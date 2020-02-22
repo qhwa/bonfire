@@ -29,3 +29,4 @@ To be designed
 * AWS EKS
 * Automatical Certbot SSL certificating renewal
 * Gitlab Actions
+* Elixir CQRS / Event Sourcing
