@@ -24,7 +24,7 @@ defmodule Bonfire.MixProject do
     [
       {:jason, "~> 1.1"},
       {:commanded, "~> 1.0.0"},
-      {:commanded_extreme_adapter, "~> 1.0"}
+      {:commanded_eventstore_adapter, "~> 1.0.0"}
     ]
   end
 end

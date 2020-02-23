@@ -6,12 +6,10 @@ defmodule Bonfire.EventHandler do
   alias Bonfire.Events.ReadingStarted
 
   def handle(%ReadingStarted{} = event, _metadata) do
-    IO.inspect(event, label: :good_news)
     :ok
   end
 
-  def handle(event, _metadata) do
-    IO.inspect(event, label: :ingored_event)
+  def handle(_event, _metadata) do
     :ok
   end
 end
