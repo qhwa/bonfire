@@ -1,0 +1,11 @@
+version: "3.6"
+
+services:
+  eventstore:
+    image: eventstore/eventstore
+    environment:
+      - START_STANDARD_PROJECTIONS=true
+      - RUN_PROJECTIONS=all
+    ports:
+      - "1113:1113"
+      - "2113:2113"

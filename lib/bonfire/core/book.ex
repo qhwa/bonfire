@@ -6,4 +6,8 @@ defmodule Bonfire.Core.Book do
   @enforce_keys [:title]
 
   defstruct [:isbn, :title, :author, :description, :cover, :tags]
+
+  def load(_book_id) do
+    __struct__(title: "Dummy book")
+  end
 end
