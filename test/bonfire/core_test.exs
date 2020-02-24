@@ -2,25 +2,25 @@ defmodule Bonfire.CoreTest do
   use ExUnit.Case
 
   alias Bonfire.Core
-  alias Bonfire.Core.{Track, Book, Note}
+  alias Bonfire.Core.{Track, Note}
 
   doctest Core
 
   test "plan a reading" do
-    book = %Book{title: "SWITCH"}
-    assert %Track{state: :pending, book: book} = Core.plan_reading(book)
+    book_id = 1
+    assert %Track{state: :pending, book_id: book_id} = Core.plan_reading(book_id)
   end
 
   test "start a reading" do
-    book = %Book{title: "SWITCH"}
-    assert %Track{state: :reading, book: book} = Core.start_reading(book)
+    book_id = 1
+    assert %Track{state: :reading, book_id: book_id} = Core.start_reading(book_id)
   end
 
   test "add notes" do
     note = Note.new("awesome")
 
     track =
-      start_reading("TEST")
+      Core.start_reading(1)
       |> Core.add_note(note)
 
     assert track.notes == [note]
@@ -28,7 +28,7 @@ defmodule Bonfire.CoreTest do
 
   test "update reading state" do
     track =
-      start_reading("TEST")
+      Core.start_reading(1)
       |> Core.update_reading_state(at_page: 10, feeling: "great", foo: :bar)
 
     assert track.at_page == 10
@@ -38,14 +38,9 @@ defmodule Bonfire.CoreTest do
 
   test "finish reading" do
     track =
-      start_reading("TEST")
+      Core.start_reading(1)
       |> Core.finish_reading()
 
     assert track.state == :finished
-  end
-
-  defp start_reading(book_name) do
-    %Book{title: book_name}
-    |> Core.start_reading()
   end
 end

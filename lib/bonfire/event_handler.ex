@@ -5,8 +5,8 @@ defmodule Bonfire.EventHandler do
 
   alias Bonfire.Events.ReadingStarted
 
-  def handle(%ReadingStarted{} = event, _metadata) do
-    :ok
+  def handle(%ReadingStarted{book_id: book_id}, _metadata) do
+    Bonfire.Tracks.start_reading(book_id)
   end
 
   def handle(_event, _metadata) do

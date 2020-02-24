@@ -3,14 +3,14 @@ defmodule Bonfire.Core do
   This module holds the highest logics.
   """
 
-  alias Bonfire.Core.{Book, Track}
+  alias Bonfire.Core.Track
 
-  def plan_reading(%Book{} = book) do
-    %Track{book: book, state: :pending}
+  def plan_reading(book_id) do
+    %Track{book_id: book_id, state: :pending}
   end
 
-  def start_reading(book) do
-    %Track{book: book, state: :reading}
+  def start_reading(book_id) do
+    %Track{book_id: book_id, state: :reading}
   end
 
   def update_reading_state(track, state) do

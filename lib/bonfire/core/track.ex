@@ -6,9 +6,9 @@ defmodule Bonfire.Core.Track do
   as instances of books
   """
 
-  @enforce_keys [:book]
+  @enforce_keys [:book_id]
 
-  defstruct book: nil,
+  defstruct book_id: nil,
             reader: nil,
             progress: nil,
             notes: [],
