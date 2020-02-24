@@ -5,7 +5,7 @@ defmodule Bonfire.Tracks.Aggregates.TrackReading do
   alias Bonfire.Tracks.Events.ReadingStarted
   alias Bonfire.Tracks.Commands.StartReading
 
-  def _execute(%{track: %{state: :reading}}, %StartReading{}) do
+  def execute(%{track: %{state: :reading}}, %StartReading{}) do
     {:error, :already_reading}
   end
 
