@@ -1,0 +1,8 @@
+<h1>Show Book</h1>
+
+<ul>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.book_path(@conn, :edit, @book) %></span>
+<span><%= link "Back", to: Routes.book_path(@conn, :index) %></span>
