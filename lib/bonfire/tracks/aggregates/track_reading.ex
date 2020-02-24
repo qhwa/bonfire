@@ -1,10 +1,9 @@
-defmodule Bonfire.Aggregates.TrackReading do
+defmodule Bonfire.Tracks.Aggregates.TrackReading do
   defstruct [:book_id, :track]
 
   alias Bonfire.Core
-  alias Bonfire.Core.Book
-  alias Bonfire.Events.ReadingStarted
-  alias Bonfire.Commands.StartReading
+  alias Bonfire.Tracks.Events.ReadingStarted
+  alias Bonfire.Tracks.Commands.StartReading
 
   def execute(%{track: %{state: :reading}}, %StartReading{}) do
     {:error, :already_reading}
@@ -15,7 +14,6 @@ defmodule Bonfire.Aggregates.TrackReading do
   end
 
   def apply(_, %ReadingStarted{book_id: book_id}) do
-    book = Book.load(book_id)
-    %__MODULE__{book_id: book_id, track: Core.start_reading(book)}
+    %__MODULE__{book_id: book_id, track: Core.start_reading(book_id)}
   end
 end

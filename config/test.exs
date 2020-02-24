@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :bonfire, Bonfire.EventStore,
+config :bonfire, Bonfire.Tracks.EventStore,
   serializer: Commanded.Serialization.JsonSerializer,
   username: "postgres",
   password: "postgres",

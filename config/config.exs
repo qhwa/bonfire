@@ -26,7 +26,7 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :bonfire, event_stores: [Bonfire.EventStore]
+config :bonfire, event_stores: [Bonfire.Tracks.EventStore]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

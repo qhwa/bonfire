@@ -14,7 +14,7 @@ defmodule Bonfire.Application do
       BonfireWeb.Endpoint,
       # Starts a worker by calling: Bonfire.Worker.start_link(arg)
       # {Bonfire.Worker, arg},
-      Bonfire.EventSupervisor
+      Bonfire.Tracks.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
