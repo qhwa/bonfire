@@ -7,7 +7,8 @@ defmodule Bonfire.Tracks.Supervisor do
 
   def init(_init_arg) do
     children = [
-      Bonfire.Tracks.EventApp
+      Bonfire.Tracks.EventApp,
+      Bonfire.Tracks.Projectors.ReadingState
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

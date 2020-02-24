@@ -43,8 +43,9 @@ defmodule Bonfire.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.1"},
       {:plug_cowboy, "~> 2.0"},
-      {:commanded, "~> 1.0.0"},
-      {:commanded_eventstore_adapter, "~> 1.0.0"}
+      {:commanded, "~> 1.0"},
+      {:commanded_eventstore_adapter, "~> 1.0"},
+      {:commanded_ecto_projections, "~> 1.0"}
     ]
   end
 
