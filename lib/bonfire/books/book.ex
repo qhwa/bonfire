@@ -2,8 +2,10 @@ defmodule Bonfire.Books.Book do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Bonfire.Books.Metadata
+
   schema "books" do
-    field :metadata, :id
+    belongs_to :metadata, Metadata
 
     timestamps()
   end
