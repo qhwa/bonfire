@@ -5,7 +5,8 @@
 <%= for reading_state <- @reading_states do %>
     <tr>
       <td>
-        <%= link reading_state.book.metadata.title, to: Routes.book_path(@conn, :show, reading_state.book) %>
+        <%= link reading_state.book.metadata.title, to: Routes.reading_state_path(@conn, :show, reading_state) %>
+        <%= BonfireWeb.ReadingStateView.state_label(reading_state.state) %>
       </td>
     </tr>
 <% end %>

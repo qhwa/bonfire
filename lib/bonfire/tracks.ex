@@ -38,7 +38,8 @@ defmodule Bonfire.Tracks do
       %ReadingState{}
 
   """
-  def get_reading_state!(id), do: raise("TODO")
+  def get_reading_state!(id),
+    do: Repo.get!(ReadingState, id) |> Repo.preload(book: [:metadata])
 
   @doc """
   Creates a reading_state.

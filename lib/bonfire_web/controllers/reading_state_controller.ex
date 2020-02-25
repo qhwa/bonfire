@@ -13,8 +13,8 @@ defmodule BonfireWeb.ReadingStateController do
   end
 
   def show(conn, %{"id" => id}) do
-    reading_state = Tracks.get_reading_state!(id)
-    render(conn, "show.html", reading_state: reading_state)
+    rs = Tracks.get_reading_state!(id)
+    render(conn, "show.html", reading_state: rs, book: rs.book, info: rs.book.metadata)
   end
 
   def edit(conn, %{"id" => id}) do
