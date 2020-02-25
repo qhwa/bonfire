@@ -1,7 +1,22 @@
-<h1>Show Book</h1>
+<h1><%= @info.title %></h1>
+ISBN: <%= @info.isbn %>
+
+<p>
+  <%= @info.description %>
+</p>
+
+<div>
+  <%= if @reading_state do %>
+    <%= @reading_state.state %>, started at: <%= @reading_state.started_at %>
+  <% else %>
+    <%= form_tag Routes.reading_state_path(@conn, :create), method: :post do %>
+      <%= hidden_input :reading_state, :isbn, value: @info.isbn %>
+      <%= submit "start reading" %>
+    <% end %>
+  <% end %>
+</div>
 
 <ul>
-
 </ul>
 
 <span><%= link "Edit", to: Routes.book_path(@conn, :edit, @book) %></span>

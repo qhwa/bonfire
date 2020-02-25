@@ -3,6 +3,7 @@ defmodule BonfireWeb.BookController do
 
   alias Bonfire.Books
   alias Bonfire.Books.Book
+  alias Bonfire.Tracks.Schemas.ReadingState
 
   def index(conn, _params) do
     books = Books.list_books()
@@ -28,7 +29,14 @@ defmodule BonfireWeb.BookController do
 
   def show(conn, %{"id" => id}) do
     book = Books.get_book!(id)
-    render(conn, "show.html", book: book)
+
+    render(
+      conn,
+      "show.html",
+      book: book,
+      info: book.metadata,
+      reading_state: book.reading_state
+    )
   end
 
   def edit(conn, %{"id" => id}) do

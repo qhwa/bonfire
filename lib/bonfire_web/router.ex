@@ -18,6 +18,7 @@ defmodule BonfireWeb.Router do
 
     get "/", PageController, :index
     resources "/books", BookController
+    resources "/tracks", ReadingStateController
   end
 
   # Other scopes may use custom stacks.

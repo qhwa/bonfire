@@ -33,7 +33,7 @@ defmodule Bonfire.Books do
 
   """
   def get_book!(id),
-    do: Repo.get!(Book, id) |> Repo.preload([:metadata])
+    do: Repo.get!(Book, id) |> Repo.preload([:metadata, :reading_state])
 
   @doc """
   Creates a book.
@@ -96,7 +96,7 @@ defmodule Bonfire.Books do
     raise "TODO"
   end
 
-  def isbn_to_book_id(isbn) do
+  def isbn_to_book(isbn) do
     with {:ok, metadata} <- isbn_to_metadata(isbn) do
       metadata_to_book(metadata)
     end

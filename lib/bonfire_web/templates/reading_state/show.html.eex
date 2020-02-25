@@ -1,0 +1,8 @@
+<h1>Show Reading state</h1>
+
+<ul>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.reading_state_path(@conn, :edit, @reading_state) %></span>
+<span><%= link "Back", to: Routes.reading_state_path(@conn, :index) %></span>

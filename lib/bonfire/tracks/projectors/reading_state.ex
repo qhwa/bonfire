@@ -9,7 +9,7 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
     name: "reading_state_projection"
 
   project(%ReadingStarted{isbn: isbn}, %{created_at: created_at}, fn multi ->
-    book_id = Books.isbn_to_book_id(isbn)
+    {:ok, %{id: book_id}} = Books.isbn_to_book(isbn)
 
     reading_state = %ReadingState{
       book_id: book_id,

@@ -3,9 +3,11 @@ defmodule Bonfire.Books.Book do
   import Ecto.Changeset
 
   alias Bonfire.Books.Metadata
+  alias Bonfire.Tracks.Schemas.ReadingState
 
   schema "books" do
     belongs_to :metadata, Metadata
+    has_one :reading_state, ReadingState
 
     timestamps()
   end
