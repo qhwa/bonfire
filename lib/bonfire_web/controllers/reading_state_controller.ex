@@ -12,18 +12,6 @@ defmodule BonfireWeb.ReadingStateController do
     render(conn, "new.html")
   end
 
-  def create(conn, %{"reading_state" => reading_state_params}) do
-    case Tracks.create_reading_state(reading_state_params) do
-      :ok ->
-        conn
-        |> put_flash(:info, "Reading state created successfully.")
-        |> redirect(to: Routes.book_path(conn, :index))
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
-  end
-
   def show(conn, %{"id" => id}) do
     reading_state = Tracks.get_reading_state!(id)
     render(conn, "show.html", reading_state: reading_state)

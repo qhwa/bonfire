@@ -8,6 +8,8 @@ defmodule Bonfire.Tracks do
   alias Bonfire.Tracks.EventApp
   alias Bonfire.Repo
 
+  import Ecto.Query, only: [from: 2]
+
   @doc """
   Returns the list of reading_states.
 
@@ -17,8 +19,11 @@ defmodule Bonfire.Tracks do
       [%ReadingState{}, ...]
 
   """
-  def list_reading_states do
-    Repo.all(ReadingState)
+  def list_reading_states(opts \\ []) do
+    order_by = Keyword.get(opts, :order_by, desc: :updated_at)
+
+    from(rs in ReadingState, order_by: ^order_by)
+    |> Repo.all()
     |> Repo.preload(book: [:metadata])
   end
 

@@ -7,7 +7,7 @@ ISBN: <%= @info.isbn %>
 
 <div>
   <%= if @reading_state do %>
-    <%= @reading_state.state %>, started at: <%= @reading_state.started_at %>
+    <%= BonfireWeb.ReadingStateView.state_label(@reading_state.state) %>
   <% else %>
     <%= form_tag Routes.reading_state_path(@conn, :create), method: :post do %>
       <%= hidden_input :reading_state, :isbn, value: @info.isbn %>
