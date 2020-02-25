@@ -13,7 +13,7 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
 
     reading_state = %ReadingState{
       book_id: book_id,
-      state: "started",
+      state: "reading",
       started_at: DateTime.truncate(created_at, :second)
     }
 

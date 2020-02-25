@@ -19,7 +19,6 @@ defmodule BonfireWeb.Router do
 
     get "/", PageController, :index
     resources "/tracks", ReadingStateController, only: [:new, :index, :show]
-    live "/search", Live.BookSuggestion
   end
 
   # Other scopes may use custom stacks.
