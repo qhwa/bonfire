@@ -73,6 +73,11 @@ config :bonfire, BonfireWeb.Endpoint,
     ]
   ]
 
+config :bonfire, Bonfire.Books.GoogleBookAPI,
+  request_options: [
+    proxy: {:socks5, 'gz1.gira.cc', 10816}
+  ]
+
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 

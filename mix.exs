@@ -45,7 +45,8 @@ defmodule Bonfire.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:commanded, "~> 1.0"},
       {:commanded_eventstore_adapter, "~> 1.0"},
-      {:commanded_ecto_projections, "~> 1.0"}
+      {:commanded_ecto_projections, "~> 1.0"},
+      {:httpoison, "~> 1.6"}
     ]
   end
 

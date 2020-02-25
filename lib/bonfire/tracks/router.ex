@@ -4,5 +4,5 @@ defmodule Bonfire.Tracks.Router do
   alias Bonfire.Tracks.Commands.StartReading
   alias Bonfire.Tracks.Aggregates.TrackReading
 
-  dispatch(StartReading, to: TrackReading, identity: :book_id)
+  dispatch(StartReading, to: TrackReading, identity: :isbn)
 end

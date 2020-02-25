@@ -11,9 +11,10 @@ defmodule Bonfire.Books.Book do
   end
 
   @doc false
-  def changeset(book, attrs) do
+  def creating_changeset(book, attrs) do
     book
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:metadata_id])
+    |> validate_required([:metadata_id])
+    |> unique_constraint(:metadata_id)
   end
 end

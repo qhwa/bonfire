@@ -1,4 +1,5 @@
 defmodule Bonfire.Tracks.Projectors.ReadingState do
+  alias Bonfire.Books
   alias Bonfire.Tracks.Events.ReadingStarted
   alias Bonfire.Tracks.Schemas.ReadingState
 
@@ -7,7 +8,9 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
     repo: Bonfire.Repo,
     name: "reading_state_projection"
 
-  project(%ReadingStarted{book_id: book_id}, %{created_at: created_at}, fn multi ->
+  project(%ReadingStarted{isbn: isbn}, %{created_at: created_at}, fn multi ->
+    book_id = Books.isbn_to_book_id(isbn)
+
     reading_state = %ReadingState{
       book_id: book_id,
       state: "started",
