@@ -1,24 +1,15 @@
-<h1>Listing Reading states</h1>
+<h1>My books</h1>
 
 <table>
-  <thead>
-    <tr>
-
-      <th></th>
-    </tr>
-  </thead>
   <tbody>
 <%= for reading_state <- @reading_states do %>
     <tr>
-
       <td>
-        <span><%= link "Show", to: Routes.reading_state_path(@conn, :show, reading_state) %></span>
-        <span><%= link "Edit", to: Routes.reading_state_path(@conn, :edit, reading_state) %></span>
-        <span><%= link "Delete", to: Routes.reading_state_path(@conn, :delete, reading_state), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <%= link reading_state.book.metadata.title, to: Routes.book_path(@conn, :show, reading_state.book) %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Reading state", to: Routes.reading_state_path(@conn, :new) %></span>
+<span><%= link "Add new book", to: Routes.reading_state_path(@conn, :new), class: "button" %></span>

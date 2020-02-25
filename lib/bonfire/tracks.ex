@@ -6,6 +6,7 @@ defmodule Bonfire.Tracks do
   alias Bonfire.Tracks.Schemas.ReadingState
   alias Bonfire.Tracks.Commands.StartReading
   alias Bonfire.Tracks.EventApp
+  alias Bonfire.Repo
 
   @doc """
   Returns the list of reading_states.
@@ -17,7 +18,8 @@ defmodule Bonfire.Tracks do
 
   """
   def list_reading_states do
-    raise "TODO"
+    Repo.all(ReadingState)
+    |> Repo.preload(book: [:metadata])
   end
 
   @doc """
