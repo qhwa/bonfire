@@ -7,7 +7,11 @@ defmodule Bonfire.Books do
   alias Bonfire.Repo
 
   alias Bonfire.Books.{Book, Metadata}
-  alias Bonfire.Books.GoogleBookAPI, as: API
+  alias Bonfire.Books.GoogleBookAPI
+
+  def search_books(keyword) do
+    GoogleBookAPI.search_books(keyword)
+  end
 
   @doc """
   Returns the list of books.
@@ -119,7 +123,7 @@ defmodule Bonfire.Books do
   end
 
   def fetch_book_info(isbn) do
-    API.find_book(isbn: isbn)
+    GoogleBookAPI.find_book(isbn: isbn)
   end
 
   def create_metadata(book) do

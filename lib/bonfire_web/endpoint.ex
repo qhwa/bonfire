@@ -10,9 +10,7 @@ defmodule BonfireWeb.Endpoint do
     signing_salt: "dZlEd9JJ"
   ]
 
-  socket "/socket", BonfireWeb.UserSocket,
-    websocket: true,
-    longpoll: false
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #

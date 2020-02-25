@@ -2,7 +2,6 @@ defmodule BonfireWeb.ReadingStateController do
   use BonfireWeb, :controller
 
   alias Bonfire.Tracks
-  alias Bonfire.Tracks.Schemas.ReadingState
 
   def index(conn, _params) do
     reading_states = Tracks.list_reading_states()
@@ -10,8 +9,7 @@ defmodule BonfireWeb.ReadingStateController do
   end
 
   def new(conn, _params) do
-    changeset = Tracks.change_reading_state(%ReadingState{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html")
   end
 
   def create(conn, %{"reading_state" => reading_state_params}) do

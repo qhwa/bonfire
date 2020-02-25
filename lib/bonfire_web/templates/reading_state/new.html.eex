@@ -1,5 +1,7 @@
 <h1>New Reading state</h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.reading_state_path(@conn, :create)) %>
+<div>
+  <%= live_render(@conn, BonfireWeb.Live.BookSuggestion) %>
+</div>
 
 <span><%= link "Back", to: Routes.reading_state_path(@conn, :index) %></span>

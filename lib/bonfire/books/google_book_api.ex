@@ -4,9 +4,28 @@ defmodule Bonfire.Books.GoogleBookAPI do
   @endpoint "https://www.googleapis.com/books/v1/volumes"
   @api_key System.fetch_env!("GOOGLE_API_KEY")
 
+  def search_books(keyword) do
+    get!(@endpoint, [], params: [q: keyword])
+    |> Map.get(:body)
+    |> case do
+      books when is_list(books) ->
+        books
+
+      _ ->
+        []
+    end
+  end
+
   def find_book(query) do
     get!(@endpoint, [], params: [q: stringify_query(query)])
     |> Map.get(:body)
+    |> case do
+      books when is_list(books) ->
+        {:ok, hd(books)}
+
+      other ->
+        other
+    end
   end
 
   defp stringify_query(query) do
@@ -45,20 +64,24 @@ defmodule Bonfire.Books.GoogleBookAPI do
       %{"totalItems" => 0} ->
         {:error, :not_found}
 
-      %{"items" => [book | _]} ->
-        {:ok, transform_book_data(book)}
+      %{"items" => items} ->
+        Enum.map(items, &transform_book_data/1)
     end
   end
 
-  defp transform_book_data(%{"volumeInfo" => info}) do
-    %{
-      title: info["title"],
-      isbn: isbn(info["industryIdentifiers"]),
-      description: info["description"]
+  defp transform_book_data(%{"volumeInfo" => info, "id" => id}) do
+    data = %{
+      isbn: isbn(info),
+      source_platform: "google",
+      source_id: id
     }
+
+    for key <- ~w[title subtitle authors description], into: data do
+      {String.to_atom(key), info[key]}
+    end
   end
 
-  defp isbn(raw_isbn_info) do
+  defp isbn(%{"industryIdentifiers" => raw_isbn_info}) do
     Enum.find_value(raw_isbn_info, fn
       %{"type" => "ISBN_13", "identifier" => id} ->
         id
@@ -66,5 +89,9 @@ defmodule Bonfire.Books.GoogleBookAPI do
       _ ->
         false
     end)
+  end
+
+  defp isbn(_) do
+    nil
   end
 end
