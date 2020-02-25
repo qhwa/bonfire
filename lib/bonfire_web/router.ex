@@ -18,8 +18,8 @@ defmodule BonfireWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/books", BookController
-    resources "/tracks", ReadingStateController
+    resources "/books", BookController, only: [:show]
+    resources "/tracks", ReadingStateController, only: [:new, :index]
     live "/search", Live.BookSuggestion
   end
 

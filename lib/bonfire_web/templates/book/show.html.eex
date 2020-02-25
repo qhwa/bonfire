@@ -19,5 +19,4 @@ ISBN: <%= @info.isbn %>
 <ul>
 </ul>
 
-<span><%= link "Edit", to: Routes.book_path(@conn, :edit, @book) %></span>
-<span><%= link "Back", to: Routes.book_path(@conn, :index) %></span>
+<span><%= link "Back", to: Routes.reading_state_path(@conn, :index) %></span>

@@ -12,7 +12,10 @@ defmodule BonfireWeb.Live.BookSuggestion do
       <input type="text" id="q" name="q" autocomplete="off" phx-debounce="500" />
       <ul>
         <%= for book <- @books, book.isbn do %>
-        <li><%= link book.title, to: "#", phx_click: "select", phx_value_isbn: book.isbn %></li>
+        <li>
+          <%= link book.title, to: "#", phx_click: "select", phx_value_isbn: book.isbn %>
+          <%= book.subtitle %> / <%= book.isbn %>
+        </li>
         <% end %>
       </ul>
     <% end %>
