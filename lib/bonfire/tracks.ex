@@ -60,68 +60,15 @@ defmodule Bonfire.Tracks do
     Repo.one(query)
   end
 
-  @doc """
-  Creates a reading_state.
-
-  ## Examples
-
-      iex> create_reading_state(%{field: value})
-      {:ok, %ReadingState{}}
-
-      iex> create_reading_state(%{field: bad_value})
-      {:error, ...}
-
-  """
   def create_reading_state(%{"isbn" => isbn}) do
     EventApp.dispatch(%StartReading{isbn: isbn}, consistency: :strong)
-  end
-
-  @doc """
-  Updates a reading_state.
-
-  ## Examples
-
-      iex> update_reading_state(reading_state, %{field: new_value})
-      {:ok, %ReadingState{}}
-
-      iex> update_reading_state(reading_state, %{field: bad_value})
-      {:error, ...}
-
-  """
-  def update_reading_state(%ReadingState{} = reading_state, attrs) do
-    raise "TODO"
   end
 
   def finish_reading_state(isbn) do
     EventApp.dispatch(%FinishReading{isbn: isbn}, consistency: :strong)
   end
 
-  @doc """
-  Deletes a ReadingState.
-
-  ## Examples
-
-      iex> delete_reading_state(reading_state)
-      {:ok, %ReadingState{}}
-
-      iex> delete_reading_state(reading_state)
-      {:error, ...}
-
-  """
-  def delete_reading_state(%ReadingState{} = reading_state) do
-    raise "TODO"
-  end
-
-  @doc """
-  Returns a data structure for tracking reading_state changes.
-
-  ## Examples
-
-      iex> change_reading_state(reading_state)
-      %Todo{...}
-
-  """
-  def change_reading_state(%ReadingState{} = reading_state) do
+  def delete_reading_state(isbn) do
     raise "TODO"
   end
 end
