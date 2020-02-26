@@ -3,6 +3,7 @@ defmodule Bonfire.Tracks do
   Tracks context. This module holds tracking related high level API.
   """
 
+  alias Bonfire.Books.{Book, Metadata}
   alias Bonfire.Tracks.Schemas.ReadingState
   alias Bonfire.Tracks.Commands.StartReading
   alias Bonfire.Tracks.EventApp
@@ -40,6 +41,20 @@ defmodule Bonfire.Tracks do
   """
   def get_reading_state!(id),
     do: Repo.get!(ReadingState, id) |> Repo.preload(book: [:metadata])
+
+  def get_reading_state_by_isbn(isbn) do
+    query =
+      from(
+        rs in ReadingState,
+        join: book in Book,
+        on: rs.book_id == book.id,
+        join: info in Metadata,
+        on: book.metadata_id == info.id,
+        where: info.isbn == ^isbn
+      )
+
+    Repo.one(query)
+  end
 
   @doc """
   Creates a reading_state.

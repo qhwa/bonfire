@@ -1,6 +1,6 @@
 defmodule Bonfire.Tracks.Projectors.ReadingState do
   alias Bonfire.Books
-  alias Bonfire.Tracks.Events.ReadingStarted
+  alias Bonfire.Tracks.Events.{ReadingStarted, ReadingFinished}
   alias Bonfire.Tracks.Schemas.ReadingState
 
   use Commanded.Projections.Ecto,
@@ -21,6 +21,22 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
       multi,
       :reading_started_projection,
       reading_state
+    )
+  end)
+
+  project(%ReadingFinished{isbn: isbn}, %{created_at: created_at}, fn multi ->
+    rs =
+      isbn
+      |> Bonfire.Tracks.get_reading_state_by_isbn()
+      |> ReadingState.updating_changeset(%{
+        state: "finished",
+        started_at: DateTime.truncate(created_at, :second)
+      })
+
+    Ecto.Multi.update(
+      multi,
+      :reading_finished_projection,
+      rs
     )
   end)
 end
