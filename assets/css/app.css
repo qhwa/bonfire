@@ -3,6 +3,27 @@
 @import "./phoenix.css";
 @import "../../deps/phoenix_live_view/assets/css/live_view.css";
 
+footer {
+  border-top: 1px solid #ccc;
+  width: 100%;
+  max-width: 76rem;
+  padding-top: 2rem;
+  margin: 2rem auto;
+}
+
+h1.title {
+  margin: 0;
+}
+
+h2.subtitle {
+  line-height: 1;
+  color: #999;
+}
+
+p.description {
+  padding: 1em 0;
+}
+
 .reading_states {
   display: flex;
   flex-wrap: wrap;
@@ -38,8 +59,11 @@
 }
 
 .reading_states li .subtitle {
-  line-height: 1;
-  color: #999;
-  display: block;
   margin-bottom: 0.5em;
+}
+
+.reading-state-state .finish-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
 }

@@ -10,6 +10,13 @@ defmodule BonfireWeb.Live.ReadingState do
 
   def mount(_params, %{"id" => id}, socket) do
     rs = Tracks.get_reading_state!(id)
-    {:ok, assign(socket, :reading_state, rs)}
+
+    socket =
+      socket
+      |> assign(:reading_state, rs)
+      |> assign(:book, rs.book)
+      |> assign(:info, rs.book.metadata)
+
+    {:ok, socket}
   end
 end

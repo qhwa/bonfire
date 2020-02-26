@@ -3,7 +3,9 @@
   <% info = rs.book.metadata %>
   <li>
     <%= if info.cover do %>
-      <img class="cover" src="<%= info.cover %>" alt="book cover image" />
+      <%= link to: Routes.reading_state_path(BonfireWeb.Endpoint, :show, rs) do %>
+        <img class="cover" src="<%= info.cover %>" alt="book cover image" />
+      <% end %>
     <% end %>
 
     <div class="info">

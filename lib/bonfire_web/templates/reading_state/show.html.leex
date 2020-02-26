@@ -1,9 +1,18 @@
-<h1><%= @reading_state.book.metadata.title %></h1>
-ISBN: <%= @reading_state.book.metadata.isbn %>
+<%= if @info.cover do %>
+  <img class="cover" src="<%= @info.cover %>" alt="book cover image" />
+<% end %>
 
-<p>
-  <%= @reading_state.book.metadata.description %>
-</p>
+<h1 class="title"><%= @info.title %></h1>
+<h2 class="subtitle"><%= @info.subtitle %></h2>
+
+<section class="info">
+  <div class="authors">By: <%= @info.authors %></div>
+  <div class="isbn">ISBN: <%= @info.isbn %></div>
+
+  <p class="description">
+    <%= @info.description %>
+  </p>
+</section>
 
 <div>
   <%= live_component(@socket, BonfireWeb.Live.ReadingStateComponent, reading_state: @reading_state, id: "rs-#{@reading_state.id}") %>

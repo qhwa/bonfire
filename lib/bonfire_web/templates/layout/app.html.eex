@@ -27,5 +27,8 @@
       <%= render @view_module, @view_template, assigns %>
     </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <footer>
+      icons by <a target="_blank" href="https://icons8.com">Icons8</a>
+    </footer>
   </body>
 </html>
