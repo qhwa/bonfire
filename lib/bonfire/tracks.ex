@@ -73,7 +73,7 @@ defmodule Bonfire.Tracks do
 
   """
   def create_reading_state(%{"isbn" => isbn}) do
-    EventApp.dispatch(%StartReading{isbn: isbn})
+    EventApp.dispatch(%StartReading{isbn: isbn}, consistency: :strong)
   end
 
   @doc """
@@ -93,7 +93,7 @@ defmodule Bonfire.Tracks do
   end
 
   def finish_reading_state(isbn) do
-    EventApp.dispatch(%FinishReading{isbn: isbn})
+    EventApp.dispatch(%FinishReading{isbn: isbn}, consistency: :strong)
   end
 
   @doc """

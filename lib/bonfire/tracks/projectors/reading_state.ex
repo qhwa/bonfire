@@ -6,7 +6,8 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
   use Commanded.Projections.Ecto,
     application: Bonfire.Tracks.EventApp,
     repo: Bonfire.Repo,
-    name: "reading_state_projection"
+    name: "reading_state_projection",
+    consistency: :strong
 
   project(%ReadingStarted{isbn: isbn}, %{created_at: created_at}, fn multi ->
     {:ok, %{id: book_id}} = Books.isbn_to_book(isbn)
