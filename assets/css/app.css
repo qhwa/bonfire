@@ -2,3 +2,44 @@
 
 @import "./phoenix.css";
 @import "../../deps/phoenix_live_view/assets/css/live_view.css";
+
+.reading_states {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-bottom: 2em;
+}
+
+.reading_states li {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 15em;
+}
+
+.reading_states li .cover {
+  display: block;
+  margin-right: 0.5em;
+}
+
+.reading_states li .info {
+  padding: 1em 0;
+  line-height: 1.6;
+}
+
+.reading_states li .title {
+  line-height: 1;
+  display: block;
+  font-weight: bold;
+  font-size: 120%;
+  margin-bottom: 0.5em;
+  color: #333;
+}
+
+.reading_states li .subtitle {
+  line-height: 1;
+  color: #999;
+  display: block;
+  margin-bottom: 0.5em;
+}

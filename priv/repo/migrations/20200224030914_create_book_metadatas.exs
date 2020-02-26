@@ -4,9 +4,13 @@ defmodule Bonfire.Repo.Migrations.CreateBookMetadatas do
   def change do
     create table(:book_metadatas) do
       add :title, :string
+      add :subtitle, :string
+      add :authors, {:array, :string}
       add :isbn, :string
       add :cover, :string
       add :description, :text
+      add :source_platform, :string
+      add :source_id, :string
 
       timestamps()
     end

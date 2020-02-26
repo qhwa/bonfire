@@ -69,14 +69,17 @@ defmodule Bonfire.Books.GoogleBookAPI do
     end
   end
 
+  @keys ~w[title subtitle authors description publisher]
+
   defp transform_book_data(%{"volumeInfo" => info, "id" => id}) do
     data = %{
+      cover: cover_image(info),
       isbn: isbn(info),
       source_platform: "google",
       source_id: id
     }
 
-    for key <- ~w[title subtitle authors description], into: data do
+    for key <- @keys, into: data do
       {String.to_atom(key), info[key]}
     end
   end
@@ -92,6 +95,14 @@ defmodule Bonfire.Books.GoogleBookAPI do
   end
 
   defp isbn(_) do
+    nil
+  end
+
+  defp cover_image(%{"imageLinks" => %{} = links}) do
+    links["extraLarge"] || links["large"] || links["medium"] || links["thumbnail"]
+  end
+
+  defp cover_image(_) do
     nil
   end
 end

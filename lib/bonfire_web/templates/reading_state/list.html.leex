@@ -1,12 +1,19 @@
-<table>
-  <tbody>
+<ul class="reading_states">
 <%= for rs <- @reading_states do %>
-    <tr>
-      <td>
-        <%= link rs.book.metadata.title, to: Routes.reading_state_path(BonfireWeb.Endpoint, :show, rs) %>
-        <%= live_component(@socket, BonfireWeb.Live.ReadingStateComponent, reading_state: rs, id: "rs-#{rs.id}") %>
-      </td>
-    </tr>
+  <% info = rs.book.metadata %>
+  <li>
+    <%= if info.cover do %>
+      <img class="cover" src="<%= info.cover %>" alt="book cover image" />
+    <% end %>
+
+    <div class="info">
+      <%= link info.title, to: Routes.reading_state_path(BonfireWeb.Endpoint, :show, rs), class: "title" %>
+      <div class="subtitle"><%= info.subtitle %></div>
+      <div class="state">
+      <%= live_component(@socket, BonfireWeb.Live.ReadingStateComponent, reading_state: rs, id: "rs-#{rs.id}") %>
+      </div>
+    </div>
+
+  </li>
 <% end %>
-  </tbody>
-</table>
+</ul>

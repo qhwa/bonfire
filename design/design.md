@@ -26,7 +26,9 @@ To be designed
 
 ## Things I want to experiment during developing this project
 
-* AWS EKS
-* Automatical Certbot SSL certificating renewal
-* Gitlab Actions
-* Elixir CQRS / Event Sourcing
+* [ ] AWS EKS
+* [ ] Automatical Certbot SSL certificating renewal
+* [ ] Gitlab Actions
+* [x] Elixir CQRS / Event Sourcing
+* [ ] CSS Modules with Phoenix
+* [ ] Rich Client UI with Phoenix

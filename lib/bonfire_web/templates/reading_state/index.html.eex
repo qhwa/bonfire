@@ -1,5 +1,5 @@
-<h1>My books</h1>
+<span><%= link "Add new book", to: Routes.reading_state_path(@conn, :new), class: "button" %></span>
+
+<h1>Books I like</h1>
 
 <%= live_render(@conn, BonfireWeb.Live.ReadingStateList) %>
-
-<span><%= link "Add new book", to: Routes.reading_state_path(@conn, :new), class: "button" %></span>
