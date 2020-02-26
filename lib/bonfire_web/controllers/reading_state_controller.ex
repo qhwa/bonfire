@@ -4,8 +4,7 @@ defmodule BonfireWeb.ReadingStateController do
   alias Bonfire.Tracks
 
   def index(conn, _params) do
-    reading_states = Tracks.list_reading_states()
-    render(conn, "index.html", reading_states: reading_states)
+    render(conn, "index.html")
   end
 
   def new(conn, _params) do

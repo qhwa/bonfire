@@ -1,16 +1,5 @@
 <h1>My books</h1>
 
-<table>
-  <tbody>
-<%= for reading_state <- @reading_states do %>
-    <tr>
-      <td>
-        <%= link reading_state.book.metadata.title, to: Routes.reading_state_path(@conn, :show, reading_state) %>
-        <%= render "_state.html", reading_state: reading_state %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+<%= live_render(@conn, BonfireWeb.Live.ReadingStateList) %>
 
 <span><%= link "Add new book", to: Routes.reading_state_path(@conn, :new), class: "button" %></span>

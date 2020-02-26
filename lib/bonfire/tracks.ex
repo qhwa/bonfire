@@ -4,10 +4,14 @@ defmodule Bonfire.Tracks do
   """
 
   alias Bonfire.Books.{Book, Metadata}
-  alias Bonfire.Tracks.Schemas.ReadingState
-  alias Bonfire.Tracks.Commands.StartReading
-  alias Bonfire.Tracks.EventApp
   alias Bonfire.Repo
+
+  alias Bonfire.Tracks.{
+    Schemas.ReadingState,
+    Commands.StartReading,
+    Commands.FinishReading,
+    EventApp
+  }
 
   import Ecto.Query, only: [from: 2]
 
@@ -86,6 +90,10 @@ defmodule Bonfire.Tracks do
   """
   def update_reading_state(%ReadingState{} = reading_state, attrs) do
     raise "TODO"
+  end
+
+  def finish_reading_state(isbn) do
+    EventApp.dispatch(%FinishReading{isbn: isbn})
   end
 
   @doc """
