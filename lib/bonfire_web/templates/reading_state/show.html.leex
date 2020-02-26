@@ -1,0 +1,15 @@
+<h1><%= @reading_state.book.metadata.title %></h1>
+ISBN: <%= @reading_state.book.metadata.isbn %>
+
+<p>
+  <%= @reading_state.book.metadata.description %>
+</p>
+
+<div>
+  <%= live_component(@socket, BonfireWeb.Live.ReadingStateComponent, reading_state: @reading_state, id: "rs-#{@reading_state.id}") %>
+</div>
+
+<ul>
+</ul>
+
+<span><%= link "Back", to: Routes.reading_state_path(BonfireWeb.Endpoint, :index) %></span>

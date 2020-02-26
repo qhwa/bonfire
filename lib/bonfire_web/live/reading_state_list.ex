@@ -9,12 +9,7 @@ defmodule BonfireWeb.Live.ReadingStateList do
   end
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :reading_states, Tracks.list_reading_states())}
-  end
-
-  def handle_event("finish", %{"isbn" => isbn}, socket) do
-    Tracks.finish_reading_state(isbn)
-
-    {:noreply, assign(socket, :reading_states, Tracks.list_reading_states())}
+    reading_states = Tracks.list_reading_states()
+    {:ok, assign(socket, :reading_states, reading_states)}
   end
 end
