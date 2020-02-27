@@ -7,6 +7,7 @@ defmodule Bonfire.Tracks.Schemas.ReadingState do
     field :started_at, :utc_datetime
     field :state, :string
 
+    belongs_to :user, Bonfire.Users.User
     belongs_to :book, Bonfire.Books.Book
 
     timestamps()

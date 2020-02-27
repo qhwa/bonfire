@@ -13,6 +13,17 @@ defmodule BonfireWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :need_authorize do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -25,7 +36,7 @@ defmodule BonfireWeb.Router do
   end
 
   scope "/", BonfireWeb do
-    pipe_through :browser
+    pipe_through :need_authorize
 
     get "/", PageController, :index
     resources "/tracks", ReadingStateController, only: [:new, :index, :show]

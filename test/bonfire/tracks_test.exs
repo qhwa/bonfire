@@ -21,7 +21,7 @@ defmodule Bonfire.TracksTest do
     @tag :pending
     test "list_reading_states/0 returns all reading_states" do
       reading_state = reading_state_fixture()
-      assert Tracks.list_reading_states() == [reading_state]
+      assert Tracks.list_reading_states(1) == [reading_state]
     end
 
     @tag :pending

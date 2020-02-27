@@ -10,10 +10,11 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
     consistency: :strong
 
   project(%ReadingStarted{isbn: isbn}, %{created_at: created_at}, fn multi ->
-    {:ok, %{id: book_id}} = Books.isbn_to_book(isbn)
+    {:ok, %{id: book_id, user_id: user_id}} = Books.isbn_to_book(isbn)
 
     reading_state = %ReadingState{
       book_id: book_id,
+      user_id: user_id,
       state: "reading",
       started_at: DateTime.truncate(created_at, :second)
     }

@@ -22,8 +22,13 @@ defmodule BonfireWeb.Live.BookSuggestion do
     """
   end
 
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :books, [])}
+  def mount(_params, %{"user_id" => user_id}, socket) do
+    socket =
+      socket
+      |> assign(:user_id, user_id)
+      |> assign(:books, [])
+
+    {:ok, socket}
   end
 
   def handle_event("user_input", %{"q" => ""}, socket) do
@@ -36,7 +41,7 @@ defmodule BonfireWeb.Live.BookSuggestion do
   end
 
   def handle_event("select", %{"isbn" => isbn}, socket) do
-    case Tracks.create_reading_state(%{"isbn" => isbn}) do
+    case Tracks.create_reading_state(%{"isbn" => isbn, "user_id" => user_id(socket)}) do
       :ok ->
         {:noreply,
          socket
@@ -47,5 +52,9 @@ defmodule BonfireWeb.Live.BookSuggestion do
         IO.inspect(error, label: :error)
         {:noreply, socket}
     end
+  end
+
+  defp user_id(socket) do
+    socket.assigns.user_id
   end
 end

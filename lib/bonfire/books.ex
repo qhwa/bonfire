@@ -100,9 +100,9 @@ defmodule Bonfire.Books do
     raise "TODO"
   end
 
-  def isbn_to_book(isbn) do
+  def isbn_to_book(%{isbn: isbn, user_id: user_id}) do
     with {:ok, metadata} <- isbn_to_metadata(isbn) do
-      metadata_to_book(metadata)
+      metadata_to_book(metadata, user_id)
     end
   end
 
@@ -131,10 +131,10 @@ defmodule Bonfire.Books do
     |> Repo.insert()
   end
 
-  def metadata_to_book(metadata) do
-    case Repo.get_by(Book, metadata_id: metadata.id) do
+  def metadata_to_book(metadata, user_id) do
+    case Repo.get_by(Book, metadata_id: metadata.id, user_id: user_id) do
       nil ->
-        Book.creating_changeset(%Book{}, %{metadata_id: metadata.id})
+        Book.creating_changeset(%Book{}, %{metadata_id: metadata.id, user_id: user_id})
         |> Repo.insert()
 
       %Book{} = book ->

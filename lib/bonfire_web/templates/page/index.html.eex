@@ -1,4 +1,4 @@
 <h1>What are your reading?</h1>
 
-<%= live_render(@conn, BonfireWeb.Live.BookSuggestion) %>
+<%= live_render(@conn, BonfireWeb.Live.BookSuggestion, session: %{"user_id" => @current_user.id}) %>
 

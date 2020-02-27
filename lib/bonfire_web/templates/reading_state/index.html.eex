@@ -2,4 +2,4 @@
 
 <h1>Books I like</h1>
 
-<%= live_render(@conn, BonfireWeb.Live.ReadingStateList) %>
+<%= live_render(@conn, BonfireWeb.Live.ReadingStateList, session: %{"user_id" => @current_user.id}) %>
