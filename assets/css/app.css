@@ -59,6 +59,8 @@ p.description {
 }
 
 .reading_states li .subtitle {
+  line-height: 1;
+  color: #999;
   margin-bottom: 0.5em;
 }
 
