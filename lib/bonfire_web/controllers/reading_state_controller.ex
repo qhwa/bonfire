@@ -1,6 +1,9 @@
 defmodule BonfireWeb.ReadingStateController do
   use BonfireWeb, :controller
 
+  plug Pow.Plug.RequireAuthenticated,
+    error_handler: Pow.Phoenix.PlugErrorHandler
+
   def index(conn, _params) do
     render(conn, "index.html")
   end

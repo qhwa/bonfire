@@ -47,7 +47,11 @@ defmodule Bonfire.MixProject do
       {:commanded, "~> 1.0"},
       {:commanded_eventstore_adapter, "~> 1.0"},
       {:commanded_ecto_projections, "~> 1.0"},
-      {:httpoison, "~> 1.6"}
+      {:httpoison, "~> 1.6"},
+      {:pow, "~> 1.0.18"},
+      {:pow_assent, "~> 0.4.6"},
+      {:certifi, "~> 2.5"},
+      {:ssl_verify_fun, "~> 1.1"}
     ]
   end
 
