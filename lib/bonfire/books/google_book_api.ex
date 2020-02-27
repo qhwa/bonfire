@@ -74,6 +74,7 @@ defmodule Bonfire.Books.GoogleBookAPI do
   defp transform_book_data(%{"volumeInfo" => info, "id" => id}) do
     data = %{
       cover: cover_image(info),
+      thumbnail: thumbnail(info),
       isbn: isbn(info),
       source_platform: "google",
       source_id: id
@@ -103,6 +104,14 @@ defmodule Bonfire.Books.GoogleBookAPI do
   end
 
   defp cover_image(_) do
+    nil
+  end
+
+  defp thumbnail(%{"imageLinks" => %{} = links}) do
+    links["smallThumbnail"] || links["thumbnail"]
+  end
+
+  defp thumbnail(_) do
     nil
   end
 end

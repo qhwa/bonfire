@@ -74,3 +74,24 @@ p.description {
   height: 1em;
   vertical-align: middle;
 }
+
+.suggestions ul li {
+  display: flex;
+  margin-bottom: .5em;
+}
+
+.suggestions ul li .cover {
+  width: 5em;
+}
+
+.suggestions ul li .cover img {
+  width: 100%;
+}
+
+.suggestions ul li .info {
+  padding-left: .5em;
+}
+
+.suggestions ul li .info .subtitle {
+  color: #ccc;
+}

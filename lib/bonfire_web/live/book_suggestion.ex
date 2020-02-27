@@ -8,13 +8,22 @@ defmodule BonfireWeb.Live.BookSuggestion do
 
   def render(assigns) do
     ~L"""
-    <%= form_tag "#", [phx_change: :user_input] do %>
+    <%= form_tag "#", phx_change: :user_input, class: "suggestions" do %>
       <input type="text" id="q" name="q" autocomplete="off" phx-debounce="500" />
       <ul>
         <%= for book <- @books, book.isbn do %>
         <li>
-          <%= link book.title, to: "#", phx_click: "select", phx_value_isbn: book.isbn %>
-          <%= book.subtitle %> / <%= book.isbn %>
+          <div class="cover">
+          <%= link to: "#", phx_click: "select", phx_value_isbn: book.isbn do %>
+          <img src="<%= book.thumbnail %>" />
+          <% end %>
+          </div>
+
+          <div class="info">
+            <div class="title"><%= link book.title, to: "#", phx_click: "select", phx_value_isbn: book.isbn, class: "title" %></div>
+            <div class="subtitle"><%= book.subtitle %></div>
+            <div class="authors"><%= book.authors %></div>
+          </div>
         </li>
         <% end %>
       </ul>
