@@ -50,7 +50,7 @@ p.description {
 }
 
 .reading_states li .info {
-  padding: 1em 0;
+  padding: 1em 1em 1em 0;
   line-height: 1.6;
 }
 
