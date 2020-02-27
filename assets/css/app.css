@@ -27,7 +27,6 @@ p.description {
 .reading_states {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   align-items: stretch;
   margin-bottom: 2em;
 }
@@ -40,8 +39,14 @@ p.description {
 }
 
 .reading_states li .cover {
-  display: block;
+  display: flex;
+  align-items: flex-end;
   margin-right: 0.5em;
+  height: 10em;
+}
+
+.reading_states li .cover img {
+  display: block;
 }
 
 .reading_states li .info {
