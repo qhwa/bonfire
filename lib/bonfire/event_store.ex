@@ -1,3 +1,3 @@
-defmodule Bonfire.Tracks.EventStore do
+defmodule Bonfire.EventStore do
   use EventStore, otp_app: :bonfire
 end

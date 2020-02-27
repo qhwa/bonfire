@@ -4,7 +4,7 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
   alias Bonfire.Tracks.Schemas.ReadingState
 
   use Commanded.Projections.Ecto,
-    application: Bonfire.Tracks.EventApp,
+    application: Bonfire.EventApp,
     repo: Bonfire.Repo,
     name: "reading_state_projection",
     consistency: :strong

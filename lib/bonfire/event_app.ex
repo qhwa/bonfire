@@ -1,10 +1,10 @@
-defmodule Bonfire.Tracks.EventApp do
+defmodule Bonfire.EventApp do
   use Commanded.Application,
     otp_app: :bonfire,
     event_store: [
       adapter: Commanded.EventStore.Adapters.EventStore,
-      event_store: Bonfire.Tracks.EventStore
+      event_store: Bonfire.EventStore
     ]
 
-  router(Bonfire.Tracks.Router)
+  router(Bonfire.EventRouter)
 end

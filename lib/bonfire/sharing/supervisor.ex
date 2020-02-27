@@ -1,4 +1,4 @@
-defmodule Bonfire.Tracks.Supervisor do
+defmodule Bonfire.Sharing.Supervisor do
   use Supervisor
 
   def start_link(init_arg) do
@@ -7,7 +7,7 @@ defmodule Bonfire.Tracks.Supervisor do
 
   def init(_init_arg) do
     children = [
-      Bonfire.Tracks.Projectors.ReadingState
+      Bonfire.Sharing.Projectors.Track
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

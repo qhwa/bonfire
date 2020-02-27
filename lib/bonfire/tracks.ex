@@ -5,12 +5,12 @@ defmodule Bonfire.Tracks do
 
   alias Bonfire.Books.{Book, Metadata}
   alias Bonfire.Repo
+  alias Bonfire.EventApp
 
   alias Bonfire.Tracks.{
     Schemas.ReadingState,
     Commands.StartReading,
-    Commands.FinishReading,
-    EventApp
+    Commands.FinishReading
   }
 
   import Ecto.Query, only: [from: 2]

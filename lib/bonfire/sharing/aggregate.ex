@@ -1,0 +1,18 @@
+defmodule Bonfire.Sharing.Aggregate do
+  defstruct [:user_id, :key]
+
+  alias Bonfire.Sharing.Commands.StartSharing
+  alias Bonfire.Sharing.Events.SharingStarted
+
+  def execute(%__MODULE__{user_id: nil}, %StartSharing{user_id: user_id, key: key}) do
+    %SharingStarted{user_id: user_id, key: key}
+  end
+
+  def execute(%__MODULE__{}, %StartSharing{}) do
+    {:error, :already_shared}
+  end
+
+  def apply(_, %SharingStarted{user_id: user_id, key: key}) do
+    %__MODULE__{user_id: user_id, key: key}
+  end
+end
