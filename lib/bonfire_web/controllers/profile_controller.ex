@@ -4,8 +4,8 @@ defmodule BonfireWeb.ProfileController do
   action_fallback BonfireWeb.FallbackController
 
   def show(conn, %{"user_name" => user_name}) do
-    with {:ok, profile} <- Bonfire.Sharing.get_profile(user_name) do
-      render(conn, "show.html", reading_states: profile.user.reading_states)
+    with {:ok, reading_states} <- Bonfire.Sharing.get_reading_states_by_profile(user_name) do
+      render(conn, "show.html", reading_states: reading_states)
     end
   end
 end
