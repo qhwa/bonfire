@@ -1,0 +1,6 @@
+# if you're going to run `docker build` on a system different from the builder
+# which is Alpine Linux, than you may need to ignore `_build` folders. Otherwise
+# there might be conflicts. In the other hand, in CI progresses you may use
+# prebuilt folder to speed up docker image generating.
+_build/
+deps/
