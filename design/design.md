@@ -26,9 +26,11 @@ To be designed
 
 ## Things I want to experiment during developing this project
 
-* [ ] AWS EKS
-* [ ] Automatical Certbot SSL certificating renewal
-* [ ] Gitlab Actions
+* [x] AWS EKS
+* [x] Automatical Certbot SSL certificating renewal
+* [ ] Github Actions (**canceled** due to adopting [Rio][], it works in a better way)
 * [x] Elixir CQRS / Event Sourcing
 * [ ] CSS Modules with Phoenix
-* [ ] Rich Client UI with Phoenix
+* [x] Rich Client UI with Phoenix
+
+[Rio]: https://rio.io

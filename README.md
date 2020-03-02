@@ -5,27 +5,39 @@ An demo project for learning Elixir. Libraries involved:
 * [Phoenix] for web framework
 * [Phoenix LiveView] for almost-no-javascript application
 * [Commanded] for [Event Sourcing]
-* [Skylab] for deployment
+* [Rio] for deployment
 
-## Run locally
+### Before running or deployment
+
+This project uses several free services:
+
+* Gitlab OAuth Application, [click here](https://github.com/settings/applications/new) to setup your own
+* Google Books Api, [document](https://developers.google.com/maps/documentation/embed/get-api-key)
+
+Environment variables required:
+
+* `GOOGLE_API_KEY`
+* `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`
+
 ## Deploy
 
-1. generate release configs:
+The easiest way to deploy may be [Rio]
 
-  ```sh
-  mix skylab.init --overwrite
-  ```
+After setting up Rio and your Kubernetes infrastructures, you can just run:
 
-2. generate docker image:
+```sh
+./deploy.sh
+```
 
-  ```sh
-  docker build -t bonfire .
-  ```
-3. distribute the docker image
+and everything is done. Out of the box there are:
 
-  You can push your docker image to your registry and run it anywhere you want.
+* Letsencrypted SSL certification
+* Continues Deployment, builds being triggered by code changes
+* Easy to attach public domain
 
-  Or just run it locally as:
+You can find more info on [Rio's homepage](https://rio.io).
+
+Also, this project contains an `Dockerfile` so you can build your own image and run it anywhere you want.
 
   ```sh
   docker run \
@@ -36,6 +48,7 @@ An demo project for learning Elixir. Libraries involved:
     -e ES_DATABASE_URL=ecto://... \
     -e GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID} \
     -e GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET} \
+    -e GOOGLE_API_KEY=${GOOGLE_API_KEY} \
     -p 4000:4000 \
     bonfire \
     start_iex
@@ -45,3 +58,5 @@ An demo project for learning Elixir. Libraries involved:
 [Phoenix]: http://www.phoenixframework.org/
 [Phoenix LiveView]: https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html
 [Commanded]: https://github.com/commanded/commanded
+[Event Sourcing]: https://martinfowler.com/eaaDev/EventSourcing.html
+[Rio]: https://rio.io
