@@ -4,7 +4,7 @@ rio \
   --debug-level 10 \
   --namespace prod \
   run \
-  --build-branch deployment \
+  --build-branch master \
   --dnssearch bonfirereading.com \
   --image-pull-policy always \
   --name bonfire \
