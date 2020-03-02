@@ -7,6 +7,8 @@ An demo project for learning Elixir. Libraries involved:
 * [Commanded] for [Event Sourcing]
 * [Rio] for deployment
 
+## Develop
+
 ### Before running or deployment
 
 This project uses several free services:
@@ -19,7 +21,16 @@ Environment variables required:
 * `GOOGLE_API_KEY`
 * `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`
 
-## Deploy
+### run locally
+
+```sh
+mix deps.get
+mix phx.server
+```
+
+than open [http://localhost:4000](http://localhost:4000) in your browser
+
+### Deploy
 
 The easiest way to deploy may be [Rio]
 
