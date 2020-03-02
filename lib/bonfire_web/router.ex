@@ -45,10 +45,10 @@ defmodule BonfireWeb.Router do
   scope "/" do
     pipe_through :browser
 
-    get "/~:user_name", BonfireWeb.ProfileController, :show
-
     pow_routes()
     pow_assent_routes()
+
+    get "/:user_name", BonfireWeb.ProfileController, :show
   end
 
   scope "/" do

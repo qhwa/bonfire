@@ -1,20 +1,47 @@
 # Bonfire
 
-To start your Phoenix server:
+An demo project for learning Elixir. Libraries involved:
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+* [Phoenix] for web framework
+* [Phoenix LiveView] for almost-no-javascript application
+* [Commanded] for [Event Sourcing]
+* [Skylab] for deployment
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## Run locally
+## Deploy
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+1. generate release configs:
 
-## Learn more
+  ```sh
+  mix skylab.init --overwrite
+  ```
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+2. generate docker image:
+
+  ```sh
+  docker build -t bonfire .
+  ```
+3. distribute the docker image
+
+  You can push your docker image to your registry and run it anywhere you want.
+
+  Or just run it locally as:
+
+  ```sh
+  docker run \
+    --rm \
+    -it \
+    -e DATABASE_URL=ecto://YOUR_DB_USERNAME:YOUR_DB_PASSOWRD@YOUR_DB_HOST:YOUR_DB_PORT/YOUR_DATABASE \
+    -e SECRET_KEY_BASE=$(mix phx.gen.secret) \
+    -e ES_DATABASE_URL=ecto://... \
+    -e GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID} \
+    -e GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET} \
+    -p 4000:4000 \
+    bonfire \
+    start_iex
+  ```
+
+
+[Phoenix]: http://www.phoenixframework.org/
+[Phoenix LiveView]: https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html
+[Commanded]: https://github.com/commanded/commanded

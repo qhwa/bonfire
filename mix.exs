@@ -51,7 +51,8 @@ defmodule Bonfire.MixProject do
       {:pow, "~> 1.0.18"},
       {:pow_assent, "~> 0.4.6"},
       {:certifi, "~> 2.5"},
-      {:ssl_verify_fun, "~> 1.1"}
+      {:ssl_verify_fun, "~> 1.1"},
+      {:skylab_dockerize, path: "packages/skylab_dockerize", runtime: false}
     ]
   end
 

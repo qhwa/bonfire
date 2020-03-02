@@ -33,6 +33,8 @@ config :bonfire, :pow,
   repo: Bonfire.Repo,
   web_module: BonfireWeb
 
+config :bonfire, Bonfire.EventStore, serializer: Commanded.Serialization.JsonSerializer
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

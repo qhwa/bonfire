@@ -2,7 +2,6 @@ defmodule Bonfire.Books.GoogleBookAPI do
   use HTTPoison.Base
 
   @endpoint "https://www.googleapis.com/books/v1/volumes"
-  @api_key System.fetch_env!("GOOGLE_API_KEY")
 
   def search_books(keyword) do
     get!(@endpoint, [], params: [q: keyword])
@@ -46,13 +45,17 @@ defmodule Bonfire.Books.GoogleBookAPI do
   end
 
   defp default_options do
-    Application.get_env(:bonfire, __MODULE__)
-    |> Keyword.get(:request_options)
+    case Application.get_env(:bonfire, __MODULE__) do
+      nil -> []
+      opts -> Keyword.get(opts, :request_options)
+    end
   end
 
   def process_request_params(params) do
-    Keyword.put(params, :key, @api_key)
+    Keyword.put(params, :key, api_key())
   end
+
+  defp api_key, do: System.fetch_env!("GOOGLE_API_KEY")
 
   def process_response_body(body) do
     body
@@ -73,8 +76,8 @@ defmodule Bonfire.Books.GoogleBookAPI do
 
   defp transform_book_data(%{"volumeInfo" => info, "id" => id}) do
     data = %{
-      cover: cover_image(info),
-      thumbnail: thumbnail(info),
+      cover: cover_image(info) |> to_ssl(),
+      thumbnail: thumbnail(info) |> to_ssl(),
       isbn: isbn(info),
       source_platform: "google",
       source_id: id
@@ -112,6 +115,14 @@ defmodule Bonfire.Books.GoogleBookAPI do
   end
 
   defp thumbnail(_) do
+    nil
+  end
+
+  defp to_ssl(url) when is_binary(url) do
+    String.replace_prefix(url, "http://", "https://")
+  end
+
+  defp to_ssl(_) do
     nil
   end
 end
