@@ -7,6 +7,7 @@ An demo project for learning Elixir. Some of the libraries involved:
 * [Commanded] for [Event Sourcing]
 * [Pow] for authentification
 * [Rio] for deployment
+* [dockerize] for docker image building
 
 Libraries are picked for practicing reason, you can find more background information in the [design document](https://github.com/qhwa/bonfire/blob/master/design/design.md). 
 
@@ -95,3 +96,4 @@ After core features finished, it is next to make reading feel like a game, which
 [Pow]: https://powauth.com/
 [credo]: https://github.com/rrrene/credo/
 [dialyxir]: https://github.com/jeremyjh/dialyxir
+[dockerize]: https://github.com/qhwa/dockerize
