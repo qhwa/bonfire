@@ -1,11 +1,13 @@
 # Bonfire
 
-An demo project for learning Elixir. Libraries involved:
+An demo project for learning Elixir. Some of the libraries involved:
 
 * [Phoenix] for web framework
 * [Phoenix LiveView] for almost-no-javascript application
 * [Commanded] for [Event Sourcing]
 * [Rio] for deployment
+
+It's still under active development, even the core features are not fully implemented yet. Refer to [Todos](#Todos) for more information.
 
 ## Develop
 
@@ -64,6 +66,17 @@ Also, this project contains an `Dockerfile` so you can build your own image and 
     bonfire \
     start_iex
   ```
+
+## Todos
+
+### core features
+
+* [ ] tags for books
+* [ ] deleting a reading track
+* [ ] sharing a reading track to others
+* [ ] stats of reading
+
+After core features finished, it is next to make reading feel like a game, which is still forming on the roadmap.
 
 
 [Phoenix]: http://www.phoenixframework.org/
