@@ -11,7 +11,7 @@ An demo project for learning Elixir. Some of the libraries involved:
 
 Libraries are picked for practicing reason, you can find more background information in the [design document](https://github.com/qhwa/bonfire/blob/master/design/design.md). 
 
-It's still under active development, even the core features are not fully implemented yet. Refer to [Todos](#Todos) for more information.
+**It's still under active development, even the core features are not fully implemented yet.** Please refer to [Todos](#Todos) for more information.
 
 ## Develop
 
