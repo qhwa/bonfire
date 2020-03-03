@@ -5,6 +5,7 @@ An demo project for learning Elixir. Some of the libraries involved:
 * [Phoenix] for web framework
 * [Phoenix LiveView] for almost-no-javascript application
 * [Commanded] for [Event Sourcing]
+* [Pow] for authentification
 * [Rio] for deployment
 
 It's still under active development, even the core features are not fully implemented yet. Refer to [Todos](#Todos) for more information.
@@ -84,3 +85,4 @@ After core features finished, it is next to make reading feel like a game, which
 [Commanded]: https://github.com/commanded/commanded
 [Event Sourcing]: https://martinfowler.com/eaaDev/EventSourcing.html
 [Rio]: https://rio.io
+[Pow]: https://powauth.com/
