@@ -39,67 +39,6 @@ defmodule Bonfire.Books do
   def get_book!(id),
     do: Repo.get!(Book, id) |> Repo.preload([:metadata, :reading_state])
 
-  @doc """
-  Creates a book.
-
-  ## Examples
-
-      iex> create_book(%{field: value})
-      {:ok, %Book{}}
-
-      iex> create_book(%{field: bad_value})
-      {:error, ...}
-
-  """
-  def create_book(attrs \\ %{}) do
-    raise "TODO"
-  end
-
-  @doc """
-  Updates a book.
-
-  ## Examples
-
-      iex> update_book(book, %{field: new_value})
-      {:ok, %Book{}}
-
-      iex> update_book(book, %{field: bad_value})
-      {:error, ...}
-
-  """
-  def update_book(%Book{} = book, attrs) do
-    raise "TODO"
-  end
-
-  @doc """
-  Deletes a Book.
-
-  ## Examples
-
-      iex> delete_book(book)
-      {:ok, %Book{}}
-
-      iex> delete_book(book)
-      {:error, ...}
-
-  """
-  def delete_book(%Book{} = book) do
-    raise "TODO"
-  end
-
-  @doc """
-  Returns a data structure for tracking book changes.
-
-  ## Examples
-
-      iex> change_book(book)
-      %Todo{...}
-
-  """
-  def change_book(%Book{} = book) do
-    raise "TODO"
-  end
-
   def isbn_to_book(%{isbn: isbn, user_id: user_id}) do
     with {:ok, metadata} <- isbn_to_metadata(isbn) do
       metadata_to_book(metadata, user_id)

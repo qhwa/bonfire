@@ -1,4 +1,6 @@
 defmodule BonfireWeb.Live.ReadingStateComponent do
+  @moduledoc false
+
   use Phoenix.LiveComponent
 
   alias BonfireWeb.ReadingStateView

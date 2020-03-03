@@ -52,7 +52,9 @@ defmodule Bonfire.MixProject do
       {:pow_assent, "~> 0.4.6"},
       {:certifi, "~> 2.5"},
       {:ssl_verify_fun, "~> 1.1"},
-      {:skylab_dockerize, path: "packages/skylab_dockerize", runtime: false}
+      {:skylab_dockerize, path: "packages/skylab_dockerize", only: :dev, runtime: false},
+      {:credo, "~> 1.2", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0.0-rc.7", only: :dev, runtime: false}
     ]
   end
 

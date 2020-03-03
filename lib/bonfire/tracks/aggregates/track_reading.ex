@@ -1,4 +1,6 @@
 defmodule Bonfire.Tracks.Aggregates.TrackReading do
+  @moduledoc false
+
   defstruct [:isbn, :state]
 
   alias Bonfire.Tracks.Events.ReadingStarted

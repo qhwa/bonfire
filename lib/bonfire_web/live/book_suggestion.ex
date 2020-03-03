@@ -1,4 +1,8 @@
 defmodule BonfireWeb.Live.BookSuggestion do
+  @moduledoc false
+
+  require Logger
+
   use Phoenix.HTML
   use Phoenix.LiveView
 
@@ -58,7 +62,7 @@ defmodule BonfireWeb.Live.BookSuggestion do
          |> redirect(to: Routes.reading_state_path(BonfireWeb.Endpoint, :index))}
 
       error ->
-        IO.inspect(error, label: :error)
+        Logger.error(["Fail on creating reading track, reason: ", inspect(error)])
         {:noreply, socket}
     end
   end

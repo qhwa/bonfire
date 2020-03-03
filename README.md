@@ -70,6 +70,11 @@ Also, this project contains an `Dockerfile` so you can build your own image and 
 
 ## Todos
 
+### Basis
+
+* [ ] pass maintainbility checking by [credo]
+* [ ] pass type checking by [dialyxir]
+
 ### core features
 
 * [ ] tags for books
@@ -86,3 +91,5 @@ After core features finished, it is next to make reading feel like a game, which
 [Event Sourcing]: https://martinfowler.com/eaaDev/EventSourcing.html
 [Rio]: https://rio.io
 [Pow]: https://powauth.com/
+[credo]: https://github.com/rrrene/credo/
+[dialyxir]: https://github.com/jeremyjh/dialyxir

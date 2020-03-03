@@ -1,4 +1,6 @@
 defmodule BonfireWeb.Live.ReadingState do
+  @moduledoc false
+
   use Phoenix.HTML
   use Phoenix.LiveView
 
