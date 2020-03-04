@@ -1,5 +1,7 @@
 <%= if @info.cover do %>
-  <img class="cover" src="<%= @info.cover %>" alt="book cover image" />
+  <div class="cover">
+    <img src="<%= @info.cover %>" alt="book cover image" />
+  </div>
 <% end %>
 
 <h1 class="title"><%= @info.title %></h1>

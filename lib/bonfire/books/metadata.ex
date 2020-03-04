@@ -31,4 +31,14 @@ defmodule Bonfire.Books.Metadata do
     |> validate_required([:title, :isbn])
     |> unique_constraint(:isbn)
   end
+
+  def updating_changeset(metadata, attrs) do
+    metadata
+    |> cast(attrs, [
+      :subtitle,
+      :authors,
+      :cover,
+      :description
+    ])
+  end
 end

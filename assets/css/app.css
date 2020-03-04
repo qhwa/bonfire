@@ -45,8 +45,13 @@ p.description {
   height: 10em;
 }
 
+.cover img {
+  max-height: 10em;
+}
+
 .reading_states li .cover img {
   display: block;
+  max-height: 100%;
 }
 
 .reading_states li .info {

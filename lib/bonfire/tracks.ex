@@ -66,10 +66,7 @@ defmodule Bonfire.Tracks do
   end
 
   def create_reading_state(%{"isbn" => isbn, "user_id" => user_id}) do
-    EventApp.dispatch(
-      %StartReading{isbn: %IsbnId{isbn: isbn, user_id: user_id}},
-      consistency: :strong
-    )
+    EventApp.dispatch(%StartReading{isbn: %IsbnId{isbn: isbn, user_id: user_id}})
   end
 
   def finish_reading_state(isbn, user_id) do
@@ -79,7 +76,7 @@ defmodule Bonfire.Tracks do
     )
   end
 
-  def delete_reading_state(isbn) do
+  def delete_reading_state(_isbn) do
     raise "TODO"
   end
 end

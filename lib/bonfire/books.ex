@@ -6,8 +6,12 @@ defmodule Bonfire.Books do
   import Ecto.Query, warn: false
   alias Bonfire.Repo
 
-  alias Bonfire.Books.{Book, Metadata}
-  alias Bonfire.Books.GoogleBookAPI
+  alias Bonfire.Books.{
+    Book,
+    Metadata,
+    GoogleBookAPI,
+    DoubanBookApi
+  }
 
   def search_books(keyword) do
     GoogleBookAPI.search_books(keyword)
@@ -63,6 +67,13 @@ defmodule Bonfire.Books do
 
   def fetch_book_info(isbn) do
     GoogleBookAPI.find_book_by_isbn(isbn)
+    |> case do
+      {:ok, %{cover: nil} = book} ->
+        {:ok, %{book | cover: DoubanBookApi.get_book_cover(isbn)}}
+
+      book ->
+        book
+    end
   end
 
   def create_metadata(book) do
@@ -78,6 +89,17 @@ defmodule Bonfire.Books do
 
       %Book{} = book ->
         {:ok, book}
+    end
+  end
+
+  @doc """
+  Fix missing cover image.
+  """
+  def fix_cover(%{cover: nil, isbn: isbn} = metadata) do
+    with {:cover, url} when is_binary(url) <- {:cover, DoubanBookApi.get_book_cover(isbn)},
+         changeset = Metadata.updating_changeset(metadata, %{cover: url}),
+         {:ok, _} <- Repo.update(changeset) do
+      :ok
     end
   end
 end
