@@ -2,9 +2,11 @@
 <%= for rs <- @reading_states do %>
   <% info = rs.book.metadata %>
   <li>
-    <%= if info.cover do %>
+    <div class="cover">
+      <%= if info.cover do %>
       <img src="<%= info.cover %>" alt="book cover image" />
-    <% end %>
+      <% end %>
+    </div>
 
     <div class="info">
       <%= info.title %>

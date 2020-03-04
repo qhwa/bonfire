@@ -72,10 +72,9 @@ config :bonfire, BonfireWeb.Endpoint,
     ]
   ]
 
-config :bonfire, Bonfire.Books.GoogleBookAPI,
-  request_options: [
-    proxy: {:socks5, 'gz1.gira.cc', 10816}
-  ]
+config :bonfire, Bonfire.Books.GoogleBookAPI, proxy: System.get_env("GOOGLE_BOOK_API_PROXY")
+
+config :bonfire, Bonfire.Books.DoubanBookApi, proxy: System.get_env("DOUBAN_BOOK_API_PROXY")
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

@@ -29,10 +29,12 @@ defmodule Bonfire.Books.GoogleBookAPI do
   end
 
   defp default_options do
-    case Application.get_env(:bonfire, __MODULE__) do
-      nil -> []
-      opts -> Keyword.get(opts, :request_options)
-    end
+    proxy =
+      Application.get_env(:bonfire, __MODULE__)
+      |> get_in([:proxy])
+      |> ParseProxy.parse!()
+
+    [proxy: proxy]
   end
 
   def process_request_params(params) do
