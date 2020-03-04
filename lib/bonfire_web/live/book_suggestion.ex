@@ -8,7 +8,6 @@ defmodule BonfireWeb.Live.BookSuggestion do
 
   alias Bonfire.Books
   alias Bonfire.Tracks
-  alias BonfireWeb.Router.Helpers, as: Routes
 
   def render(assigns) do
     ~L"""

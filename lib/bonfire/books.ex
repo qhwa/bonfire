@@ -17,32 +17,6 @@ defmodule Bonfire.Books do
     GoogleBookAPI.search_books(keyword)
   end
 
-  @doc """
-  Returns the list of books.
-
-  ## Examples
-
-      iex> list_books()
-      [%Book{}, ...]
-
-  """
-  def list_books,
-    do: Repo.all(Book) |> Repo.preload([:metadata])
-
-  @doc """
-  Gets a single book.
-
-  Raises if the Book does not exist.
-
-  ## Examples
-
-      iex> get_book!(123)
-      %Book{}
-
-  """
-  def get_book!(id),
-    do: Repo.get!(Book, id) |> Repo.preload([:metadata, :reading_state])
-
   def isbn_to_book(%{isbn: isbn, user_id: user_id}) do
     with {:ok, metadata} <- isbn_to_metadata(isbn) do
       metadata_to_book(metadata, user_id)
