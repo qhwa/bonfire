@@ -15,29 +15,13 @@ defmodule Bonfire.Books.GoogleBookAPI do
     end
   end
 
-  def find_book(query) do
-    get!(@endpoint, [], params: [q: stringify_query(query)])
-    |> Map.get(:body)
+  def find_book_by_isbn(isbn) do
+    search_books(isbn)
+    |> Enum.find(fn book -> book.isbn == isbn end)
     |> case do
-      books when is_list(books) ->
-        {:ok, hd(books)}
-
-      other ->
-        other
+      %{} = book -> book
+      nil -> nil
     end
-  end
-
-  defp stringify_query(query) do
-    query
-    |> Enum.map(fn
-      {key, value} ->
-        [to_string(key), ":", to_string(value)]
-
-      term when is_binary(term) ->
-        term
-    end)
-    |> Enum.intersperse("+")
-    |> IO.iodata_to_binary()
   end
 
   def process_request_options(options) do

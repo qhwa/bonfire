@@ -62,7 +62,7 @@ defmodule Bonfire.Books do
   end
 
   def fetch_book_info(isbn) do
-    GoogleBookAPI.find_book(isbn: isbn)
+    GoogleBookAPI.find_book_by_isbn(isbn)
   end
 
   def create_metadata(book) do
