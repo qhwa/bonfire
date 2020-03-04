@@ -3,7 +3,8 @@ defmodule Bonfire.Books do
   The Books context.
   """
 
-  import Ecto.Query, warn: false
+  import Ecto.Query
+
   alias Bonfire.Repo
 
   alias Bonfire.Books.{
@@ -75,5 +76,11 @@ defmodule Bonfire.Books do
          {:ok, _} <- Repo.update(changeset) do
       :ok
     end
+  end
+
+  def fix_all_covers! do
+    from(data in Metadata, where: is_nil(data.cover))
+    |> Repo.all()
+    |> Enum.map(&fix_cover/1)
   end
 end
