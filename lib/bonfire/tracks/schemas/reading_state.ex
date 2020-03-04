@@ -1,4 +1,8 @@
 defmodule Bonfire.Tracks.Schemas.ReadingState do
+  @moduledoc """
+  The database schema for reading states.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -14,7 +18,6 @@ defmodule Bonfire.Tracks.Schemas.ReadingState do
   end
 
   def updating_changeset(rs, attrs) do
-    rs
-    |> cast(attrs, [:state, :started_at, :finished_at])
+    cast(rs, attrs, [:state, :started_at, :finished_at])
   end
 end

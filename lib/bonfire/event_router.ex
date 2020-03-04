@@ -1,4 +1,5 @@
 defmodule Bonfire.EventRouter do
+  @moduledoc false
   use Commanded.Commands.CompositeRouter
 
   router(Bonfire.Tracks.Router)

@@ -1,4 +1,6 @@
 defmodule Bonfire.UserIdentities.UserIdentity do
+  @moduledoc false
+
   use Ecto.Schema
   use PowAssent.Ecto.UserIdentities.Schema, user: Bonfire.Users.User
 

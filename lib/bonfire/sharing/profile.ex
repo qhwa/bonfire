@@ -1,4 +1,8 @@
 defmodule Bonfire.Sharing.Profile do
+  @moduledoc """
+  A database schema representing user profiles.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

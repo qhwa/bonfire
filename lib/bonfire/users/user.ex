@@ -1,4 +1,7 @@
 defmodule Bonfire.Users.User do
+  @moduledoc """
+  A module representing the User schema in database
+  """
   use Ecto.Schema
   use Pow.Ecto.Schema
   use PowAssent.Ecto.Schema

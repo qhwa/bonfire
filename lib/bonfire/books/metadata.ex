@@ -1,4 +1,8 @@
 defmodule Bonfire.Books.Metadata do
+  @moduledoc """
+  Database schema of book metadatas.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

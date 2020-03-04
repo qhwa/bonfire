@@ -1,4 +1,8 @@
 defmodule Bonfire.Books.DoubanBookApi do
+  @moduledoc """
+  A module for fetching information from douban.com.
+  """
+
   use HTTPoison.Base
   require Logger
 

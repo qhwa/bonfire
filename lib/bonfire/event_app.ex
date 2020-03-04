@@ -1,4 +1,6 @@
 defmodule Bonfire.EventApp do
+  @moduledoc false
+
   use Commanded.Application,
     otp_app: :bonfire,
     event_store: [
