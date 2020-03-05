@@ -75,8 +75,8 @@ Also, this project contains an `Dockerfile` so you can build your own image and 
 
 ### Basis
 
-* [ ] pass maintainbility checking by [credo]
-* [ ] pass type checking by [dialyxir]
+* [x] pass maintainbility checking by [credo]
+* [x] pass type checking by [dialyxir]
 
 ### core features
 
