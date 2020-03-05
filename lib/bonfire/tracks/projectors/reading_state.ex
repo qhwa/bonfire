@@ -1,4 +1,8 @@
 defmodule Bonfire.Tracks.Projectors.ReadingState do
+  @moduledoc """
+  A projector with hooks on reading state related changes.
+  """
+
   alias Bonfire.Books
   alias Bonfire.Tracks.Events.{ReadingStarted, ReadingFinished}
   alias Bonfire.Tracks.Schemas.ReadingState

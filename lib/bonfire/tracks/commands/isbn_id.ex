@@ -1,4 +1,9 @@
 defmodule IsbnId do
+  @moduledoc """
+  A struct holding the `isbn`, and `user_id`. The struct often used as a context.
+  """
+  @type t :: %{isbn: binary, user_id: any}
+
   @derive Jason.Encoder
   @enforce_keys [:isbn, :user_id]
   defstruct [:isbn, :user_id]

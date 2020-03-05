@@ -1,4 +1,6 @@
 defmodule Bonfire.Tracks.Supervisor do
+  @moduledoc false
+
   use Supervisor
 
   def start_link(init_arg) do

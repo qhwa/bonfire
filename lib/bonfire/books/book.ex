@@ -1,4 +1,8 @@
 defmodule Bonfire.Books.Book do
+  @moduledoc """
+  A database schema of user_book.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

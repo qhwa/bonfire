@@ -1,4 +1,8 @@
 defmodule Bonfire.Books.DoubanBookApi do
+  @moduledoc """
+  A module for fetching information from douban.com.
+  """
+
   use HTTPoison.Base
   require Logger
 
@@ -18,11 +22,8 @@ defmodule Bonfire.Books.DoubanBookApi do
   end
 
   def process_request_options(_) do
-    proxy =
-      Application.get_env(:bonfire, __MODULE__)
-      |> get_in([:proxy])
-      |> ParseProxy.parse!()
-
-    [proxy: proxy]
+    Application.get_env(:bonfire, __MODULE__)
+    |> get_in([:proxy])
+    |> ParseProxy.parse!()
   end
 end

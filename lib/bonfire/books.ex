@@ -3,7 +3,8 @@ defmodule Bonfire.Books do
   The Books context.
   """
 
-  import Ecto.Query, warn: false
+  import Ecto.Query
+
   alias Bonfire.Repo
 
   alias Bonfire.Books.{
@@ -16,32 +17,6 @@ defmodule Bonfire.Books do
   def search_books(keyword) do
     GoogleBookAPI.search_books(keyword)
   end
-
-  @doc """
-  Returns the list of books.
-
-  ## Examples
-
-      iex> list_books()
-      [%Book{}, ...]
-
-  """
-  def list_books,
-    do: Repo.all(Book) |> Repo.preload([:metadata])
-
-  @doc """
-  Gets a single book.
-
-  Raises if the Book does not exist.
-
-  ## Examples
-
-      iex> get_book!(123)
-      %Book{}
-
-  """
-  def get_book!(id),
-    do: Repo.get!(Book, id) |> Repo.preload([:metadata, :reading_state])
 
   def isbn_to_book(%{isbn: isbn, user_id: user_id}) do
     with {:ok, metadata} <- isbn_to_metadata(isbn) do
@@ -101,5 +76,11 @@ defmodule Bonfire.Books do
          {:ok, _} <- Repo.update(changeset) do
       :ok
     end
+  end
+
+  def fix_all_covers! do
+    from(data in Metadata, where: is_nil(data.cover))
+    |> Repo.all()
+    |> Enum.map(&fix_cover/1)
   end
 end

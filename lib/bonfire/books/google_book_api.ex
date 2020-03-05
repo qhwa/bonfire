@@ -1,4 +1,6 @@
 defmodule Bonfire.Books.GoogleBookAPI do
+  @moduledoc false
+
   use HTTPoison.Base
 
   @endpoint "https://www.googleapis.com/books/v1/volumes"
@@ -29,12 +31,9 @@ defmodule Bonfire.Books.GoogleBookAPI do
   end
 
   defp default_options do
-    proxy =
-      Application.get_env(:bonfire, __MODULE__)
-      |> get_in([:proxy])
-      |> ParseProxy.parse!()
-
-    [proxy: proxy]
+    Application.get_env(:bonfire, __MODULE__)
+    |> get_in([:proxy])
+    |> ParseProxy.parse!()
   end
 
   def process_request_params(params) do

@@ -16,7 +16,7 @@ defmodule Bonfire.Tracks.Aggregates.TrackReading do
     %ReadingStarted{isbn: isbn}
   end
 
-  def execute(%{state: :finished} = state, %FinishReading{}) do
+  def execute(%{state: :finished}, %FinishReading{}) do
     {:error, :already_finished}
   end
 

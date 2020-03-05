@@ -1,4 +1,8 @@
 defmodule Bonfire.Sharing.Projectors.Track do
+  @moduledoc """
+  A projector with hooks on sharing changes.
+  """
+
   use Commanded.Projections.Ecto,
     application: Bonfire.EventApp,
     repo: Bonfire.Repo,
