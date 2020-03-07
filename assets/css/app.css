@@ -1,16 +1,6 @@
+@import "./menu.css";
+
 /* This file is for your main application css. */
-
-@import "./phoenix.css";
-@import "../../deps/phoenix_live_view/assets/css/live_view.css";
-
-footer {
-  border-top: 1px solid #ccc;
-  width: 100%;
-  max-width: 76rem;
-  padding-top: 2rem;
-  margin: 2rem auto;
-}
-
 h1.title {
   margin: 0;
 }

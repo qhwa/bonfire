@@ -9,34 +9,36 @@
     <%= csrf_meta_tag() %>
   </head>
   <body>
-    <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><a href="/tracks">my books</a></li>
-            <li>
-            <%= if Pow.Plug.current_user(@conn) do %>
-              <span><%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete %></span>
-            <% else %>
-              <span><%= link "Register", to: Routes.pow_registration_path(@conn, :new) %></span>
-              <span><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></span>
-            <% end %>
-            </li>
-          </ul>
-        </nav>
-        <a href="/" class="brand">
-          <b>Bonfire</b> Reading
-        </a>
-      </section>
-    </header>
+    <div class="container">
+      <header class="header is-clearfix">
+        <a href="/" class="logo"><b>Bonfire</b> reading</a>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu">
+          <%= if Pow.Plug.current_user(@conn) do %>
+          <li><a href="/tracks">My books</a></li>
+          <li><%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item" %></li>
+
+          <% else %>
+          <li><%= link "Sign up", to: Routes.pow_registration_path(@conn, :new) %></li>
+          <li><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></li>
+          <% end %>
+        </ul>
+      </header>
+    </div>
+
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>
     </main>
+
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-    <footer>
-      icons by <a target="_blank" href="https://icons8.com">Icons8</a>
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        icons by <a target="_blank" href="https://icons8.com">Icons8</a>
+      </div>
     </footer>
   </body>
 </html>
