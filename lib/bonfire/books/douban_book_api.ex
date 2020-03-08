@@ -10,6 +10,7 @@ defmodule Bonfire.Books.DoubanBookApi do
     with {:ok, %HTTPoison.Response{status_code: 200, body: body}} <- get(isbn),
          {:ok, data} <- Jason.decode(body) do
       Map.get(data, "cover_url")
+      |> String.replace("/l/", "/m/")
     else
       e ->
         Logger.error(["error getting cover from douban, ", inspect(e)])
