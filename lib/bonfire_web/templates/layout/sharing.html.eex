@@ -9,17 +9,13 @@
     <%= csrf_meta_tag() %>
   </head>
   <body>
-    <header>
-      <section class="section">
-        <div class="container">
-          <a href="/" class="brand">
-            <b>Bonfire</b>Reading
-          </a> 
-          <div class="is-divider-vertical"></div>
-          Books I like
-        </div>
-      </section>
-    </header>
+    <div class="profile container">
+      <a href="/" class="brand">
+        <b>Bonfire</b>Reading
+      </a> 
+      <div class="is-divider-vertical"></div>
+      Books I like
+    </div>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>

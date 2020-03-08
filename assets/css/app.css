@@ -1,6 +1,5 @@
 @import "./menu.css";
 
-/* This file is for your main application css. */
 h1.title {
   margin: 0;
 }
@@ -110,4 +109,32 @@ p.description {
 
 .book .info .subtitle {
   font-size: inherit;
+}
+
+.profile.container {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  ul.reading_states > li {
+    width: 100%;
+    margin-bottom: 3em;
+  }
+
+  ul.reading_states > li .cover {
+    width: 100%;
+    height: auto;
+  }
+
+  ul.reading_states > li .cover img {
+    max-height: unset;
+  }
 }
