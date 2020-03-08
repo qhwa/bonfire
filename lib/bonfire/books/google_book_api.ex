@@ -88,23 +88,11 @@ defmodule Bonfire.Books.GoogleBookAPI do
   end
 
   defp cover_image(%{"imageLinks" => %{} = links}) do
-    img = links["extraLarge"] || links["large"] || links["medium"] || links["thumbnail"]
-
-    case img do
-      url when is_binary(url) ->
-        set_zoom_level(url, 4)
-
-      nil ->
-        nil
-    end
+    links["extraLarge"] || links["large"] || links["medium"]
   end
 
   defp cover_image(_) do
     nil
-  end
-
-  defp set_zoom_level(url, level) do
-    String.replace(url, ~r/zoom=\d+/, "zoom=#{level}")
   end
 
   defp thumbnail(%{"imageLinks" => %{} = links}) do
