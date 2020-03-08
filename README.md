@@ -1,6 +1,8 @@
 # Bonfire
 
-An demo project for learning Elixir. Some of the libraries involved:
+An demo project for learning Elixir. It's under active development.
+
+Some of the libraries involved:
 
 * [Phoenix] for web framework
 * [Phoenix LiveView] for almost-no-javascript application
