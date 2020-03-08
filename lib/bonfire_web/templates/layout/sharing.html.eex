@@ -28,7 +28,7 @@
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
     <footer class="footer">
       <div class="content has-text-centered">
-        powered by <a href="/"><b>Bonfire</b>Reading</a>
+        powered by <a href="/"><b>Bonfire</b> reading</a>
       </div>
     </footer>
   </body>
