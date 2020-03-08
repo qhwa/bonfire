@@ -39,6 +39,10 @@ p.description {
   max-height: 10em;
 }
 
+.reading_states > li {
+  margin-bottom: 0.5em;
+}
+
 .reading_states li .cover img {
   display: block;
   max-height: 100%;
@@ -50,7 +54,7 @@ p.description {
 }
 
 .reading_states li .title {
-  line-height: 1;
+  line-height: 1.1;
   display: block;
   font-weight: bold;
   font-size: 120%;
@@ -59,6 +63,7 @@ p.description {
 }
 
 .reading_states li .subtitle {
+  font-size: 90%;
   line-height: 1;
   color: #999;
   margin-bottom: 0.5em;
@@ -89,4 +94,12 @@ p.description {
 
 .suggestions ul li .info .subtitle {
   color: #ccc;
+}
+
+.new-reading-state.button {
+  float: right;
+}
+.add-new-book-icon {
+  height: 1.5em;
+  margin-right: 0.5em;
 }

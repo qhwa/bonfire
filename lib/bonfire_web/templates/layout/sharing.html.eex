@@ -10,12 +10,14 @@
   </head>
   <body>
     <header>
-      <section class="container">
-        <span>
-        <a href="/" class="brand">
-          <b>Bonfire</b> Reading
-        </a> | Books I like
-        </span>
+      <section class="section">
+        <div class="container">
+          <a href="/" class="brand">
+            <b>Bonfire</b>Reading
+          </a> 
+          <div class="is-divider-vertical"></div>
+          Books I like
+        </div>
       </section>
     </header>
     <main role="main" class="container">
@@ -24,8 +26,10 @@
       <%= render @view_module, @view_template, assigns %>
     </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-    <footer>
-      powered by <a href="/">Bonfire reading</a>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        powered by <a href="/"><b>Bonfire</b>Reading</a>
+      </div>
     </footer>
   </body>
 </html>
