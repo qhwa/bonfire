@@ -9,7 +9,7 @@
     </div>
 
     <div class="info">
-      <%= info.title %>
+      <div class="title is-spaced"><%= info.title %></div>
       <div class="subtitle"><%= info.subtitle %></div>
       <div class="reading-state-state state">
         <%= if rs.state == "finished" do %>

@@ -1,4 +1,2 @@
-<h1>Sign in</h1>
-
 <%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn),
-  do: content_tag(:span, link) %>
+  do: content_tag(:span, link, class: "button") %>
