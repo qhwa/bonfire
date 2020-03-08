@@ -1,9 +1,11 @@
-<h1 class="title">
-  Books I like
-  <%= link to: Routes.reading_state_path(@conn, :new), class: "button new-reading-state" do %>
-    <img src="<%= Routes.static_path(@conn, "/images/icon-add-book.svg") %>" class="add-new-book-icon" />
-    Add new book
-  <% end %>
-</h1>
+<div class="container">
+  <h1 class="title">
+    Books I like
+    <%= link to: Routes.reading_state_path(@conn, :new), class: "button new-reading-state" do %>
+      <img src="<%= Routes.static_path(@conn, "/images/icon-add-book.svg") %>" class="add-new-book-icon" />
+      Add new book
+    <% end %>
+  </h1>
 
-<%= live_render(@conn, BonfireWeb.Live.ReadingStateList, session: %{"user_id" => @current_user.id}) %>
+  <%= live_render(@conn, BonfireWeb.Live.ReadingStateList, session: %{"user_id" => @current_user.id}) %>
+</div>

@@ -1,7 +1,7 @@
-<h1>New Reading state</h1>
+<div class="container">
+  <h1 class="title">Add new book</h1>
 
-<div>
-  <%= live_render(@conn, BonfireWeb.Live.BookSuggestion, session: %{"user_id" => @current_user.id}) %>
+  <div>
+    <%= live_render(@conn, BonfireWeb.Live.BookSuggestion, session: %{"user_id" => @current_user.id}) %>
+  </div>
 </div>
-
-<span><%= link "Back", to: Routes.reading_state_path(@conn, :index) %></span>

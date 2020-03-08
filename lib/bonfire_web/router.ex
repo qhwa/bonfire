@@ -38,7 +38,6 @@ defmodule BonfireWeb.Router do
   scope "/", BonfireWeb do
     pipe_through :need_authorize
 
-    get "/", PageController, :index
     resources "/tracks", ReadingStateController, only: [:new, :index, :show]
   end
 
@@ -48,6 +47,7 @@ defmodule BonfireWeb.Router do
     pow_routes()
     pow_assent_routes()
 
+    get "/", BonfireWeb.PageController, :index
     get "/:user_name", BonfireWeb.ProfileController, :show
   end
 

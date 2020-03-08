@@ -6,7 +6,7 @@ h1.title {
 }
 
 h2.subtitle {
-  line-height: 1;
+  line-height: 1.1;
   color: #999;
 }
 
@@ -64,7 +64,7 @@ p.description {
 
 .reading_states li .subtitle {
   font-size: 90%;
-  line-height: 1;
+  line-height: 1.1;
   color: #999;
   margin-bottom: 0.5em;
 }
@@ -102,4 +102,12 @@ p.description {
 .add-new-book-icon {
   height: 1.5em;
   margin-right: 0.5em;
+}
+
+.book .info .title {
+  font-size: inherit;
+}
+
+.book .info .subtitle {
+  font-size: inherit;
 }

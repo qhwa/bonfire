@@ -1,4 +1,8 @@
-<h1>What are your reading?</h1>
-
-<%= live_render(@conn, BonfireWeb.Live.BookSuggestion, session: %{"user_id" => @current_user.id}) %>
-
+<section class="hero is-medium is-bold is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">BonfireReading</h1>
+      <h2 class="subtitle">Track and share your reading state.</h2>
+    </div>
+  </div>
+</section>

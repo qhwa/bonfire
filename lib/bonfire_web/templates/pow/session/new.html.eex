@@ -1,2 +1,8 @@
-<%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn),
-  do: content_tag(:span, link, class: "button") %>
+<div class="hero is-medium is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn),
+      do: content_tag(:span, link, class: "button") %>
+    </div>
+  </div>
+</div>

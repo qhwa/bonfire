@@ -13,14 +13,18 @@ defmodule BonfireWeb.Live.BookSuggestion do
     ~L"""
     <% flash = live_flash(@flash, :info) %>
     <%= if flash do %>
-    <div class="alert alert-info" phx-click="lv:clear-flash" phx-value-key="info"><%= flash %></div>
+    <div class="notification is-success is-light" phx-click="lv:clear-flash" phx-value-key="info"><%= flash %></div>
     <% end %>
 
     <%= form_tag "#", phx_change: :user_input, class: "suggestions" do %>
-      <input type="text" id="q" name="q" autocomplete="off" phx-debounce="500" />
+      <div class="field">
+        <label class="label">search</label>
+        <input type="text" id="q" name="q" class="input" autocomplete="off" phx-debounce="500" placeholder="book title, subtitle, isbn or content keyword" />
+      </div>
+
       <ul>
         <%= for book <- @books, book.isbn do %>
-        <li>
+        <li class="book">
           <div class="cover">
           <%= link to: "#", phx_click: "select", phx_value_isbn: book.isbn, phx_value_isbn: book.title do %>
           <img src="<%= book.thumbnail %>" />
@@ -28,8 +32,8 @@ defmodule BonfireWeb.Live.BookSuggestion do
           </div>
 
           <div class="info">
-            <div class="title"><%= link book.title, to: "#", phx_click: "select", phx_value_isbn: book.isbn, phx_value_title: book.title, class: "title" %></div>
-            <div class="subtitle"><%= book.subtitle %></div>
+            <h4 class="title"><%= link book.title, to: "#", phx_click: "select", phx_value_isbn: book.isbn, phx_value_title: book.title, class: "title" %></h4>
+            <h5 class="subtitle"><%= book.subtitle %></h5>
             <div class="authors"><%= book.authors %></div>
           </div>
         </li>
