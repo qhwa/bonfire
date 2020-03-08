@@ -75,7 +75,7 @@ defmodule Bonfire.Books.GoogleBookAPI do
 
   defp isbn(%{"industryIdentifiers" => raw_isbn_info}) do
     Enum.find_value(raw_isbn_info, fn
-      %{"type" => "ISBN_10", "identifier" => id} ->
+      %{"type" => "ISBN_13", "identifier" => id} ->
         id
 
       _ ->
