@@ -7,6 +7,6 @@ defmodule Bonfire.Tracks.Router do
     Aggregates.TrackReading
   }
 
-  identify(TrackReading, by: :isbn, prefix: "reading-state-")
+  identify(TrackReading, by: :track_id, prefix: "reading-state-")
   dispatch([StartReading, FinishReading], to: TrackReading)
 end

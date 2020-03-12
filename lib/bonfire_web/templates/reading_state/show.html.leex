@@ -1,19 +1,19 @@
 <div class="container">
-  <%= if @info.cover do %>
+  <%= if @book.cover do %>
     <div class="cover">
-      <img src="<%= @info.cover %>" alt="book cover image" />
+      <img src="<%= @book.cover %>" alt="book cover image" />
     </div>
   <% end %>
 
-  <h1 class="title"><%= @info.title %></h1>
-  <h2 class="subtitle"><%= @info.subtitle %></h2>
+  <h1 class="title"><%= @book.title %></h1>
+  <h2 class="subtitle"><%= @book.subtitle %></h2>
 
   <section class="info">
-    <div class="authors">By: <%= @info.authors %></div>
-    <div class="isbn">ISBN: <%= @info.isbn %></div>
+    <div class="authors">By: <%= @book.authors %></div>
+    <div class="isbn">ISBN: <%= @book.isbn %></div>
 
     <p class="description">
-      <%= @info.description %>
+      <%= @book.description %>
     </p>
   </section>
 

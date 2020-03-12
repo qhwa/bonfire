@@ -1,6 +1,6 @@
 <ul class="reading_states">
 <%= for rs <- @reading_states do %>
-  <% info = rs.book.metadata %>
+  <% info = rs.user_book.book %>
   <li>
     <div class="cover">
       <%= if info.cover do %>

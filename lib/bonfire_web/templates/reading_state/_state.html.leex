@@ -11,7 +11,7 @@
     <%= link "finish",
       to: "#",
       phx_click: "finish",
-      phx_value_isbn: @reading_state.book.metadata.isbn,
+      phx_value_isbn: @reading_state.user_book.book.isbn,
       phx_target: "#rs-state-#{@reading_state.id}"
     %>
     ]

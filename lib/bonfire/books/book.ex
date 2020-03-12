@@ -1,19 +1,24 @@
 defmodule Bonfire.Books.Book do
   @moduledoc """
-  A database schema of user_book.
+  Database schema of book metadatas.
   """
 
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Bonfire.Books.Metadata
-  alias Bonfire.Tracks.Schemas.ReadingState
-  alias Bonfire.Users.User
-
   schema "books" do
-    belongs_to :metadata, Metadata
-    belongs_to :user, User
-    has_one :reading_state, ReadingState
+    field :cover, :string
+    field :description, :string
+    field :isbn, :string
+    field :isbn_10, :string
+    field :isbn_13, :string
+    field :title, :string
+    field :subtitle, :string
+    field :source_platform, :string
+    field :source_id, :string
+    field :authors, {:array, :string}
+
+    has_many :user_books, Bonfire.Books.UserBook
 
     timestamps()
   end
@@ -21,7 +26,29 @@ defmodule Bonfire.Books.Book do
   @doc false
   def creating_changeset(book, attrs) do
     book
-    |> cast(attrs, [:metadata_id, :user_id])
-    |> validate_required([:metadata_id, :user_id])
+    |> cast(attrs, [
+      :title,
+      :subtitle,
+      :authors,
+      :isbn,
+      :isbn_10,
+      :isbn_13,
+      :cover,
+      :description,
+      :source_platform,
+      :source_id
+    ])
+    |> validate_required([:title, :isbn])
+    |> unique_constraint(:isbn)
+  end
+
+  def updating_changeset(book, attrs) do
+    book
+    |> cast(attrs, [
+      :subtitle,
+      :authors,
+      :cover,
+      :description
+    ])
   end
 end

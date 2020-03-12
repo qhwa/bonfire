@@ -12,7 +12,7 @@ defmodule BonfireWeb.Live.ReadingStateComponent do
 
   def handle_event("finish", _session, socket) do
     rs = socket.assigns.reading_state
-    :ok = Tracks.finish_reading_state(rs.book.metadata.isbn, rs.book.user_id)
+    :ok = Tracks.finish_reading_state(rs.user_book.book.isbn, rs.user_id)
     {:noreply, assign(socket, :reading_state, reload(rs))}
   end
 

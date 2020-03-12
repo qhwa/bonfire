@@ -16,8 +16,8 @@ defmodule BonfireWeb.Live.ReadingState do
     socket =
       socket
       |> assign(:reading_state, rs)
-      |> assign(:book, rs.book)
-      |> assign(:info, rs.book.metadata)
+      |> assign(:user_book, rs.user_book)
+      |> assign(:book, rs.user_book.book)
 
     {:ok, socket}
   end

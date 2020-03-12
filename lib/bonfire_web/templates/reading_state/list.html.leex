@@ -1,6 +1,6 @@
 <ul class="reading_states is-flex-tablet">
 <%= for rs <- @reading_states do %>
-  <% info = rs.book.metadata %>
+  <% info = rs.user_book.book %>
   <li>
     <%= if info.cover do %>
       <%= link to: Routes.reading_state_path(BonfireWeb.Endpoint, :show, rs), class: "cover" do %>
