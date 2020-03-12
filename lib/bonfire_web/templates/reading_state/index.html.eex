@@ -1,11 +1,18 @@
 <div class="container">
   <h1 class="title">
     Books I like
+  </h1>
+
+  <div class="stats">
+    I have finished <%= @stats.finished %> book(s), and <%= @stats.reading %> reading.
+  </div>
+
+  <div class="buttons">
     <%= link to: Routes.reading_state_path(@conn, :new), class: "button new-reading-state" do %>
       <img src="<%= Routes.static_path(@conn, "/images/icon-add-book.svg") %>" class="add-new-book-icon" />
       Add new book
     <% end %>
-  </h1>
+  </div>
 
   <%= live_render(@conn, BonfireWeb.Live.ReadingStateList, session: %{"user_id" => @current_user.id}) %>
 </div>

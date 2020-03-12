@@ -124,10 +124,6 @@ p.description {
 }
 
 @media only screen and (max-width: 425px) {
-  ul.reading_states {
-    display: block;
-  }
-
   ul.reading_states > li {
     width: 100%;
     margin-bottom: 3em;
