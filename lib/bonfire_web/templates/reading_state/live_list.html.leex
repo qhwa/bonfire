@@ -1,3 +1,32 @@
+<nav class="stats level is-mobile">
+  <div class="level-item">
+    <div>
+      <p class="heading">total</p>
+      <p class="title"><%= @stats.total %></p>
+    </div>
+  </div>
+
+  <div class="level-item">
+    <div>
+      <p class="heading">reading</p>
+      <p class="title"><%= @stats.reading %></p>
+    </div>
+  </div>
+
+  <div class="level-item">
+    <div>
+      <p class="heading">finished</p>
+      <p class="title"><%= @stats.finished %></p>
+    </div>
+  </div>
+
+  <div class="level-item">
+    <span class="icon"><i class="fas fa-share-square"></i></span>
+  </div>
+</nav>
+
+<hr class="hr" />
+
 <ul class="reading_states is-flex-tablet">
 <%= for rs <- @reading_states do %>
   <% info = rs.user_book.book %>

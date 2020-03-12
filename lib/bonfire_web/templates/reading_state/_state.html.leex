@@ -1,7 +1,7 @@
 <div class="reading-state-state" id="rs-state-<%= @reading_state.id %>">
 
   <%= if @reading_state.state == "finished" do %>
-  <img src="<%= Routes.static_path(@socket, "/images/checked.svg") %>" class="finish-icon" alt="finished" /> 
+    <span class="icon has-text-success"><i class="fas fa-check-circle"></i></span>
   <% end %>
 
   <%= @reading_state.state %>

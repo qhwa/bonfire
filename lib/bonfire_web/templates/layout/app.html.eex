@@ -11,12 +11,22 @@
   <body>
     <div class="container">
       <header class="header is-clearfix">
-        <a href="/" class="logo"><b>Bonfire</b> reading</a>
+        <a href="/" class="logo">
+          <span class="icon"><i class="fas fa-fire-alt"></i></span>
+          <b>Bonfire</b> reading
+        </a>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <ul class="menu">
           <%= if Pow.Plug.current_user(@conn) do %>
           <li><a href="/tracks">My books</a></li>
+          <li>
+            <%= link to: Routes.reading_state_path(@conn, :new), class: "new-reading-state" do %>
+              <span class="icon"><i class="fas fa-plus"></i></span>
+              Add new book
+            <% end %>
+          </li>
+
           <li><%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item" %></li>
 
           <% else %>
@@ -39,7 +49,7 @@
 
     <footer class="footer">
       <div class="content has-text-centered">
-        icons by <a target="_blank" href="https://icons8.com">Icons8</a>
+
       </div>
     </footer>
   </body>

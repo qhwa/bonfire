@@ -2,6 +2,7 @@
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
 import "bulma/css/bulma.css";
+import "@fortawesome/fontawesome-free/css/all.css";
 import "../css/app.css";
 
 // webpack automatically bundles all modules in your
