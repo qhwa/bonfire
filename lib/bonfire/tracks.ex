@@ -79,4 +79,16 @@ defmodule Bonfire.Tracks do
   def delete_reading_state(_isbn) do
     raise "TODO"
   end
+
+  def stats(user_id) do
+    count = fn state ->
+      from(rs in ReadingState, where: rs.user_id == ^user_id and rs.state == ^state)
+      |> Repo.aggregate(:count)
+    end
+
+    %{
+      finished: count.("finished"),
+      reading: count.("reading")
+    }
+  end
 end

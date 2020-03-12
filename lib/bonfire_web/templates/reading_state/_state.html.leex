@@ -1,20 +1,23 @@
-<div class="reading-state-state" id="rs-state-<%= @reading_state.id %>">
-
-  <%= if @reading_state.state == "finished" do %>
+<%= if @reading_state.state == "finished" do %>
+  <div class="reading-state-state has-text-success">
     <span class="icon has-text-success"><i class="fas fa-check-circle"></i></span>
-  <% end %>
+    finished
+  </div>
+<% else %>
+  <div class="reading-state-state" id="rs-state-<%= @reading_state.id %>">
 
-  <%= @reading_state.state %>
+    <%= @reading_state.state %>
 
-  <%= if @reading_state.state == "reading" do %>
-    [
-    <%= link "finish",
-      to: "#",
-      phx_click: "finish",
-      phx_value_isbn: @reading_state.user_book.book.isbn,
-      phx_target: "#rs-state-#{@reading_state.id}"
-    %>
-    ]
-  <% end %>
+    <%= if @reading_state.state == "reading" do %>
+      [
+      <%= link "finish",
+        to: "#",
+        phx_click: "finish",
+        phx_value_isbn: @reading_state.user_book.book.isbn,
+        phx_target: "#rs-state-#{@reading_state.id}"
+      %>
+      ]
+    <% end %>
+  </div>
+<% end %>
 
-</div>

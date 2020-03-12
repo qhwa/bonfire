@@ -14,7 +14,7 @@ defmodule BonfireWeb.Live.ReadingStateList do
     socket =
       socket
       |> assign(:reading_states, Tracks.list_reading_states(user_id))
-      |> assign(:stats, %{total: 0, reading: 0, finished: 0})
+      |> assign(:stats, Tracks.stats(user_id))
 
     {:ok, socket}
   end

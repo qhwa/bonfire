@@ -1,7 +1,15 @@
 <div class="container">
-  <h1 class="title">
-    Books I like
-  </h1>
+  <div class="level">
+    <h1 class="title level-left">
+      Books I like
+    </h1>
+
+    <div class="level-right">
+      <a href="/sharing/new" class="button">
+        <span class="icon"><i class="fas fa-link"></i></span>
+      </a>
+    </div>
+  </div>
 
   <%= live_render(@conn, BonfireWeb.Live.ReadingStateList, session: %{"user_id" => @current_user.id}) %>
 </div>
