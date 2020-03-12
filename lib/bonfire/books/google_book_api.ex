@@ -73,8 +73,8 @@ defmodule Bonfire.Books.GoogleBookAPI do
     isbn_13 = isbn(info, "ISBN_13")
 
     data = %{
-      cover: cover_image(info) |> to_ssl(),
-      thumbnail: thumbnail(info) |> to_ssl(),
+      cover: cover_image(info) |> transform_cover_url(),
+      thumbnail: thumbnail(info) |> transform_cover_url(),
       isbn_10: isbn_10,
       isbn_13: isbn_13,
       isbn: isbn_13 || isbn_10,
@@ -102,7 +102,8 @@ defmodule Bonfire.Books.GoogleBookAPI do
   end
 
   defp cover_image(%{"imageLinks" => %{} = links}) do
-    links["extraLarge"] || links["large"] || links["medium"]
+    links["extraLarge"] || links["large"] || links["medium"] || links["thumbnail"] ||
+      links["smallThumbnail"]
   end
 
   defp cover_image(_) do
@@ -117,11 +118,13 @@ defmodule Bonfire.Books.GoogleBookAPI do
     nil
   end
 
-  defp to_ssl(url) when is_binary(url) do
-    String.replace_prefix(url, "http://", "https://")
+  defp transform_cover_url(url) when is_binary(url) do
+    url
+    |> String.replace_prefix("http://", "https://")
+    |> String.replace("&edge=curl", "")
   end
 
-  defp to_ssl(_) do
+  defp transform_cover_url(_) do
     nil
   end
 end
