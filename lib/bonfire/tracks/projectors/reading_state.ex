@@ -45,11 +45,20 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
           started_at: DateTime.truncate(created_at, :second)
         })
 
-      Ecto.Multi.update(
-        multi,
-        :reading_finished_projection,
-        rs
+      ret =
+        Ecto.Multi.update(
+          multi,
+          :reading_finished_projection,
+          rs
+        )
+
+      Phoenix.PubSub.broadcast(
+        Bonfire.PubSub,
+        "rs:#{user_id}",
+        {__MODULE__, :reading_state_updated, rs}
       )
+
+      ret
     end
   )
 end

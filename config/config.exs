@@ -16,7 +16,8 @@ config :bonfire, BonfireWeb.Endpoint,
   secret_key_base: "RBt4Gr1SgcmFO7Tkuch73S8OyrqLJcApAetkTqd8ApUTMItP6knDbttVEaIZBKH+",
   render_errors: [view: BonfireWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Bonfire.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [signing_salt: "1ct/on/h"]
+  live_view: [signing_salt: "1ct/on/h"],
+  pubsub: [adapter: Phoenix.PubSub.PG2, pool_size: 1, name: Bonfire.PubSub]
 
 # Configures Elixir's Logger
 config :logger, :console,
