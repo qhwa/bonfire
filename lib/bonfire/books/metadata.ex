@@ -10,6 +10,8 @@ defmodule Bonfire.Books.Metadata do
     field :cover, :string
     field :description, :string
     field :isbn, :string
+    field :isbn_10, :string
+    field :isbn_13, :string
     field :title, :string
     field :subtitle, :string
     field :source_platform, :string
@@ -27,6 +29,8 @@ defmodule Bonfire.Books.Metadata do
       :subtitle,
       :authors,
       :isbn,
+      :isbn_10,
+      :isbn_13,
       :cover,
       :description,
       :source_platform,
