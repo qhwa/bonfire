@@ -12,7 +12,7 @@ use Mix.Config
 config :bonfire, BonfireWeb.Endpoint,
   server: true,
   http: [port: 4000],
-  url: [host: "bonfirereading.com", port: 443, scheme: "https"],
+  url: [host: "bonfire.ooo", port: 443, scheme: "https"],
   cache_static_manifest: "priv/static/cache_manifest.json",
   force_ssl: [rewrite_on: [:x_forwarded_proto], hsts: true]
 
