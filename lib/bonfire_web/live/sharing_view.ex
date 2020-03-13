@@ -25,6 +25,8 @@ defmodule BonfireWeb.Live.SharingView do
 
       _ ->
         socket
+        |> assign(:share_key, nil)
+        |> assign(:share_url, nil)
     end
   end
 
