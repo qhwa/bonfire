@@ -1,22 +1,48 @@
-<ul class="reading_states">
+<nav class="stats level is-mobile">
+  <div class="level-item">
+    <div>
+      <p class="heading">finished</p>
+      <p class="title"><%= @stats.finished %></p>
+    </div>
+  </div>
+
+  <div class="level-item">
+    <div>
+      <p class="heading">reading</p>
+      <p class="title"><%= @stats.reading %></p>
+    </div>
+  </div>
+</nav>
+
+<hr class="hr" />
+
+<ul class="reading_states is-flex-tablet">
 <%= for rs <- @reading_states do %>
   <% info = rs.user_book.book %>
   <li>
     <div class="cover">
-      <%= if info.cover do %>
-      <img src="<%= info.cover %>" alt="book cover image" />
+    <%= if info.cover do %>
+      <%= link to: Routes.reading_state_path(BonfireWeb.Endpoint, :show, rs) do %>
+        <img src="<%= info.cover %>" alt="book cover image" />
       <% end %>
+    <% end %>
     </div>
 
     <div class="info">
-      <div class="title is-spaced"><%= info.title %></div>
+      <%= link info.title, to: Routes.reading_state_path(BonfireWeb.Endpoint, :show, rs), class: "title is-spaced" %>
       <div class="subtitle"><%= info.subtitle %></div>
-      <div class="reading-state-state state">
-        <%= if rs.state == "finished" do %>
-        <img src="<%= Routes.static_path(@conn, "/images/checked.svg") %>" class="finish-icon" alt="finished" /> 
-        <% end %>
+      <div class="state">
 
-        <%= rs.state %>
+      <%= if rs.state == "finished" do %>
+        <div class="reading-state-state has-text-success">
+          <span class="svg-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"/></svg>
+          </span>
+
+          finished
+        </div>
+      <% end %>
+
       </div>
     </div>
 
