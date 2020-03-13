@@ -18,11 +18,11 @@ defmodule Bonfire.Books.GoogleBookAPI do
   end
 
   def find_book_by_isbn(isbn) do
-    search_books(isbn)
+    search_books("isbn:#{isbn}")
     |> Enum.find(fn book -> book.isbn == isbn end)
     |> case do
       %{} = book -> {:ok, book}
-      nil -> nil
+      nil -> {:error, :not_found}
     end
   end
 

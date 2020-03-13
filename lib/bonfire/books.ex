@@ -4,6 +4,7 @@ defmodule Bonfire.Books do
   """
 
   import Ecto.Query
+  require Logger
 
   alias Bonfire.Repo
 
@@ -46,8 +47,9 @@ defmodule Bonfire.Books do
       {:ok, %{cover: nil} = book} ->
         {:ok, %{book | cover: DoubanBookApi.get_book_cover(isbn)}}
 
-      book ->
-        book
+      other ->
+        Logger.error(["Error fetching booking wiht isbn: ", isbn, ", result: ", inspect(other)])
+        other
     end
   end
 
