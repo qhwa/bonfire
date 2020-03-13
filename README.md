@@ -84,8 +84,8 @@ Also, this project contains an `Dockerfile` so you can build your own image and 
 
 * [ ] tags for books
 * [ ] deleting a reading track
-* [ ] sharing a reading track to others
-* [ ] stats of reading
+* [x] sharing a reading track to others
+* [x] stats of reading
 
 After core features finished, it is next to make reading feel like a game, which is still forming on the roadmap.
 
