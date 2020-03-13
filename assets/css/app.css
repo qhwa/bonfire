@@ -120,6 +120,36 @@ p.description {
   padding-bottom: 1em;
 }
 
+.new-sharing {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.new-sharing .trigger {
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  width: 40px;
+  height: 100%;
+}
+
+.new-sharing .trigger + #new-sharing {
+  width: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-right: 0.5em;
+}
+
+.new-sharing .trigger:checked + #new-sharing {
+  width: 100%;
+}
+
+.new-sharing .share-url {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
 @media only screen and (max-width: 1024px) {
   .container {
     padding-left: 1em;
@@ -140,5 +170,19 @@ p.description {
 
   ul.reading_states > li .cover img {
     max-height: unset;
+  }
+
+  .new-sharing {
+    flex-direction: row;
+  }
+
+  .new-sharing .trigger.button {
+    left: 0;
+    right: unset;
+  }
+
+  .new-sharing .trigger + #new-sharing {
+    margin-right: auto;
+    margin-left: 0.5em;
   }
 }

@@ -1,12 +1,20 @@
-<div class="level is-mobile">
+<div class="level">
   <h1 class="title level-left">
     Books I like
   </h1>
 
   <div class="level-right">
-    <a href="/sharing/new" class="button">
-      <span class="icon"><i class="fas fa-link"></i></span>
-    </a>
+    <div class="new-sharing is-relative">
+      <a class="link button is-static">
+        <span class="icon"><i class="fas fa-link"></i></span>
+      </a>
+
+      <input type="checkbox" class="trigger button" />
+
+      <section id="new-sharing">
+        <%= live_render(@socket, BonfireWeb.Live.SharingView, id: :sharing, session: %{"user_id" => @user_id}) %>
+      </section>
+    </div>
   </div>
 </div>
 
