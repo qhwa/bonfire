@@ -24,7 +24,7 @@ defmodule BonfireWeb.Live.SharingView do
         |> assign(:share_url, BonfireWeb.Router.Helpers.profile_url(socket, :show, key))
 
       _ ->
-        nil
+        socket
     end
   end
 
