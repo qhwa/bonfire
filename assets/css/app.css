@@ -28,10 +28,14 @@ p.description {
 }
 
 .reading_states li .cover {
+  height: 11em;
+}
+
+.reading_states li .cover a {
   display: flex;
   align-items: flex-end;
   margin-right: 0.5em;
-  height: 10em;
+  height: 100%;
 }
 
 .cover img {
