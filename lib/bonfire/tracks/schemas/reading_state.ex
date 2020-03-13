@@ -12,7 +12,7 @@ defmodule Bonfire.Tracks.Schemas.ReadingState do
     field :state, :string
 
     belongs_to :user, Bonfire.Users.User
-    belongs_to :book, Bonfire.Books.Book
+    belongs_to :user_book, Bonfire.Books.UserBook
 
     timestamps()
   end

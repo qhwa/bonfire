@@ -1,0 +1,25 @@
+<form phx-submit="save" phx-target="#sharing" id="sharing">
+  <div class="field has-addons">
+    <%= if @share_key do %>
+      <div class="control">
+        <input class="share-url input" value="<%= @share_url %>" />
+      </div>
+
+      <div class="control">
+        <input class="button is-primary" type="button" value="copy" onclick="void(navigator.clipboard.writeText('<%= @share_url %>'))" />
+      </div>
+    <% else %>
+      <div class="control">
+        <span class="button is-static"><%= Routes.page_url(@socket, :index) %></span>
+      </div>
+
+      <div class="control">
+        <input class="input" type="text" class="box" name="key" value="<%= @share_key %>"/>
+      </div>
+
+      <div class="control">
+        <input class="button is-primary" type="submit" value="save" />
+      </div>
+    <% end %>
+  </div>
+</form>

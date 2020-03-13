@@ -2,11 +2,13 @@ defmodule Bonfire.Repo.Migrations.CreateBookMetadatas do
   use Ecto.Migration
 
   def change do
-    create table(:book_metadatas) do
+    create table(:books) do
       add :title, :string
       add :subtitle, :string
       add :authors, {:array, :string}
       add :isbn, :string
+      add :isbn_10, :string
+      add :isbn_13, :string
       add :cover, :string
       add :description, :text
       add :source_platform, :string
@@ -15,6 +17,6 @@ defmodule Bonfire.Repo.Migrations.CreateBookMetadatas do
       timestamps()
     end
 
-    create unique_index(:book_metadatas, [:isbn])
+    create unique_index(:books, [:isbn])
   end
 end

@@ -10,6 +10,6 @@ defmodule Bonfire.Repo.Migrations.CreateProfiles do
     end
 
     create unique_index(:profiles, [:share_key])
-    create index(:profiles, [:user_id])
+    create unique_index(:profiles, [:user_id])
   end
 end

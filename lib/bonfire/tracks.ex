@@ -3,7 +3,7 @@ defmodule Bonfire.Tracks do
   Tracks context. This module holds tracking related high level API.
   """
 
-  alias Bonfire.Books.{Book, Metadata}
+  alias Bonfire.Books.{Book, UserBook}
   alias Bonfire.Repo
   alias Bonfire.EventApp
 
@@ -33,7 +33,7 @@ defmodule Bonfire.Tracks do
       order_by: ^order_by
     )
     |> Repo.all()
-    |> Repo.preload(book: [:metadata])
+    |> Repo.preload(user_book: [:book])
   end
 
   @doc """
@@ -48,35 +48,47 @@ defmodule Bonfire.Tracks do
 
   """
   def get_reading_state!(id),
-    do: Repo.get!(ReadingState, id) |> Repo.preload(book: [:metadata])
+    do: Repo.get!(ReadingState, id) |> Repo.preload(user_book: [:book])
 
-  def get_reading_state_by_isbn(%{isbn: isbn, user_id: user_id}) do
+  def get_reading_state_by_isbn(isbn, user_id) do
     query =
       from(
         rs in ReadingState,
+        join: user_book in UserBook,
+        on: rs.user_book_id == user_book.id,
         join: book in Book,
-        on: rs.book_id == book.id,
-        join: info in Metadata,
-        on: book.metadata_id == info.id,
-        where: info.isbn == ^isbn,
-        where: book.user_id == ^user_id
+        on: user_book.book_id == book.id,
+        where: book.isbn == ^isbn,
+        where: user_book.user_id == ^user_id
       )
 
     Repo.one(query)
   end
 
   def create_reading_state(%{"isbn" => isbn, "user_id" => user_id}) do
-    EventApp.dispatch(%StartReading{isbn: %IsbnId{isbn: isbn, user_id: user_id}})
+    EventApp.dispatch(%StartReading{track_id: %TrackId{isbn: isbn, user_id: user_id}})
   end
 
   def finish_reading_state(isbn, user_id) do
     EventApp.dispatch(
-      %FinishReading{isbn: %IsbnId{isbn: isbn, user_id: user_id}},
+      %FinishReading{track_id: %TrackId{isbn: isbn, user_id: user_id}},
       consistency: :strong
     )
   end
 
   def delete_reading_state(_isbn) do
     raise "TODO"
+  end
+
+  def stats(user_id) do
+    count = fn state ->
+      from(rs in ReadingState, where: rs.user_id == ^user_id and rs.state == ^state)
+      |> Repo.aggregate(:count)
+    end
+
+    %{
+      finished: count.("finished"),
+      reading: count.("reading")
+    }
   end
 end

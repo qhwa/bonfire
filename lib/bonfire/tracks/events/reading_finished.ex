@@ -3,9 +3,9 @@ defmodule Bonfire.Tracks.Events.ReadingFinished do
   Reading finished event struct.
   """
 
-  @type t :: %{isbn: IsbnId.t()}
+  @type t :: %{track_id: TrackId.t()}
 
   @derive Jason.Encoder
 
-  defstruct [:isbn]
+  defstruct [:track_id]
 end

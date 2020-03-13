@@ -3,7 +3,7 @@ defmodule Bonfire.Tracks.Commands.FinishReading do
   A command struct
   """
 
-  @type t :: %{isbn: IsbnId.t()}
+  @type t :: %{track_id: TrackId.t()}
 
-  defstruct [:isbn]
+  defstruct [:track_id]
 end

@@ -4,12 +4,13 @@ defmodule Bonfire.Books do
   """
 
   import Ecto.Query
+  require Logger
 
   alias Bonfire.Repo
 
   alias Bonfire.Books.{
+    UserBook,
     Book,
-    Metadata,
     GoogleBookAPI,
     DoubanBookApi
   }
@@ -18,25 +19,25 @@ defmodule Bonfire.Books do
     GoogleBookAPI.search_books(keyword)
   end
 
-  def isbn_to_book(%{isbn: isbn, user_id: user_id}) do
-    with {:ok, metadata} <- isbn_to_metadata(isbn) do
-      metadata_to_book(metadata, user_id)
+  def isbn_to_user_book(isbn, user_id) do
+    with {:ok, book} <- isbn_to_book(isbn) do
+      book_to_user_book(book, user_id)
     end
   end
 
-  def isbn_to_metadata(isbn) do
-    case Repo.get_by(Metadata, isbn: isbn) do
-      %Metadata{} = metadata ->
-        {:ok, metadata}
+  def isbn_to_book(isbn) do
+    case Repo.get_by(Book, isbn: isbn) do
+      %Book{} = book ->
+        {:ok, book}
 
       nil ->
-        create_metadata_from_isbn(isbn)
+        create_book_from_isbn(isbn)
     end
   end
 
-  def create_metadata_from_isbn(isbn) do
+  def create_book_from_isbn(isbn) do
     with {:ok, book_info} <- fetch_book_info(isbn) do
-      create_metadata(book_info)
+      create_book(book_info)
     end
   end
 
@@ -46,40 +47,41 @@ defmodule Bonfire.Books do
       {:ok, %{cover: nil} = book} ->
         {:ok, %{book | cover: DoubanBookApi.get_book_cover(isbn)}}
 
-      book ->
-        book
+      other ->
+        Logger.error(["Error fetching booking wiht isbn: ", isbn, ", result: ", inspect(other)])
+        other
     end
   end
 
-  def create_metadata(book) do
-    Metadata.creating_changeset(%Metadata{}, book)
+  def create_book(book) do
+    Book.creating_changeset(%Book{}, book)
     |> Repo.insert()
   end
 
-  def metadata_to_book(metadata, user_id) do
-    case Repo.get_by(Book, metadata_id: metadata.id, user_id: user_id) do
+  def book_to_user_book(book, user_id) do
+    case Repo.get_by(UserBook, book_id: book.id, user_id: user_id) do
       nil ->
-        Book.creating_changeset(%Book{}, %{metadata_id: metadata.id, user_id: user_id})
+        UserBook.creating_changeset(%UserBook{}, %{book_id: book.id, user_id: user_id})
         |> Repo.insert()
 
-      %Book{} = book ->
-        {:ok, book}
+      %UserBook{} = user_book ->
+        {:ok, user_book}
     end
   end
 
   @doc """
   Fix missing cover image.
   """
-  def fix_cover(%{cover: nil, isbn: isbn} = metadata) do
+  def fix_cover(%{cover: nil, isbn: isbn} = book) do
     with {:cover, url} when is_binary(url) <- {:cover, DoubanBookApi.get_book_cover(isbn)},
-         changeset = Metadata.updating_changeset(metadata, %{cover: url}),
+         changeset = Book.updating_changeset(book, %{cover: url}),
          {:ok, _} <- Repo.update(changeset) do
       :ok
     end
   end
 
   def fix_all_covers! do
-    from(data in Metadata, where: is_nil(data.cover))
+    from(data in Book, where: is_nil(data.cover))
     |> Repo.all()
     |> Enum.map(&fix_cover/1)
   end

@@ -13,6 +13,22 @@ p.description {
   padding: 1em 0;
 }
 
+.svg-icon {
+  display: inline-flex;
+  align-self: center;
+}
+
+.svg-icon svg {
+  width: 1em;
+  height: 1em;
+  top: 0.125em;
+  position: relative;
+}
+
+.svg-icon svg path {
+  fill: currentColor;
+}
+
 .reading_states {
   display: flex;
   flex-wrap: wrap;
@@ -28,10 +44,14 @@ p.description {
 }
 
 .reading_states li .cover {
+  height: 11em;
+}
+
+.reading_states li .cover a {
   display: flex;
   align-items: flex-end;
   margin-right: 0.5em;
-  height: 10em;
+  height: 100%;
 }
 
 .cover img {
@@ -116,6 +136,49 @@ p.description {
   padding-bottom: 1em;
 }
 
+.new-sharing {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.new-sharing .link.button {
+  padding-left: calc(0.75em - 1px);
+  padding-right: calc(0.75em - 1px);
+}
+
+.new-sharing .trigger {
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  width: 40px;
+  height: 100%;
+}
+
+.new-sharing .trigger + #new-sharing {
+  width: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-right: 0.5em;
+}
+
+.new-sharing .trigger:checked + #new-sharing {
+  width: 100%;
+}
+
+.new-sharing .share-url {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.profile .logo {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 1em;
+  margin-right: 1em;
+  border-right: .5px solid #ccc;
+}
+
 @media only screen and (max-width: 1024px) {
   .container {
     padding-left: 1em;
@@ -124,10 +187,6 @@ p.description {
 }
 
 @media only screen and (max-width: 425px) {
-  ul.reading_states {
-    display: block;
-  }
-
   ul.reading_states > li {
     width: 100%;
     margin-bottom: 3em;
@@ -140,5 +199,19 @@ p.description {
 
   ul.reading_states > li .cover img {
     max-height: unset;
+  }
+
+  .new-sharing {
+    flex-direction: row;
+  }
+
+  .new-sharing .trigger.button {
+    left: 0;
+    right: unset;
+  }
+
+  .new-sharing .trigger + #new-sharing {
+    margin-right: auto;
+    margin-left: 0.5em;
   }
 }
