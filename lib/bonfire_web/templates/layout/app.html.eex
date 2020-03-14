@@ -43,9 +43,13 @@
 
     <main role="main">
       <div class="container">
-        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <% info = get_flash(@conn, :info) %>
+        <% error = get_flash(@conn, :error) %>
+
+        <%= if info do %><div class="notification is-success is-light" role="alert"><%= info %></div><% end %>
+        <%= if error do %><div class="notification is-success is-light" role="alert"><%= error %></div><% end %>
       </div>
+
       <%= render @view_module, @view_template, assigns %>
     </main>
 

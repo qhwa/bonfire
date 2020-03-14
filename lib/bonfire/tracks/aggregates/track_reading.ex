@@ -3,10 +3,14 @@ defmodule Bonfire.Tracks.Aggregates.TrackReading do
 
   defstruct [:track_id, :state]
 
-  alias Bonfire.Tracks.Events.ReadingStarted
-  alias Bonfire.Tracks.Events.ReadingFinished
-  alias Bonfire.Tracks.Commands.StartReading
-  alias Bonfire.Tracks.Commands.FinishReading
+  alias Bonfire.Tracks.{
+    Events.ReadingStarted,
+    Events.ReadingFinished,
+    Events.ReadingUntracked,
+    Commands.StartReading,
+    Commands.FinishReading,
+    Commands.UntrackReading
+  }
 
   def execute(%{state: :reading}, %StartReading{}) do
     {:error, :already_reading}
@@ -24,11 +28,23 @@ defmodule Bonfire.Tracks.Aggregates.TrackReading do
     %ReadingFinished{track_id: track_id}
   end
 
+  def execute(%{state: nil}, %UntrackReading{}) do
+    {:error, :not_tracking}
+  end
+
+  def execute(_, %UntrackReading{track_id: track_id}) do
+    %ReadingUntracked{track_id: track_id}
+  end
+
   def apply(_, %ReadingStarted{track_id: track_id}) do
     %__MODULE__{track_id: track_id, state: :reading}
   end
 
   def apply(state, %ReadingFinished{}) do
     %{state | state: :finished}
+  end
+
+  def apply(state, %ReadingUntracked{}) do
+    %{state | state: nil}
   end
 end

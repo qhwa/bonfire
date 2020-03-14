@@ -10,7 +10,8 @@ defmodule Bonfire.Tracks do
   alias Bonfire.Tracks.{
     Schemas.ReadingState,
     Commands.StartReading,
-    Commands.FinishReading
+    Commands.FinishReading,
+    Commands.UntrackReading
   }
 
   import Ecto.Query, only: [from: 2]
@@ -43,12 +44,21 @@ defmodule Bonfire.Tracks do
 
   ## Examples
 
-      iex> get_reading_state!(123)
-      %ReadingState{}
+      iex> get_reading_state(123)
+      {:ok, %ReadingState{}}
 
   """
-  def get_reading_state!(id),
-    do: Repo.get!(ReadingState, id) |> Repo.preload(user_book: [:book])
+  def get_reading_state(id) do
+    Repo.get(ReadingState, id)
+    |> Repo.preload(user_book: [:book])
+    |> case do
+      %ReadingState{} = rs ->
+        {:ok, rs}
+
+      nil ->
+        {:error, :not_found}
+    end
+  end
 
   def get_reading_state_by_isbn(isbn, user_id) do
     query =
@@ -63,6 +73,7 @@ defmodule Bonfire.Tracks do
       )
 
     Repo.one(query)
+    |> Repo.preload(user_book: [:book])
   end
 
   def create_reading_state(%{"isbn" => isbn, "user_id" => user_id}) do
@@ -76,8 +87,21 @@ defmodule Bonfire.Tracks do
     )
   end
 
-  def delete_reading_state(_isbn) do
-    raise "TODO"
+  def untrack_reading_state(id, user_id) do
+    Repo.get_by(ReadingState, id: id, user_id: user_id)
+    |> Repo.preload(user_book: [:book])
+    |> case do
+      %ReadingState{} = rs ->
+        isbn = rs.user_book.book.isbn
+
+        EventApp.dispatch(
+          %UntrackReading{track_id: %TrackId{isbn: isbn, user_id: user_id}},
+          consistency: :strong
+        )
+
+      nil ->
+        {:error, :not_found}
+    end
   end
 
   def stats(user_id) do

@@ -51,7 +51,7 @@
 
       <details>
         <summary>Actions</summary>
-        <a class="button is-danger">delete</a>
+        <%= link "delete", to: Routes.reading_state_path(@socket, :delete, @reading_state.id), method: "delete", class: "button is-danger" %>
       </details>
     </section>
   </div>
