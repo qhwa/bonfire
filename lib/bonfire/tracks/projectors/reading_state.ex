@@ -4,7 +4,7 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
   """
 
   alias Bonfire.Books
-  alias Bonfire.Tracks.Events.{ReadingStarted, ReadingFinished}
+  alias Bonfire.Tracks.Events.{ReadingStarted, ReadingFinished, ReadingUntracked}
   alias Bonfire.Tracks.Schemas.ReadingState
 
   use Commanded.Projections.Ecto,
@@ -59,6 +59,20 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
       )
 
       ret
+    end
+  )
+
+  project(
+    %ReadingUntracked{track_id: %{user_id: user_id, isbn: isbn}},
+    _,
+    fn multi ->
+      rs = Bonfire.Tracks.get_reading_state_by_isbn(isbn, user_id)
+
+      Ecto.Multi.delete(
+        multi,
+        :delete_reading_state,
+        rs
+      )
     end
   )
 end

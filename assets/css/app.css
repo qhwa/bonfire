@@ -1,4 +1,19 @@
 @import "./menu.css";
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans|Antic+Slab|Average|PT+Serif+Caption&display=swap');
+
+body {
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 20px;
+}
+
+details summary {
+  margin-bottom: .5em;
+}
+
+.book-title {
+  font-family: 'PT Serif Caption', serif;
+  font-size: inherit;
+}
 
 h1.title {
   margin: 0;
@@ -11,6 +26,24 @@ h2.subtitle {
 
 p.description {
   padding: 1em 0;
+  font-family: 'Average', serif;
+}
+
+header .menu {
+  font-size: 120%;
+}
+
+header .logo {
+  font-size: 120%;
+}
+
+.breadcrumb {
+  font-size: inherit;
+}
+
+.notification.is-success.is-light {
+  background-color: #effaf3;
+  color: #257942;
 }
 
 .svg-icon {
@@ -76,7 +109,6 @@ p.description {
   line-height: 1.1;
   display: block;
   font-weight: bold;
-  font-size: 120%;
   margin-bottom: 0.5em;
   color: #333;
 }
@@ -88,10 +120,22 @@ p.description {
   margin-bottom: 0.5em;
 }
 
-.reading-state-state .finish-icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: middle;
+.reading-state-state.reading {
+  display: flex;
+  align-items: center;
+}
+
+.reading_states li .reading-state-state.reading .finish.button {
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.reading_states li:hover .reading-state-state.reading .finish.button {
+  opacity: 1;
+}
+
+.reading-state-state.reading .finish.button {
+  margin-left: .5em;
 }
 
 .suggestions ul li {
@@ -179,6 +223,19 @@ p.description {
   border-right: .5px solid #ccc;
 }
 
+.reading-state-detail .book-info {
+  flex: 2;
+}
+
+.reading-state-detail .book-info .description {
+  font-size: 120%;
+}
+
+.reading-state-detail .user-book {
+  flex: 1;
+  padding: 1em;
+}
+
 @media only screen and (max-width: 1024px) {
   .container {
     padding-left: 1em;
@@ -213,5 +270,9 @@ p.description {
   .new-sharing .trigger + #new-sharing {
     margin-right: auto;
     margin-left: 0.5em;
+  }
+
+  .reading-state-state.reading .finish.button {
+    opacity: 1;
   }
 }
