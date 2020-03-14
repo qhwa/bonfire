@@ -83,7 +83,7 @@ Also, this project contains an `Dockerfile` so you can build your own image and 
 ### core features
 
 * [ ] tags for books
-* [ ] deleting a reading track
+* [x] deleting a reading track
 * [x] sharing a reading track to others
 * [x] stats of reading
 
