@@ -17,7 +17,7 @@ defmodule BonfireWeb.Live.ReadingStateComponent do
   end
 
   defp reload(%{id: id}) do
-    {:ok, rs} = Tracks.get_reading_state!(id)
+    {:ok, rs} = Tracks.get_reading_state(id)
     rs
   end
 end
