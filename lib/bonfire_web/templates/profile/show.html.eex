@@ -29,8 +29,8 @@
     </div>
 
     <div class="info">
-      <%= link info.title, to: Routes.reading_state_path(BonfireWeb.Endpoint, :show, rs), class: "title is-spaced" %>
-      <div class="subtitle"><%= info.subtitle %></div>
+      <%= link info.title, to: Routes.reading_state_path(BonfireWeb.Endpoint, :show, rs), class: "title book-title is-spaced" %>
+      <div class="subtitle book-title"><%= info.subtitle %></div>
       <div class="state">
 
       <%= if rs.state == "finished" do %>
