@@ -44,7 +44,7 @@
 
     <section class="user-book">
       <div>
-        <%= live_component(@socket, BonfireWeb.Live.ReadingStateComponent, reading_state: @reading_state, id: "rs-#{@reading_state.id}") %>
+        <label class="label">State:</label> <%= live_component(@socket, BonfireWeb.Live.ReadingStateComponent, reading_state: @reading_state, id: "rs-#{@reading_state.id}") %>
       </div>
 
       <hr class="divider"></hr>

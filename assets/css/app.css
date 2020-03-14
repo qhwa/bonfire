@@ -6,6 +6,10 @@ body {
   font-size: 20px;
 }
 
+details summary {
+  margin-bottom: .5em;
+}
+
 .book-title {
   font-family: 'PT Serif Caption', serif;
   font-size: inherit;
