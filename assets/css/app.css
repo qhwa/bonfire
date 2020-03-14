@@ -13,6 +13,11 @@ p.description {
   padding: 1em 0;
 }
 
+.notification.is-success.is-light {
+  background-color: #effaf3;
+  color: #257942;
+}
+
 .svg-icon {
   display: inline-flex;
   align-self: center;
@@ -88,10 +93,22 @@ p.description {
   margin-bottom: 0.5em;
 }
 
-.reading-state-state .finish-icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: middle;
+.reading-state-state.reading {
+  display: flex;
+  align-items: center;
+}
+
+.reading_states li .reading-state-state.reading .finish.button {
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.reading_states li:hover .reading-state-state.reading .finish.button {
+  opacity: 1;
+}
+
+.reading-state-state.reading .finish.button {
+  margin-left: .5em;
 }
 
 .suggestions ul li {
@@ -213,5 +230,9 @@ p.description {
   .new-sharing .trigger + #new-sharing {
     margin-right: auto;
     margin-left: 0.5em;
+  }
+
+  .reading-state-state.reading .finish.button {
+    opacity: 1;
   }
 }
