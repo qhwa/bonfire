@@ -1,4 +1,15 @@
 @import "./menu.css";
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans|Antic+Slab|Average|PT+Serif+Caption&display=swap');
+
+body {
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 20px;
+}
+
+.book-title {
+  font-family: 'PT Serif Caption', serif;
+  font-size: inherit;
+}
 
 h1.title {
   margin: 0;
@@ -11,6 +22,19 @@ h2.subtitle {
 
 p.description {
   padding: 1em 0;
+  font-family: 'Average', serif;
+}
+
+header .menu {
+  font-size: 120%;
+}
+
+header .logo {
+  font-size: 120%;
+}
+
+.breadcrumb {
+  font-size: inherit;
 }
 
 .notification.is-success.is-light {
@@ -81,7 +105,6 @@ p.description {
   line-height: 1.1;
   display: block;
   font-weight: bold;
-  font-size: 120%;
   margin-bottom: 0.5em;
   color: #333;
 }
@@ -194,6 +217,19 @@ p.description {
   padding-right: 1em;
   margin-right: 1em;
   border-right: .5px solid #ccc;
+}
+
+.reading-state-detail .book-info {
+  flex: 2;
+}
+
+.reading-state-detail .book-info .description {
+  font-size: 120%;
+}
+
+.reading-state-detail .user-book {
+  flex: 1;
+  padding: 1em;
 }
 
 @media only screen and (max-width: 1024px) {

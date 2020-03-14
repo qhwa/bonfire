@@ -40,19 +40,19 @@
 
 <ul class="reading_states is-flex-tablet">
 <%= for rs <- @reading_states do %>
-  <% info = rs.user_book.book %>
+  <% book = rs.user_book.book %>
   <li>
     <div class="cover">
-    <%= if info.cover do %>
+    <%= if book.cover do %>
       <%= link to: Routes.reading_state_path(BonfireWeb.Endpoint, :show, rs) do %>
-        <img src="<%= info.cover %>" alt="book cover image" />
+        <img src="<%= book.cover %>" alt="book cover image" />
       <% end %>
     <% end %>
     </div>
 
     <div class="info">
-      <%= link info.title, to: Routes.reading_state_path(BonfireWeb.Endpoint, :show, rs), class: "title is-spaced" %>
-      <div class="subtitle"><%= info.subtitle %></div>
+      <%= link book.title, to: Routes.reading_state_path(BonfireWeb.Endpoint, :show, rs), class: "title book-title is-spaced" %>
+      <div class="subtitle book-title"><%= book.subtitle %></div>
       <div class="state">
       <%= live_component(@socket, BonfireWeb.Live.ReadingStateComponent, reading_state: rs, id: "rs-#{rs.id}") %>
       </div>

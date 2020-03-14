@@ -1,27 +1,58 @@
-<div class="container">
-  <%= if @book.cover do %>
-    <div class="cover">
-      <img src="<%= @book.cover %>" alt="book cover image" />
-    </div>
-  <% end %>
+<div class="reading-state-detail container">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li><%= link "Books", to: Routes.reading_state_path(BonfireWeb.Endpoint, :index) %></li>
+      <li class="is-active"><a href="#" aria-current="page"><%= @book.title %></a></li>
+    </ul>
+  </nav>
 
-  <h1 class="title"><%= @book.title %></h1>
-  <h2 class="subtitle"><%= @book.subtitle %></h2>
+  <div class="is-flex-tablet">
+    <section class="book-info">
+      <div class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <%= if @book.cover do %>
+                <div class="card-image">
+                  <div class="cover">
+                    <img src="<%= @book.cover %>" alt="book cover image" />
+                  </div>
+                </div>
+              <% end %>
+            </div>
 
-  <section class="info">
-    <div class="authors">By: <%= @book.authors %></div>
-    <div class="isbn">ISBN: <%= @book.isbn %></div>
+            <div class="media-content">
+              <h1 class="title book-title"><%= @book.title %></h1>
+              <h2 class="subtitle book-title"><%= @book.subtitle %></h2>
 
-    <p class="description">
-      <%= @book.description %>
-    </p>
-  </section>
+              <div class="info">
+                <div class="authors">By: <%= @book.authors %></div>
+                <div class="isbn">ISBN: <%= @book.isbn %></div>
 
-  <div>
-    <%= live_component(@socket, BonfireWeb.Live.ReadingStateComponent, reading_state: @reading_state, id: "rs-#{@reading_state.id}") %>
+              </div>
+            </div>
+          </div>
+
+          <div class="content">
+            <p class="description">
+              <%= @book.description %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="user-book">
+      <div>
+        <%= live_component(@socket, BonfireWeb.Live.ReadingStateComponent, reading_state: @reading_state, id: "rs-#{@reading_state.id}") %>
+      </div>
+
+      <hr class="divider"></hr>
+
+      <details>
+        <summary>Actions</summary>
+        <a class="button is-danger">delete</a>
+      </details>
+    </section>
   </div>
-
-  <ul>
-  </ul>
-
 </div>
