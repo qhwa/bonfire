@@ -10,6 +10,10 @@ details summary {
   margin-bottom: .5em;
 }
 
+footer.footer {
+  margin-top: 3em;
+}
+
 .book-title {
   font-family: 'PT Serif Caption', serif;
   font-size: inherit;
