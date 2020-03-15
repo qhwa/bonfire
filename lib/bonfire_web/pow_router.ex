@@ -3,7 +3,9 @@ defmodule BonfireWeb.PowRouter do
 
   alias BonfireWeb.Router.Helpers, as: Routes
 
-  def after_sign_in_path(%{assigns: %{request_path: path}}) when path != "/",
+  @landing_pages ~w[/]
+
+  def after_sign_in_path(%{assigns: %{request_path: path}}) when path not in @landing_pages,
     do: path
 
   def after_sign_in_path(conn),
