@@ -241,6 +241,11 @@ nav.header .menu {
   padding: 1em;
 }
 
+.github.auth.button {
+  background: url(~@fortawesome/fontawesome-free/svgs/brands/github.svg) no-repeat .5em center / 1em auto;
+  padding-left: 2em;
+}
+
 @media only screen and (max-width: 1024px) {
   .container {
     padding-left: 1em;
