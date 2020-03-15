@@ -1,5 +1,4 @@
 # - stage 1: generate release files
-
 FROM qhwa/elixir-builder:latest AS builder
 
 ARG mix_env=prod
