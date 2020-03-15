@@ -1,5 +1,5 @@
+@import "./fonts.css";
 @import "./menu.css";
-@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans|Antic+Slab|Average|PT+Serif+Caption&display=swap');
 
 body {
   font-family: 'Alegreya Sans', sans-serif;
