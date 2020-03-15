@@ -66,7 +66,7 @@ defmodule Bonfire.Books.GoogleBookAPI do
     end
   end
 
-  @keys ~w[title subtitle authors description publisher]
+  @keys ~w[title subtitle authors description publisher categories]
 
   defp transform_book_data(%{"volumeInfo" => info, "id" => id}) do
     isbn_10 = isbn(info, "ISBN_10")
