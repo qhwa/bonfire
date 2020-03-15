@@ -32,7 +32,8 @@ config :bonfire, event_stores: [Bonfire.EventStore]
 config :bonfire, :pow,
   user: Bonfire.Users.User,
   repo: Bonfire.Repo,
-  web_module: BonfireWeb
+  web_module: BonfireWeb,
+  routes_backend: BonfireWeb.PowRouter
 
 config :bonfire, Bonfire.EventStore, serializer: Commanded.Serialization.JsonSerializer
 
