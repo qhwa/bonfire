@@ -19,6 +19,11 @@ h1.title {
   margin: 0;
 }
 
+.title.page-title {
+  margin-bottom: 0;
+  line-height: 2;
+}
+
 h2.subtitle {
   line-height: 1.1;
   color: #999;
@@ -29,12 +34,12 @@ p.description {
   font-family: 'Average', serif;
 }
 
-header .menu {
+nav.header {
   font-size: 120%;
 }
 
-header .logo {
-  font-size: 120%;
+nav.header .menu {
+  font-size: inherit;
 }
 
 .breadcrumb {
@@ -240,6 +245,12 @@ header .logo {
   .container {
     padding-left: 1em;
     padding-right: 1em;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .page-title.page-title {
+    line-height: 1;
   }
 }
 
