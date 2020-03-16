@@ -4,6 +4,7 @@ rio \
   --debug-level 10 \
   --namespace prod \
   run \
+  --no-mesh \
   --build-branch master \
   --dnssearch bonfire.ooo \
   --image-pull-policy always \
