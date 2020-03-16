@@ -47,6 +47,9 @@ defmodule Bonfire.Books do
       {:ok, %{cover: nil} = book} ->
         {:ok, %{book | cover: DoubanBookApi.get_book_cover(isbn)}}
 
+      {:ok, %{cover: url} = book} ->
+        {:ok, %{book | cover: cover_on_cdn(url)}}
+
       other ->
         Logger.error(["Error fetching booking wiht isbn: ", isbn, ", result: ", inspect(other)])
         other
@@ -85,4 +88,11 @@ defmodule Bonfire.Books do
     |> Repo.all()
     |> Enum.map(&fix_cover/1)
   end
+
+  @google_book_cover_cdn_host "gbook-cover-proxy.bonfirereading.com"
+
+  defp cover_on_cdn(nil), do: nil
+
+  defp cover_on_cdn(url),
+    do: url |> String.replace("books.google.com", @google_book_cover_cdn_host)
 end
