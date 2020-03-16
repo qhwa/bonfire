@@ -34,7 +34,6 @@
           <li><%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item" %></li>
 
           <% else %>
-          <li><%= link "Sign up", to: Routes.pow_registration_path(@conn, :new) %></li>
           <li><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></li>
           <% end %>
         </ul>
