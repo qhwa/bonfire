@@ -19,7 +19,7 @@ defmodule BonfireWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :bonfire,
-    gzip: true,
+    gzip: Mix.env() != :dev,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
