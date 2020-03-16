@@ -56,7 +56,11 @@
 
     <footer class="footer">
       <div class="content has-text-centered">
-        <div><a href="https://github.com/qhwa/bonfire">Source code</a></div>
+        <p>
+          This site is open sourced.
+          <a rel="nofollow" href="https://github.com/qhwa/bonfire">Source code</a>
+        </p>
+        <p>❤️  Built with <a rel="nofollow" href="https://elixir-lang.org">Elixir</a>, <a rel="nofollow" href="http://www.phoenixframework.org/">Phoenix</a>, <a rel="nofollow" href="https://github.com/commanded/commanded">Commanded</a>, <a rel="nofollow" href="https://powauth.com">Pow</a> and other open source softwares.</p>
       </div>
     </footer>
   </body>
