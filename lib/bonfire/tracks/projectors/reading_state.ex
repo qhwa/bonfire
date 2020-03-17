@@ -4,8 +4,15 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
   """
 
   alias Bonfire.Books
-  alias Bonfire.Tracks.Events.{ReadingStarted, ReadingFinished, ReadingUntracked}
-  alias Bonfire.Tracks.Schemas.ReadingState
+
+  alias Bonfire.Tracks.{
+    Events.ReadingStarted,
+    Events.ReadingFinished,
+    Events.ReadingUntracked,
+    Events.CheckedIn,
+    Schemas.ReadingState,
+    Schemas.Checkin
+  }
 
   use Commanded.Projections.Ecto,
     application: Bonfire.EventApp,
@@ -75,4 +82,30 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
       )
     end
   )
+
+  project(
+    %CheckedIn{track_id: %{user_id: user_id, isbn: isbn}, insight: insight},
+    %{created_at: created_at},
+    fn multi ->
+      with %ReadingState{id: id} <- Bonfire.Tracks.get_reading_state_by_isbn(isbn, user_id) do
+        checkin = %Checkin{
+          user_id: user_id,
+          reading_state_id: id,
+          date: to_date(created_at),
+          insight: insight
+        }
+
+        Ecto.Multi.insert(
+          multi,
+          :create_checkin,
+          checkin
+        )
+      end
+    end
+  )
+
+  defp to_date(time) do
+    # TODO: consider user's timezone
+    DateTime.to_date(time)
+  end
 end

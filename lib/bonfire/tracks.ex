@@ -11,7 +11,8 @@ defmodule Bonfire.Tracks do
     Schemas.ReadingState,
     Commands.StartReading,
     Commands.FinishReading,
-    Commands.UntrackReading
+    Commands.UntrackReading,
+    Commands.Checkin
   }
 
   import Ecto.Query, only: [from: 2]
@@ -78,6 +79,10 @@ defmodule Bonfire.Tracks do
   end
 
   def create_reading_state(%{"isbn" => isbn, "user_id" => user_id}) do
+    create_reading_state(isbn, user_id)
+  end
+
+  def create_reading_state(isbn, user_id) do
     EventApp.dispatch(%StartReading{track_id: %TrackId{isbn: isbn, user_id: user_id}})
   end
 
@@ -115,5 +120,9 @@ defmodule Bonfire.Tracks do
       finished: count.("finished"),
       reading: count.("reading")
     }
+  end
+
+  def checkin(isbn, user_id) do
+    EventApp.dispatch(%Checkin{track_id: %TrackId{user_id: user_id, isbn: isbn}})
   end
 end

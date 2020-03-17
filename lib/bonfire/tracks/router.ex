@@ -5,9 +5,10 @@ defmodule Bonfire.Tracks.Router do
     Commands.StartReading,
     Commands.FinishReading,
     Commands.UntrackReading,
+    Commands.Checkin,
     Aggregates.TrackReading
   }
 
   identify(TrackReading, by: :track_id, prefix: "reading-state-")
-  dispatch([StartReading, FinishReading, UntrackReading], to: TrackReading)
+  dispatch([StartReading, FinishReading, UntrackReading, Checkin], to: TrackReading)
 end

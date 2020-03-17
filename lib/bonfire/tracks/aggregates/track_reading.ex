@@ -7,9 +7,11 @@ defmodule Bonfire.Tracks.Aggregates.TrackReading do
     Events.ReadingStarted,
     Events.ReadingFinished,
     Events.ReadingUntracked,
+    Events.CheckedIn,
     Commands.StartReading,
     Commands.FinishReading,
-    Commands.UntrackReading
+    Commands.UntrackReading,
+    Commands.Checkin
   }
 
   def execute(%{state: :reading}, %StartReading{}) do
@@ -36,6 +38,17 @@ defmodule Bonfire.Tracks.Aggregates.TrackReading do
     %ReadingUntracked{track_id: track_id}
   end
 
+  def execute(%{state: nil}, %Checkin{track_id: track_id} = cmd) do
+    [
+      %ReadingStarted{track_id: track_id},
+      %CheckedIn{track_id: track_id}
+    ]
+  end
+
+  def execute(_, %Checkin{} = cmd) do
+    %{cmd | __struct__: CheckedIn}
+  end
+
   def apply(_, %ReadingStarted{track_id: track_id}) do
     %__MODULE__{track_id: track_id, state: :reading}
   end
@@ -46,5 +59,9 @@ defmodule Bonfire.Tracks.Aggregates.TrackReading do
 
   def apply(state, %ReadingUntracked{}) do
     %{state | state: nil}
+  end
+
+  def apply(state, %CheckedIn{}) do
+    state
   end
 end
