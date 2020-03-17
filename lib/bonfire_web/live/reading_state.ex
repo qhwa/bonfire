@@ -16,8 +16,8 @@ defmodule BonfireWeb.Live.ReadingState do
     Phoenix.View.render(BonfireWeb.ReadingStateView, "show.html", assigns)
   end
 
-  def mount(_params, %{"id" => id}, socket) do
-    with {:ok, rs} <- Tracks.get_reading_state(id) do
+  def mount(_params, %{"id" => id, "user_id" => user_id}, socket) do
+    with {:ok, rs} <- Tracks.get_reading_state(id, user_id) do
       socket =
         socket
         |> assign(:reading_state, rs)

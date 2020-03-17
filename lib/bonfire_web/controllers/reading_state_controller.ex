@@ -10,7 +10,11 @@ defmodule BonfireWeb.ReadingStateController do
   end
 
   def show(conn, %{"id" => id}) do
-    live_render(conn, BonfireWeb.Live.ReadingState, session: %{"id" => id})
+    current_user_id = conn.assigns.current_user.id
+
+    live_render(conn, BonfireWeb.Live.ReadingState,
+      session: %{"id" => id, "user_id" => current_user_id}
+    )
   end
 
   def delete(conn, %{"id" => id}) do

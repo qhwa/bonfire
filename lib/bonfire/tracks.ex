@@ -44,12 +44,13 @@ defmodule Bonfire.Tracks do
 
   ## Examples
 
-      iex> get_reading_state(123)
+      iex> get_reading_state(123, 1)
       {:ok, %ReadingState{}}
 
   """
-  def get_reading_state(id) do
-    Repo.get(ReadingState, id)
+  def get_reading_state(id, user_id) do
+    from(rs in ReadingState, where: rs.id == ^id and rs.user_id == ^user_id)
+    |> Repo.one()
     |> Repo.preload(user_book: [:book])
     |> case do
       %ReadingState{} = rs ->

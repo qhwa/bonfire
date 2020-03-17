@@ -16,8 +16,8 @@ defmodule BonfireWeb.Live.ReadingStateComponent do
     {:noreply, assign(socket, :reading_state, reload(rs))}
   end
 
-  defp reload(%{id: id}) do
-    {:ok, rs} = Tracks.get_reading_state(id)
+  defp reload(%{id: id, user_id: user_id}) do
+    {:ok, rs} = Tracks.get_reading_state(id, user_id)
     rs
   end
 end

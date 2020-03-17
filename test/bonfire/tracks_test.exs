@@ -25,9 +25,10 @@ defmodule Bonfire.TracksTest do
     end
 
     @tag :pending
-    test "get_reading_state/1 returns the reading_state with given id" do
+    test "get_reading_state/2 returns the reading_state with given id" do
       reading_state = reading_state_fixture()
-      assert Tracks.get_reading_state(reading_state.id) == {:ok, reading_state}
+      user_id = 1
+      assert Tracks.get_reading_state(reading_state.id, user_id) == {:ok, reading_state}
     end
 
     @tag :pending
