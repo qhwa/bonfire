@@ -37,11 +37,18 @@ github_client_secret =
     You can get it from https://github.com/settings/applications/new
     """
 
+static_url =
+  (System.get_env("BONFIRE_CDN") || "https://static.bonfirereading.com")
+  |> URI.parse()
+  |> Map.take([:scheme, :port, :host, :path])
+  |> Map.to_list()
+
 config :bonfire, BonfireWeb.Endpoint,
   http: [
     port: String.to_integer(System.get_env("PORT") || "4000"),
     transport_options: [socket_opts: [:inet6]]
   ],
+  static_url: static_url,
   secret_key_base: secret_key_base
 
 config :bonfire, Bonfire.Repo,
