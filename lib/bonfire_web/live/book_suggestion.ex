@@ -4,21 +4,15 @@ defmodule BonfireWeb.Live.BookSuggestion do
   require Logger
 
   use Phoenix.HTML
-  use Phoenix.LiveView
+  use Phoenix.LiveComponent
 
   alias Bonfire.Books
-  alias Bonfire.Tracks
 
   def render(assigns) do
     ~L"""
-    <% flash = live_flash(@flash, :info) %>
-    <%= if flash do %>
-    <div class="notification is-success is-light" phx-click="lv:clear-flash" phx-value-key="info"><%= flash %></div>
-    <% end %>
-
-    <%= form_tag "#", phx_change: :user_input, class: "suggestions" do %>
+    <section id="book-suggestion">
+    <%= form_tag "#", phx_change: :user_input, phx_target: "#book-suggestion", class: "suggestions" do %>
       <div class="field">
-        <label class="label">search</label>
         <input type="text" id="q" name="q" class="input" autocomplete="off" phx-debounce="500" placeholder="book title, subtitle, isbn or content keyword" />
       </div>
 
@@ -40,13 +34,13 @@ defmodule BonfireWeb.Live.BookSuggestion do
         <% end %>
       </ul>
     <% end %>
+    </section>
     """
   end
 
-  def mount(_params, %{"user_id" => user_id}, socket) do
+  def mount(socket) do
     socket =
       socket
-      |> assign(:user_id, user_id)
       |> assign(:books, [])
 
     {:ok, socket}
@@ -59,23 +53,5 @@ defmodule BonfireWeb.Live.BookSuggestion do
   def handle_event("user_input", %{"q" => input}, socket) do
     books = Books.search_books(input)
     {:noreply, assign(socket, :books, books)}
-  end
-
-  def handle_event("select", %{"isbn" => isbn, "title" => title}, socket) do
-    case Tracks.create_reading_state(%{"isbn" => isbn, "user_id" => user_id(socket)}) do
-      :ok ->
-        {:noreply, socket |> put_flash(:info, "New book (#{title}) added!")}
-
-      {:error, :already_reading} ->
-        {:noreply, socket |> put_flash(:info, "You have already added it.")}
-
-      error ->
-        Logger.error(["Fail on creating reading track, reason: ", inspect(error)])
-        {:noreply, socket}
-    end
-  end
-
-  defp user_id(socket) do
-    socket.assigns.user_id
   end
 end

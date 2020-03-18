@@ -39,6 +39,7 @@ defmodule BonfireWeb.Router do
     pipe_through :need_authorize
 
     resources "/tracks", ReadingStateController, only: [:new, :index, :show, :delete]
+    resources "/checkins", CheckinController, only: [:new, :index, :delete]
   end
 
   scope "/" do
