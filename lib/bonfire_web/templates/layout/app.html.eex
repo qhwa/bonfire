@@ -21,7 +21,7 @@
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <ul class="menu">
           <%= if Pow.Plug.current_user(@conn) do %>
-          <li><a href="/tracks">My Reading</a></li>
+
           <li>
             <%= link to: Routes.checkin_path(@conn, :new), class: "new-checkin" do %>
               <span class="svg-icon">
@@ -30,6 +30,7 @@
               Check in
             <% end %>
           </li>
+          <li><a href="/tracks">My Reading</a></li>
 
           <li><%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item" %></li>
 
