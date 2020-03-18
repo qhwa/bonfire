@@ -1,12 +1,30 @@
 <div class="container">
-  <section id="weekly-calendar" class="section">
-    <h1 class="title">My reading calendar</h1>
-    <ul class="weekly calendar">
-      <label>Weeks: </label>
-      <%= for week <- 52..1 do %>
-        <li class="<%= frequency(Map.get(@weekly_calendar, 1 - week, [])) %>" title="<%= week_title(week) %>"/>
-      <% end %>
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li><%= link "Books", to: Routes.reading_state_path(BonfireWeb.Endpoint, :index) %></li>
+      <li class="is-active"><a href="#" aria-current="page">Checkins</a></li>
     </ul>
+  </nav>
+
+  <section id="checkin-stats" class="section">
+    <h1 class="title">Checkins</h1>
+
+    <nav class="stats level is-mobile">
+      <div class="level-item">
+        <div>
+          <p class="heading">Perfect weeks</p>
+          <p class="title"><%= @stats.perfect_week_count %></p>
+        </div>
+      </div>
+
+      <div class="level-item">
+        <div>
+          <p class="heading">Perfect Days</p>
+          <p class="title"><%= @stats.perfect_day_count %></p>
+        </div>
+      </div>
+    </nav>
+
   </section>
 
   <section id="latest-readings" class="section">

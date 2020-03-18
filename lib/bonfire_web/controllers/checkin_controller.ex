@@ -5,10 +5,10 @@ defmodule BonfireWeb.CheckinController do
 
   def index(conn, _params) do
     user_id = user_id(conn)
-    calendar = Tracks.weekly_calendar(user_id)
+    stats = Tracks.checkin_stats(user_id)
     checkins = Tracks.recent_checkins(user_id)
 
-    render(conn, "index.html", weekly_calendar: calendar, checkins: checkins)
+    render(conn, "index.html", stats: stats, checkins: checkins)
   end
 
   def new(conn, _params) do

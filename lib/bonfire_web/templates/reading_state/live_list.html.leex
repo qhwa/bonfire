@@ -1,6 +1,6 @@
 <div class="level">
   <h1 class="title page-title level-left">
-    Books I like
+    My Reading Tracks
   </h1>
 
   <div class="level-right">
@@ -23,15 +23,22 @@
 <nav class="stats level is-mobile">
   <div class="level-item">
     <div>
-      <p class="heading">finished</p>
+      <p class="heading">Books finished</p>
       <p class="title"><%= @stats.finished %></p>
     </div>
   </div>
 
   <div class="level-item">
     <div>
-      <p class="heading">reading</p>
+      <p class="heading">Books reading</p>
       <p class="title"><%= @stats.reading %></p>
+    </div>
+  </div>
+
+  <div class="level-item">
+    <div>
+      <p class="heading">Checkins</p>
+      <p class="title"><%= link @stats.checkin_count, to: Routes.checkin_path(@socket, :index) %></p>
     </div>
   </div>
 </nav>

@@ -15,6 +15,8 @@ defmodule Bonfire.Tracks do
     Commands.Checkin
   }
 
+  alias Bonfire.Tracks.Schemas.Checkin, as: CheckinSchema
+
   import Ecto.Query, only: [from: 2]
 
   @doc """
@@ -111,15 +113,21 @@ defmodule Bonfire.Tracks do
   end
 
   def stats(user_id) do
-    count = fn state ->
-      from(rs in ReadingState, where: rs.user_id == ^user_id and rs.state == ^state)
-      |> Repo.aggregate(:count)
-    end
-
     %{
-      finished: count.("finished"),
-      reading: count.("reading")
+      finished: count_reading_state_by_state(user_id, "finished"),
+      reading: count_reading_state_by_state(user_id, "reading"),
+      checkin_count: count_checkins(user_id)
     }
+  end
+
+  defp count_reading_state_by_state(user_id, state) do
+    from(rs in ReadingState, where: rs.user_id == ^user_id and rs.state == ^state)
+    |> Repo.aggregate(:count)
+  end
+
+  defp count_checkins(user_id) do
+    from(c in CheckinSchema, where: c.user_id == ^user_id)
+    |> Repo.aggregate(:count)
   end
 
   @doc """
@@ -154,12 +162,34 @@ defmodule Bonfire.Tracks do
   Get recent checkins of a user
   """
   def recent_checkins(user_id) do
-    from(c in Bonfire.Tracks.Schemas.Checkin,
+    from(c in CheckinSchema,
       where: c.user_id == ^user_id,
       limit: @max_recent_checkins,
       order_by: [desc: :inserted_at]
     )
     |> Repo.all()
     |> Repo.preload([:book])
+  end
+
+  @doc """
+  Checkin stats summary of a user.
+  """
+  def checkin_stats(user_id) do
+    checkins =
+      from(c in "checkins", select: [:id, :date], where: c.user_id == ^user_id)
+      |> Repo.all()
+
+    count_by = fn count ->
+      checkins
+      |> Enum.group_by(&count.(&1.date))
+      |> Enum.count()
+    end
+
+    today = DateTime.utc_now() |> DateTime.to_date()
+
+    %{
+      perfect_week_count: count_by.(&to_week(&1, today)),
+      perfect_day_count: count_by.(& &1)
+    }
   end
 end
