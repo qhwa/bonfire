@@ -18,19 +18,17 @@ defmodule BonfireWeb.Live.BookSuggestion do
 
       <ul>
         <%= for book <- @books, book.isbn do %>
-        <li class="book">
-          <div class="cover">
-          <%= link to: "#", phx_click: "select", phx_value_isbn: book.isbn, phx_value_isbn: book.title do %>
-          <img src="<%= book.thumbnail %>" />
-          <% end %>
-          </div>
+          <%= content_tag :li, class: "book", phx_click: "select", phx_value_isbn: book.isbn, phx_value_title: book.title, phx_value_thumbnail: book.thumbnail do %>
 
-          <div class="info">
-            <h4 class="title"><%= link book.title, to: "#", phx_click: "select", phx_value_isbn: book.isbn, phx_value_title: book.title, class: "title" %></h4>
-            <h5 class="subtitle"><%= book.subtitle %></h5>
-            <div class="authors"><%= book.authors %></div>
-          </div>
-        </li>
+            <div class="cover"><%= img_tag book.thumbnail %></div>
+
+            <div class="info">
+              <h4 class="title"><%= book.title %></h4>
+              <h5 class="subtitle"><%= book.subtitle %></h5>
+              <div class="authors"><%= book.authors %></div>
+            </div>
+
+          <% end %>
         <% end %>
       </ul>
     <% end %>
