@@ -126,7 +126,10 @@ defmodule Bonfire.Tracks do
   Create a checkin for a user.
   """
   def checkin(isbn, user_id, insight \\ nil) do
-    EventApp.dispatch(%Checkin{track_id: %TrackId{user_id: user_id, isbn: isbn}, insight: insight})
+    EventApp.dispatch(
+      %Checkin{track_id: %TrackId{user_id: user_id, isbn: isbn}, insight: insight},
+      consistency: :strong
+    )
   end
 
   @doc """

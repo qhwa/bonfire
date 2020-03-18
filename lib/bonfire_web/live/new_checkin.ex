@@ -7,6 +7,7 @@ defmodule BonfireWeb.Live.NewCheckin do
   use Phoenix.LiveView
 
   alias Bonfire.Tracks
+  alias BonfireWeb.Router.Helpers, as: Routes
 
   def render(assigns) do
     ~L"""
@@ -18,15 +19,17 @@ defmodule BonfireWeb.Live.NewCheckin do
     <%= if @state == :new, do: live_component(@socket, BonfireWeb.Live.BookSuggestion, id: :new_book_suggestion) %>
 
     <%= if @state == :selected do %>
-      <%= if @book.thumbnail, do: img_tag @book.thumbnail %>
-      <%= @book.title %>
-      <a href="#" phx-click="unselect">change</a>
+      <section class="selected">
+        <%= BonfireWeb.BookView.cover_tag @book.thumbnail %>
+        <h4 class="book-title title"><%= @book.title %></h4>
+        <a href="#" class="change button" phx-click="unselect">change</a>
+      </section>
 
       <%= form_tag "#", phx_submit: :submit do %>
         <input type="hidden" name="isbn" value="<%= @book.isbn %>" >
 
         <div class="field">
-          <label class="label">Any insight?</label>
+          <h4 class="subtitle is-3">Share some insights (optional)</h4>
           <textarea class="textarea" name="insight" placeholder="anything you want to share"></textarea>
         </div>
 
@@ -72,6 +75,7 @@ defmodule BonfireWeb.Live.NewCheckin do
       socket =
         socket
         |> put_flash(:info, "Well done!")
+        |> redirect(to: Routes.checkin_path(BonfireWeb.Endpoint, :index))
         |> assign(:state, :done)
 
       {:noreply, socket}

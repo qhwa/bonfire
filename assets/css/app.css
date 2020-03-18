@@ -164,7 +164,7 @@ nav.header .menu {
   border-bottom: none;
 }
 
-.suggestions ul li .book-cover {
+.book-cover {
   height: 4em;
   width: 4em;
   background-size: contain;

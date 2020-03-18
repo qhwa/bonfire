@@ -15,15 +15,15 @@
       <%= for checkin <- @checkins do %>
         <% book = checkin.book %>
         <li class="checkin">
-          <%= if book.cover, do: img_tag(book.cover, class: "cover") %>
+          <%= BonfireWeb.BookView.cover_tag(book.cover) %>
+          <div class="content">
+            <span><%= checkin.inserted_at %></span>
+            <h4 class="title book-title"><%= link book.title, to: Routes.reading_state_path(@conn, :show, checkin.reading_state_id) %></h4>
 
-          <div class="info">
-            <h4 class="title"><%= book.title %></h4>
-            <h5 class="subtitle"><%= book.subtitle %></h5>
-            <div class="authors"><%= book.authors %></div>
+            <%= if checkin.insight && checkin.insight != "" do %>
+            <div class="insight notification"><%= checkin.insight %></div>
           </div>
-
-          <div class="insight"><%= checkin.insight %></div>
+        <% end %>
         </li>
       <% end %>
     </ul>
