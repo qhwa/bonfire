@@ -11,8 +11,11 @@ defmodule Bonfire.Tracks do
     Schemas.ReadingState,
     Commands.StartReading,
     Commands.FinishReading,
-    Commands.UntrackReading
+    Commands.UntrackReading,
+    Commands.Checkin
   }
+
+  alias Bonfire.Tracks.Schemas.Checkin, as: CheckinSchema
 
   import Ecto.Query, only: [from: 2]
 
@@ -44,12 +47,13 @@ defmodule Bonfire.Tracks do
 
   ## Examples
 
-      iex> get_reading_state(123)
+      iex> get_reading_state(123, 1)
       {:ok, %ReadingState{}}
 
   """
-  def get_reading_state(id) do
-    Repo.get(ReadingState, id)
+  def get_reading_state(id, user_id) do
+    from(rs in ReadingState, where: rs.id == ^id and rs.user_id == ^user_id)
+    |> Repo.one()
     |> Repo.preload(user_book: [:book])
     |> case do
       %ReadingState{} = rs ->
@@ -77,6 +81,10 @@ defmodule Bonfire.Tracks do
   end
 
   def create_reading_state(%{"isbn" => isbn, "user_id" => user_id}) do
+    create_reading_state(isbn, user_id)
+  end
+
+  def create_reading_state(isbn, user_id) do
     EventApp.dispatch(%StartReading{track_id: %TrackId{isbn: isbn, user_id: user_id}})
   end
 
@@ -105,14 +113,92 @@ defmodule Bonfire.Tracks do
   end
 
   def stats(user_id) do
-    count = fn state ->
-      from(rs in ReadingState, where: rs.user_id == ^user_id and rs.state == ^state)
-      |> Repo.aggregate(:count)
+    %{
+      finished: count_reading_state_by_state(user_id, "finished"),
+      reading: count_reading_state_by_state(user_id, "reading"),
+      checkin_count: count_checkins(user_id)
+    }
+  end
+
+  defp count_reading_state_by_state(user_id, state) do
+    from(rs in ReadingState, where: rs.user_id == ^user_id and rs.state == ^state)
+    |> Repo.aggregate(:count)
+  end
+
+  defp count_checkins(user_id) do
+    from(c in CheckinSchema, where: c.user_id == ^user_id)
+    |> Repo.aggregate(:count)
+  end
+
+  @doc """
+  Create a checkin for a user.
+  """
+  def checkin(isbn, user_id, insight \\ nil) do
+    EventApp.dispatch(
+      %Checkin{track_id: %TrackId{user_id: user_id, isbn: isbn}, insight: insight},
+      consistency: :strong
+    )
+  end
+
+  @doc """
+  Generate a weekly reporting calendar for a user.
+  """
+  def weekly_calendar(user_id) do
+    today = DateTime.utc_now() |> DateTime.to_date()
+
+    from(c in "checkins", select: [:id, :date], where: c.user_id == ^user_id)
+    |> Repo.all()
+    |> Enum.group_by(&to_week(&1.date, today))
+  end
+
+  defp to_week(date, today) do
+    Date.diff(date, today)
+    |> Integer.floor_div(7)
+  end
+
+  @max_recent_checkins 10
+
+  @doc """
+  Get recent checkins of a user
+  """
+  def recent_checkins(user_id) do
+    from(c in CheckinSchema,
+      where: c.user_id == ^user_id,
+      limit: @max_recent_checkins,
+      order_by: [desc: :inserted_at]
+    )
+    |> Repo.all()
+    |> Repo.preload([:book])
+  end
+
+  @doc """
+  Checkin stats summary of a user.
+  """
+  def checkin_stats(user_id) do
+    checkins =
+      from(c in "checkins", select: [:id, :date], where: c.user_id == ^user_id)
+      |> Repo.all()
+
+    count_by = fn count ->
+      checkins
+      |> Enum.group_by(&count.(&1.date))
+      |> Enum.count()
     end
 
+    today = DateTime.utc_now() |> DateTime.to_date()
+
     %{
-      finished: count.("finished"),
-      reading: count.("reading")
+      perfect_week_count: count_by.(&to_week(&1, today)),
+      perfect_day_count: count_by.(& &1)
     }
+  end
+
+  def get_checkins(reading_state) do
+    from(c in CheckinSchema,
+      where: c.reading_state_id == ^reading_state.id,
+      order_by: [desc: :inserted_at]
+    )
+    |> Repo.all()
+    |> Repo.preload(:book)
   end
 end

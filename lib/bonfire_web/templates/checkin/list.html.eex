@@ -1,0 +1,16 @@
+<ul class="latest-checkins">
+  <%= for checkin <- @checkins do %>
+    <% book = checkin.book %>
+    <li class="checkin">
+      <div class="list-item"><%= BonfireWeb.BookView.cover_tag(book.cover) %></div>
+      <div class="content">
+        <span><%= checkin.inserted_at %></span>
+        <h4 class="title book-title"><%= link book.title, to: Routes.reading_state_path(BonfireWeb.Endpoint, :show, checkin.reading_state_id) %></h4>
+
+        <%= if checkin.insight && checkin.insight != "" do %>
+        <div class="insight notification"><%= checkin.insight %></div>
+      </div>
+    <% end %>
+    </li>
+  <% end %>
+</ul>

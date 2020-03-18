@@ -1,0 +1,7 @@
+<div class="container" id="new-checkin">
+  <h1 class="title">What are you reading?</h1>
+
+  <div>
+    <%= live_render(@conn, BonfireWeb.Live.NewCheckin, session: %{"user_id" => @current_user.id}) %>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+.weekly.calendar {
+  display: flex;
+  align-items: center;
+}
+
+.weekly.calendar li {
+  width: 1em;
+  height: 1em;
+  background: #efefef;
+  margin-right: 1px;
+  border: 1px solid transparent;
+}
+
+.weekly.calendar li:hover {
+  border: 1px solid #ccc;
+}
+
+.weekly.calendar li.once {
+  background: #69cd69;
+}
+
+.weekly.calendar li.a-few {
+  background: #3e943f;
+}
+
+.weekly.calendar li.a-lot {
+  background: #386935;
+}
+
+ul.latest-checkins {
+  margin-left: 5em;
+  border-left: 1px solid #efefef;
+}
+
+ul.latest-checkins li {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: .5em 0;
+  border-bottom: 1px solid #efefef;
+  min-height: 5em;
+}
+
+ul.latest-checkins li:last-child {
+  border-bottom: none;
+}
+
+ul.latest-checkins li::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #ccc;
+  border-radius: 50%;
+}
+
+ul.latest-checkins li .list-item {
+  width: 4em;
+  height: 4em;
+  position: absolute;
+  top: 50%;
+  left: -3em;
+  background-position: top right;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+ul.latest-checkins li .list-item .svg-icon svg {
+  top: 0;
+}
+
+ul.latest-checkins li .content {
+  margin-left: 1em;
+  flex: 1;
+}
+
+ul.latest-checkins li .content .book-title a {
+  color: inherit;
+  font-size: 100%;
+}
+
+#new-checkin section.selected {
+  display: flex;
+  align-items: center;
+  box-shadow: 1px 2px 4px 1px rgba(0, 0, 0, .1);
+  padding: .5em;
+  margin-bottom: 1em;
+}
+
+#new-checkin section.selected .title {
+  flex: 1;
+}

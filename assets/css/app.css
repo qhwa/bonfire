@@ -1,5 +1,6 @@
 @import "./fonts.css";
 @import "./menu.css";
+@import "./checkin.css";
 
 body {
   font-family: 'Alegreya Sans', sans-serif;
@@ -147,25 +148,38 @@ nav.header .menu {
   margin-left: .5em;
 }
 
+.suggestions ul {
+  padding: 1em 0;
+  margin-top: -0.75rem;
+}
+
 .suggestions ul li {
   display: flex;
   margin-bottom: .5em;
+  padding: .5em 1em;
+  border-bottom: 1px solid #efefef;
 }
 
-.suggestions ul li .cover {
-  width: 5em;
+.suggestions ul li:last-child {
+  border-bottom: none;
 }
 
-.suggestions ul li .cover img {
-  width: 100%;
+.book-cover {
+  height: 4em;
+  width: 4em;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .suggestions ul li .info {
   padding-left: .5em;
+  flex: 1;
 }
 
 .suggestions ul li .info .subtitle {
   color: #ccc;
+  margin-bottom: 0;
 }
 
 .new-reading-state.button {
@@ -243,6 +257,10 @@ nav.header .menu {
 .reading-state-detail .user-book {
   flex: 1;
   padding: 1em;
+}
+
+.reading-state-detail #checkins {
+  margin-top: 2em;
 }
 
 .github.auth.button {

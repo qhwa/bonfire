@@ -19,6 +19,7 @@ defmodule Bonfire.Books.Book do
     field :authors, {:array, :string}
 
     has_many :user_books, Bonfire.Books.UserBook
+    has_many :checkins, Bonfire.Tracks.Schemas.Checkin
 
     timestamps()
   end
