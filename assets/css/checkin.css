@@ -41,6 +41,10 @@ ul.latest-checkins li {
   min-height: 5em;
 }
 
+ul.latest-checkins li:last-child {
+  border-bottom: none;
+}
+
 ul.latest-checkins li::after {
   content: '';
   position: absolute;
@@ -53,7 +57,7 @@ ul.latest-checkins li::after {
   border-radius: 50%;
 }
 
-ul.latest-checkins li .book-cover {
+ul.latest-checkins li .list-item {
   width: 4em;
   height: 4em;
   position: absolute;
@@ -61,6 +65,13 @@ ul.latest-checkins li .book-cover {
   left: -3em;
   background-position: top right;
   transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+ul.latest-checkins li .list-item .svg-icon svg {
+  top: 0;
 }
 
 ul.latest-checkins li .content {

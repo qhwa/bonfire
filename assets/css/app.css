@@ -259,6 +259,10 @@ nav.header .menu {
   padding: 1em;
 }
 
+.reading-state-detail #checkins {
+  margin-top: 2em;
+}
+
 .github.auth.button {
   background: url(~@fortawesome/fontawesome-free/svgs/brands/github.svg) no-repeat .5em center / 1em auto;
   padding-left: 2em;

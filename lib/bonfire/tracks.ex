@@ -192,4 +192,13 @@ defmodule Bonfire.Tracks do
       perfect_day_count: count_by.(& &1)
     }
   end
+
+  def get_checkins(reading_state) do
+    from(c in CheckinSchema,
+      where: c.reading_state_id == ^reading_state.id,
+      order_by: [desc: :inserted_at]
+    )
+    |> Repo.all()
+    |> Repo.preload(:book)
+  end
 end
