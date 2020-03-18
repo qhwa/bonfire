@@ -1,0 +1,32 @@
+.weekly.calendar {
+  display: flex;
+  align-items: center;
+}
+
+.weekly.calendar li {
+  width: 1em;
+  height: 1em;
+  background: #efefef;
+  margin-right: 1px;
+  border: 1px solid transparent;
+}
+
+.weekly.calendar li:hover {
+  border: 1px solid #ccc;
+}
+
+.weekly.calendar li.once {
+  background: #69cd69;
+}
+
+.weekly.calendar li.a-few {
+  background: #3e943f;
+}
+
+.weekly.calendar li.a-lot {
+  background: #386935;
+}
+
+#latest-readings ul.latest-checkins li {
+  display: flex;
+}

@@ -122,7 +122,41 @@ defmodule Bonfire.Tracks do
     }
   end
 
-  def checkin(isbn, user_id) do
-    EventApp.dispatch(%Checkin{track_id: %TrackId{user_id: user_id, isbn: isbn}})
+  @doc """
+  Create a checkin for a user.
+  """
+  def checkin(isbn, user_id, insight \\ nil) do
+    EventApp.dispatch(%Checkin{track_id: %TrackId{user_id: user_id, isbn: isbn}, insight: insight})
+  end
+
+  @doc """
+  Generate a weekly reporting calendar for a user.
+  """
+  def weekly_calendar(user_id) do
+    today = DateTime.utc_now() |> DateTime.to_date()
+
+    from(c in "checkins", select: [:id, :date], where: c.user_id == ^user_id)
+    |> Repo.all()
+    |> Enum.group_by(&to_week(&1.date, today))
+  end
+
+  defp to_week(date, today) do
+    Date.diff(date, today)
+    |> Integer.floor_div(7)
+  end
+
+  @max_recent_checkins 10
+
+  @doc """
+  Get recent checkins of a user
+  """
+  def recent_checkins(user_id) do
+    from(c in Bonfire.Tracks.Schemas.Checkin,
+      where: c.user_id == ^user_id,
+      limit: @max_recent_checkins,
+      order_by: [desc: :inserted_at]
+    )
+    |> Repo.all()
+    |> Repo.preload([:book])
   end
 end

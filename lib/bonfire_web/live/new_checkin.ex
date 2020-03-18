@@ -67,8 +67,8 @@ defmodule BonfireWeb.Live.NewCheckin do
     {:noreply, socket}
   end
 
-  def handle_event("submit", %{"isbn" => isbn}, socket) do
-    with :ok <- Tracks.checkin(isbn, user_id(socket)) do
+  def handle_event("submit", %{"isbn" => isbn, "insight" => insight}, socket) do
+    with :ok <- Tracks.checkin(isbn, user_id(socket), insight) do
       socket =
         socket
         |> put_flash(:info, "Well done!")

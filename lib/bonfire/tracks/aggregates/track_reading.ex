@@ -38,10 +38,10 @@ defmodule Bonfire.Tracks.Aggregates.TrackReading do
     %ReadingUntracked{track_id: track_id}
   end
 
-  def execute(%{state: nil}, %Checkin{track_id: track_id} = cmd) do
+  def execute(%{state: nil}, %Checkin{track_id: track_id, insight: insight}) do
     [
       %ReadingStarted{track_id: track_id},
-      %CheckedIn{track_id: track_id}
+      %CheckedIn{track_id: track_id, insight: insight}
     ]
   end
 

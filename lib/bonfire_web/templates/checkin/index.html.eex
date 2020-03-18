@@ -1,0 +1,31 @@
+<div class="container">
+  <section id="weekly-calendar" class="section">
+    <h1 class="title">My reading calendar</h1>
+    <ul class="weekly calendar">
+      <label>Weeks: </label>
+      <%= for week <- 52..1 do %>
+        <li class="<%= frequency(Map.get(@weekly_calendar, 1 - week, [])) %>" title="<%= week_title(week) %>"/>
+      <% end %>
+    </ul>
+  </section>
+
+  <section id="latest-readings" class="section">
+    <h1 class="title">My recent readings</h1>
+    <ul class="latest-checkins">
+      <%= for checkin <- @checkins do %>
+        <% book = checkin.book %>
+        <li class="checkin">
+          <%= if book.cover, do: img_tag(book.cover, class: "cover") %>
+
+          <div class="info">
+            <h4 class="title"><%= book.title %></h4>
+            <h5 class="subtitle"><%= book.subtitle %></h5>
+            <div class="authors"><%= book.authors %></div>
+          </div>
+
+          <div class="insight"><%= checkin.insight %></div>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+</div>

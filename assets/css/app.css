@@ -1,5 +1,6 @@
 @import "./fonts.css";
 @import "./menu.css";
+@import "./checkin.css";
 
 body {
   font-family: 'Alegreya Sans', sans-serif;
@@ -163,7 +164,7 @@ nav.header .menu {
   border-bottom: none;
 }
 
-.suggestions ul li .cover {
+.suggestions ul li .book-cover {
   height: 4em;
   width: 4em;
   background-size: contain;

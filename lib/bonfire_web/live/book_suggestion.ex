@@ -21,7 +21,7 @@ defmodule BonfireWeb.Live.BookSuggestion do
         <%= for book <- @books, book.isbn do %>
           <%= content_tag :li, class: "book dropdown-item", phx_click: "select", phx_value_isbn: book.isbn, phx_value_title: book.title, phx_value_thumbnail: book.thumbnail do %>
 
-            <%= cover_tag(book.thumbnail) %>
+            <%= BonfireWeb.BookView.cover_tag(book.thumbnail) %>
 
             <div class="info">
               <h4 class="title"><%= book.title %></h4>
@@ -57,13 +57,5 @@ defmodule BonfireWeb.Live.BookSuggestion do
   def handle_event("user_input", %{"q" => input}, socket) do
     books = Books.search_books(input)
     {:noreply, assign(socket, :books, books)}
-  end
-
-  defp cover_tag(nil) do
-    content_tag(:div, "", class: "cover")
-  end
-
-  defp cover_tag(thumbnail) do
-    content_tag(:div, "", class: "cover", style: "background-image: url(#{thumbnail})")
   end
 end

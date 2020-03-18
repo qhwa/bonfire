@@ -6,6 +6,7 @@ defmodule Bonfire.Tracks.Schemas.Checkin do
     field :insight, :string
 
     belongs_to :user, Bonfire.Users.User
+    belongs_to :book, Bonfire.Books.Book
     belongs_to :reading_state, Bonfire.Tracks.Schemas.ReadingState
 
     timestamps()
