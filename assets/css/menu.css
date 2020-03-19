@@ -2,10 +2,9 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  overflow: hidden;
 }
 
-.header li a {
+.header li > * {
   display: block;
   padding: 20px 20px;
   text-decoration: none;

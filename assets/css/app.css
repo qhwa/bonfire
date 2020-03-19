@@ -1,10 +1,13 @@
 @import "./fonts.css";
-@import "./menu.css";
 @import "./checkin.css";
 
 body {
   font-family: 'Alegreya Sans', sans-serif;
   font-size: 20px;
+}
+
+main {
+  margin-top: 5.25rem;
 }
 
 details summary {
@@ -13,6 +16,10 @@ details summary {
 
 footer.footer {
   margin-top: 3em;
+}
+
+.flash.container {
+  margin-bottom: 1em;
 }
 
 .book-title {
@@ -39,12 +46,48 @@ p.description {
   font-family: 'Average', serif;
 }
 
-nav.header {
+.navbar {
   font-size: 120%;
 }
 
-nav.header .menu {
+.navbar .navbar-brand .navbar-item {
+  padding-right: 1em;
+  margin-right: 1em;
+  border-right: 1px solid #efefef;
+}
+
+.navbar .navbar-brand .navbar-item b {
+  padding-right: .3em;
+}
+
+.navbar .navbar-dropdown {
   font-size: inherit;
+}
+
+.navbar .burger-trigger {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+  z-index: 50;
+  opacity: 0;
+}
+
+.navbar .burger-trigger:checked + .navbar-brand .navbar-burger span:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.navbar .burger-trigger:checked + .navbar-brand .navbar-burger span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar .burger-trigger:checked + .navbar-brand .navbar-burger span:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg)
+}
+
+.navbar .burger-trigger:checked ~ .navbar-menu {
+  display: block;
 }
 
 .breadcrumb {
@@ -59,13 +102,18 @@ nav.header .menu {
 .svg-icon {
   display: inline-flex;
   align-self: center;
+  margin-right: .5em;
 }
 
 .svg-icon svg {
   width: 1em;
   height: 1em;
-  top: 0.125em;
   position: relative;
+  top: 0.125em;
+}
+
+.svg-icon.flex svg {
+  top: 0;
 }
 
 .svg-icon svg path {
@@ -272,6 +320,9 @@ nav.header .menu {
   .container {
     padding-left: 1em;
     padding-right: 1em;
+  }
+  .navbar .burger-trigger {
+    display: block;
   }
 }
 
