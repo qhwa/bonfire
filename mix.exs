@@ -52,6 +52,7 @@ defmodule Bonfire.MixProject do
       {:pow_assent, "~> 0.4.6"},
       {:certifi, "~> 2.5"},
       {:ssl_verify_fun, "~> 1.1"},
+      {:tzdata, "~> 1.0.3"},
       {:credo, "~> 1.2", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0-rc.7", only: :dev, runtime: false}
     ]

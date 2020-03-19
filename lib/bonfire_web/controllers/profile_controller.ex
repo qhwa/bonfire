@@ -4,9 +4,12 @@ defmodule BonfireWeb.ProfileController do
   alias Bonfire.Sharing
   alias Bonfire.Sharing.Profile
   alias Bonfire.Tracks
+  alias Bonfire.Users
 
   plug Pow.Plug.RequireAuthenticated,
-       [error_handler: Pow.Phoenix.PlugErrorHandler] when action in [:edit]
+       [error_handler: Pow.Phoenix.PlugErrorHandler] when action in [:edit, :update]
+
+  plug :load_profile when action in [:edit, :update]
 
   action_fallback BonfireWeb.FallbackController
 
@@ -20,12 +23,34 @@ defmodule BonfireWeb.ProfileController do
   end
 
   def edit(conn, _params) do
-    with {:ok, profile} <- load_profile(conn.assigns.current_user) do
-      render(conn, "edit.html", profile: Profile.updating_changeset(profile, %{}))
+    changeset = Profile.updating_changeset(conn.assigns.profile, %{})
+    render(conn, "edit.html", changeset: changeset)
+  end
+
+  def update(conn, %{"profile" => params}) do
+    changeset = Profile.updating_changeset(conn.assigns.profile, params)
+
+    case Bonfire.Repo.update(changeset) do
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, "Successfully updated!")
+        |> render("edit.html", changeset: changeset)
+
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, "Something went wrong!")
+        |> render("edit.html", changeset: changeset)
     end
   end
 
-  defp load_profile(user) do
-    Bonfire.Users.get_or_create_profile(user.id)
+  defp load_profile(conn, _) do
+    Users.get_or_create_profile(conn.assigns.current_user.id)
+    |> case do
+      {:ok, profile} ->
+        conn |> assign(:profile, profile)
+
+      {:error, _} ->
+        conn |> halt()
+    end
   end
 end
