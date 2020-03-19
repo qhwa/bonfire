@@ -10,8 +10,8 @@ defmodule BonfireWeb.ErrorHelpers do
   """
   def error_tag(form, field) do
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
-      content_tag(:span, translate_error(error),
-        class: "help-block",
+      content_tag(:p, translate_error(error),
+        class: "help is-danger",
         data: [phx_error_for: input_id(form, field)]
       )
     end)
