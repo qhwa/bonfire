@@ -3,24 +3,23 @@
   <h1 class="title">Profile</h1>
 
   <%= form_for @changeset, Routes.profile_path(@conn, :update), [class: "form"], fn f -> %>
-    <label class="label">share url</label>
-    <div class="field has-addons">
+    <label class="label">nick name (can't change again)</label>
+    <div class="field">
       <div class="control">
-        <span class="button is-static"><%= Routes.page_url(@conn, :index) %></span>
+        <%= text_input f, :share_key, class: "input box", disabled: @changeset.data.share_key %>
       </div>
-
-      <div class="control">
-        <%= text_input f, :share_key, class: "input box", disabled: true %>
-      </div>
+      <%= error_tag f, :share_key %>
     </div>
+
 
     <div class="field">
       <label class="label">timezone</label>
       <div class="control">
         <div class="select">
-          <%= select f, :timezone, Tzdata.zone_lists_grouped() %>
+          <%= select f, :timezone, Tzdata.zone_lists_grouped(), prompt: "None (UTC +00:00)" %>
         </div>
       </div>
+      <%= error_tag f, :timezone %>
     </div>
 
     <div class="field">

@@ -70,7 +70,7 @@
         <% error = get_flash(@conn, :error) %>
 
         <%= if info do %><div class="notification is-success is-light" role="alert"><%= info %></div><% end %>
-        <%= if error do %><div class="notification is-success is-light" role="alert"><%= error %></div><% end %>
+        <%= if error do %><div class="notification is-warning is-light" role="alert"><%= error %></div><% end %>
       </div>
 
       <%= render @view_module, @view_template, assigns %>

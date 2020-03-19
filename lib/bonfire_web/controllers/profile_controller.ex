@@ -38,7 +38,6 @@ defmodule BonfireWeb.ProfileController do
 
       {:error, changeset} ->
         conn
-        |> put_flash(:error, "Something went wrong!")
         |> render("edit.html", changeset: changeset)
     end
   end

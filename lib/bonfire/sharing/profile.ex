@@ -18,6 +18,7 @@ defmodule Bonfire.Sharing.Profile do
   def creating_changeset(profile, attrs) do
     profile
     |> cast(attrs, [:share_key, :user_id, :timezone])
+    |> validate_length(:share_key, min: 6)
     |> unique_constraint(:share_key)
   end
 
@@ -25,6 +26,7 @@ defmodule Bonfire.Sharing.Profile do
   def updating_changeset(profile, attrs) do
     profile
     |> cast(attrs, [:share_key, :timezone])
+    |> validate_length(:share_key, min: 6)
     |> unique_constraint(:share_key)
   end
 end
