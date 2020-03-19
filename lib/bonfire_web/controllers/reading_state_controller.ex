@@ -1,6 +1,8 @@
 defmodule BonfireWeb.ReadingStateController do
   use BonfireWeb, :controller
 
+  plug BonfireWeb.Plug.PreloadProfile
+
   def index(conn, _params) do
     render(conn, "index.html")
   end
@@ -13,7 +15,11 @@ defmodule BonfireWeb.ReadingStateController do
     current_user_id = conn.assigns.current_user.id
 
     live_render(conn, BonfireWeb.Live.ReadingState,
-      session: %{"id" => id, "user_id" => current_user_id}
+      session: %{
+        "id" => id,
+        "user_id" => current_user_id,
+        "profile" => conn.assigns.current_user.profile
+      }
     )
   end
 

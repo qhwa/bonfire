@@ -11,6 +11,13 @@
   <nav class="stats level is-mobile">
     <div class="level-item">
       <div>
+        <p class="heading">Total</p>
+        <p class="title"><%= @stats.total %></p>
+      </div>
+    </div>
+    
+    <div class="level-item">
+      <div>
         <p class="heading">
         Perfect weeks
         <span class="svg-icon" title="Weeks that has at least one checkin">
@@ -38,6 +45,6 @@
 
   <section id="latest-readings" class="section">
     <h1 class="title">My recent readings</h1>
-    <%= render "list.html", checkins: @checkins %>
+    <%= render "list.html", checkins: @checkins, conn: @conn %>
   </section>
 </div>

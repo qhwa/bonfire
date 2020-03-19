@@ -3,6 +3,8 @@ defmodule BonfireWeb.CheckinController do
 
   alias Bonfire.Tracks
 
+  plug BonfireWeb.Plug.PreloadProfile
+
   def index(conn, _params) do
     user_id = user_id(conn)
     stats = Tracks.checkin_stats(user_id)
