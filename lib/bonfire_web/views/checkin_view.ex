@@ -9,4 +9,30 @@ defmodule BonfireWeb.CheckinView do
   def week_title(1), do: "this week"
   def week_title(2), do: "last week"
   def week_title(ago), do: "#{ago - 1} weeks ago"
+
+  def datetime_tag(%Plug.Conn{} = conn, datetime) do
+    tz = conn.assigns.current_user.profile.timezone
+    datetime_tag(tz, datetime)
+  end
+
+  def datetime_tag(nil, datetime) do
+    content_tag(:span, to_str(datetime))
+  end
+
+  def datetime_tag(tz, datetime) when is_binary(tz) do
+    dt = Bonfire.Tracks.db_time_to_user_time(datetime, tz)
+    content_tag(:span, to_str(dt))
+  end
+
+  defp to_str(dt) do
+    [dt.year, "-", dt.month, "-", dt.day, " ", dt.hour, ":", dt.minute, ":", dt.second]
+    |> Enum.map(fn
+      x when is_integer(x) and x < 10 ->
+        "0" <> to_string(x)
+
+      o ->
+        o
+    end)
+    |> Enum.join()
+  end
 end

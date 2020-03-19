@@ -151,8 +151,8 @@ defmodule Bonfire.Tracks do
     |> Enum.group_by(&to_week(&1.date, today))
   end
 
-  defp to_week(date, today) do
-    Date.diff(date, today)
+  defp to_week(date, beginning) do
+    Date.diff(beginning, date)
     |> Integer.floor_div(7)
   end
 
@@ -175,20 +175,29 @@ defmodule Bonfire.Tracks do
   Checkin stats summary of a user.
   """
   def checkin_stats(user_id) do
+    tz = Bonfire.Users.get_timezone(user_id)
+
     checkins =
-      from(c in "checkins", select: [:id, :date], where: c.user_id == ^user_id)
+      from(c in "checkins", select: [:inserted_at], where: c.user_id == ^user_id)
       |> Repo.all()
+      |> Enum.map(fn %{inserted_at: time} ->
+        db_time_to_user_time(time, tz)
+        |> DateTime.to_date()
+      end)
 
     count_by = fn count ->
       checkins
-      |> Enum.group_by(&count.(&1.date))
+      |> Enum.group_by(&count.(&1))
       |> Enum.count()
     end
 
-    today = DateTime.utc_now() |> DateTime.to_date()
+    today = DateTime.utc_now() |> to_user_local_time(tz) |> DateTime.to_date()
+
+    start_of_the_week = today |> Date.add(1 - Date.day_of_week(today))
 
     %{
-      perfect_week_count: count_by.(&to_week(&1, today)),
+      total: length(checkins),
+      perfect_week_count: count_by.(&to_week(&1, start_of_the_week)),
       perfect_day_count: count_by.(& &1)
     }
   end
@@ -201,4 +210,19 @@ defmodule Bonfire.Tracks do
     |> Repo.all()
     |> Repo.preload(:book)
   end
+
+  @doc """
+  Convert a Datetime from DB (without timezone info) into User local time (with timezone)
+  """
+  def db_time_to_user_time(time, tz) do
+    time
+    |> DateTime.from_naive!("Etc/UTC")
+    |> to_user_local_time(tz)
+  end
+
+  defp to_user_local_time(time, "Etc/UTC"),
+    do: time
+
+  defp to_user_local_time(time, tz),
+    do: time |> DateTime.shift_zone!(tz, Tzdata.TimeZoneDatabase)
 end
