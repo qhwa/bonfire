@@ -17,7 +17,13 @@ defmodule Bonfire.Sharing.Profile do
   def creating_changeset(profile, attrs) do
     profile
     |> cast(attrs, [:share_key, :user_id])
-    |> validate_required([:share_key])
+    |> unique_constraint(:share_key)
+  end
+
+  @doc false
+  def updating_changeset(profile, attrs) do
+    profile
+    |> cast(attrs, [:share_key])
     |> unique_constraint(:share_key)
   end
 end

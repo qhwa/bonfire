@@ -40,6 +40,7 @@ defmodule BonfireWeb.Router do
 
     resources "/tracks", ReadingStateController, only: [:new, :index, :show, :delete]
     resources "/checkins", CheckinController, only: [:new, :index, :delete]
+    resources "/profile", ProfileController, only: [:edit, :update], singleton: true
   end
 
   scope "/" do
