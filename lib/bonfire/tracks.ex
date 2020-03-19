@@ -220,6 +220,9 @@ defmodule Bonfire.Tracks do
     |> to_user_local_time(tz)
   end
 
+  defp to_user_local_time(time, nil),
+    do: time
+
   defp to_user_local_time(time, "Etc/UTC"),
     do: time
 
