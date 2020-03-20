@@ -1,10 +1,13 @@
 <div class="hero is-medium is-bold">
   <div class="hero-body">
-    <div class="container">
+    <ul class="container has-text-centered">
       <%= for provider <- PowAssent.Plug.available_providers(@conn) do %>
-        <%= PowAssent.Phoenix.ViewHelpers.authorization_link(@conn, provider, class: "auth button #{to_string(provider)}"
+
+        <li>
+        <%= PowAssent.Phoenix.ViewHelpers.authorization_link(@conn, provider, class: "auth button #{to_string(provider)} is-large"
 ) %>
+        </li>
       <% end %>
-    </div>
+    </ul>
   </div>
 </div>
