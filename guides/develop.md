@@ -10,7 +10,7 @@ This project uses several free services:
 Environment variables required:
 
 * `GOOGLE_API_KEY`
-* `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`
+* `BONFIRE_GITHUB_APP_ID` and `BONFIRE_GITHUB_APP_SECRET`
 
 ### run locally
 
