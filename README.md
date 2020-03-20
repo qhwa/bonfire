@@ -4,9 +4,9 @@ A small project for exploring some interesting approaches to a delightful web ap
 
 ## Motivation
 
+* to get inspirations on interesting books/papers from others
 * to explore most recent technologies on building and deploying a web application
 * try to use as little JavaScript as possible by leveraging [Phoenix LiveView]
-* to get inspirations on interesting books from others
 
 Some of the frameworks/libraries used:
 
