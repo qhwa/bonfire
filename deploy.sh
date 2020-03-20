@@ -4,7 +4,6 @@ rio \
   --debug-level 10 \
   --namespace prod \
   run \
-  --no-mesh \
   --build-branch master \
   --image-pull-policy always \
   --name bonfire \
