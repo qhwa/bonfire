@@ -1,8 +1,9 @@
-<section class="hero is-medium is-bold is-info">
+<section id="home-hero-1" class="hero is-medium is-bold is-warnning is-fullheight-with-navbar">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title">Bonfire reading</h1>
-      <h2 class="subtitle">Track and share your reading state.</h2>
+      <h1 class="title">Record your reading activities</h1>
+      <h2 class="subtitle">and get rewarded by them</h2>
+      <%= link "Get Started", to: Routes.checkin_path(@conn, :new), class: "button is-large is-warning" %>
     </div>
   </div>
 </section>

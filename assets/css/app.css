@@ -1,5 +1,6 @@
 @import "./fonts.css";
 @import "./checkin.css";
+@import "./home.css";
 
 body {
   font-family: 'Alegreya Sans', sans-serif;
