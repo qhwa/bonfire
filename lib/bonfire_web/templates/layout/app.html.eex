@@ -76,7 +76,7 @@
       <%= render @view_module, @view_template, assigns %>
     </main>
 
-    <script type="text/javascript" src="<%= Routes.static_url(@conn, "/js/app.js") %>"></script>
+    <script async type="text/javascript" src="<%= Routes.static_url(@conn, "/js/app.js") %>"></script>
 
     <footer class="footer">
       <div class="content has-text-centered">
