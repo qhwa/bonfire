@@ -47,13 +47,11 @@
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link"><%= @conn.assigns.current_user.email %></a>
             <div class="navbar-dropdown is-right" role="menu">
-              <div class="dropdown-content">
-                <%= link "My Reading", to: Routes.reading_state_path(@conn, :index), class: "navbar-item" %>
-                <%= link "Add new book", to: Routes.reading_state_path(@conn, :new), class: "navbar-item" %>
-                <%= link "Settings", to: Routes.profile_path(@conn, :edit), class: "navbar-item" %>
-                <hr class="navbar-divider" />
-                <%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item" %>
-              </div>
+              <%= link "My Reading", to: Routes.reading_state_path(@conn, :index), class: "navbar-item" %>
+              <%= link "Add new book", to: Routes.reading_state_path(@conn, :new), class: "navbar-item" %>
+              <%= link "Settings", to: Routes.profile_path(@conn, :edit), class: "navbar-item" %>
+              <hr class="navbar-divider" />
+              <%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item" %>
             </div>
           </div>
 

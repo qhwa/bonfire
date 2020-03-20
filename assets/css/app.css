@@ -9,6 +9,7 @@ body {
 
 main {
   min-height: 20rem;
+  margin-top: 3.25rem;
 }
 
 details summary {
