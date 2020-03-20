@@ -14,7 +14,12 @@ rio \
   --env DATABASE_URL=secret://bonfire/database-url \
   --env ES_DATABASE_URL=secret://bonfire/es-database-url \
   --env SECRET_KEY_BASE=secret://bonfire/secret-key-base \
-  --env GITHUB_CLIENT_ID=secret://bonfire/github-client-id \
-  --env GITHUB_CLIENT_SECRET=secret://bonfire/github-client-secret \
+  --env AUTH_WITH_GITHUB=true \
+  --env BONFIRE_GITHUB_CLIENT_ID=secret://bonfire/github-client-id \
+  --env BONFIRE_GITHUB_CLIENT_SECRET=secret://bonfire/github-client-secret \
+  --env AUTH_WITH_GOOGLE=true \
+  --env BONFIRE_GOOGLE_CLIENT_ID=secret://bonfire/google-client-id \
+  --env BONFIRE_GOOGLE_CLIENT_SECRET=secret://bonfire/google-client-secret \
   --env GOOGLE_API_KEY=secret://bonfire/google-api-key \
+  --env BONFIRE_CDN="https://static.bonfirereading.com" \
   https://github.com/qhwa/bonfire

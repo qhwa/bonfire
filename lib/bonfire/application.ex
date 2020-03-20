@@ -6,6 +6,8 @@ defmodule Bonfire.Application do
   use Application
 
   def start(_type, _args) do
+    Application.put_env(:bonfire, :pow_assent, providers: pow_assent_providers())
+
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository
@@ -23,6 +25,29 @@ defmodule Bonfire.Application do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Bonfire.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  defp pow_assent_providers do
+    [github: true, google: false]
+    |> Enum.reduce([], fn {name, default_on}, providers ->
+      uname = name |> to_string() |> String.upcase()
+
+      case System.get_env("AUTH_WITH_#{uname}", to_string(default_on)) do
+        "false" ->
+          providers
+
+        _ ->
+          [{name, pow_assent_provider_config(uname)} | providers]
+      end
+    end)
+  end
+
+  defp pow_assent_provider_config(name) do
+    [
+      client_id: System.fetch_env!("BONFIRE_#{name}_CLIENT_ID"),
+      client_secret: System.fetch_env!("BONFIRE_#{name}_CLIENT_SECRET"),
+      strategy: Module.concat([Assent.Strategy, String.capitalize(name)])
+    ]
   end
 
   # Tell Phoenix to update the endpoint configuration
