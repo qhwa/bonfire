@@ -21,27 +21,17 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
-github_client_id =
-  System.get_env("GITHUB_CLIENT_ID") ||
-    raise """
-    environment variable GITHUB_CLIENT_ID is missing.
-    You can either :
-    * generate a new one from https://github.com/settings/applications/new
-    * or get an existing one from https://github.com/settings/developers
-    """
-
-github_client_secret =
-  System.get_env("GITHUB_CLIENT_SECRET") ||
-    raise """
-    environment variable GITHUB_CLIENT_SECRET is missing.
-    You can get it from https://github.com/settings/applications/new
-    """
-
 static_url =
-  (System.get_env("BONFIRE_CDN") || "https://static.bonfirereading.com")
-  |> URI.parse()
-  |> Map.take([:scheme, :port, :host, :path])
-  |> Map.to_list()
+  case System.get_env("BONFIRE_CDN", "false") do
+    "false" ->
+      nil
+
+    url ->
+      url
+      |> URI.parse()
+      |> Map.take([:scheme, :port, :host, :path])
+      |> Map.to_list()
+  end
 
 config :bonfire, BonfireWeb.Endpoint,
   http: [
@@ -59,12 +49,3 @@ config :bonfire, Bonfire.EventStore,
   serializer: Commanded.Serialization.JsonSerializer,
   url: es_database_url,
   pool_size: String.to_integer(System.get_env("ES_REPO_POOL_SIZE") || "10")
-
-config :bonfire, :pow_assent,
-  providers: [
-    github: [
-      client_id: github_client_id,
-      client_secret: github_client_secret,
-      strategy: Assent.Strategy.Github
-    ]
-  ]

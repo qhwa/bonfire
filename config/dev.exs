@@ -81,17 +81,3 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
-
-config :bonfire, :pow_assent,
-  providers: [
-    google: [
-      client_id: System.get_env("BONFIRE_GOOGLE_APP_ID"),
-      client_secret: System.get_env("BONFIRE_GOOGLE_APP_SECRET"),
-      strategy: Assent.Strategy.Google
-    ],
-    github: [
-      client_id: System.get_env("BONFIRE_GITHUB_APP_ID"),
-      client_secret: System.get_env("BONFIRE_GITHUB_APP_SECRET"),
-      strategy: Assent.Strategy.Github
-    ]
-  ]
