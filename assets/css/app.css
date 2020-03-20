@@ -7,10 +7,6 @@ body {
   font-size: 20px;
 }
 
-main {
-  margin-top: 5.25rem;
-}
-
 details summary {
   margin-bottom: .5em;
 }
@@ -320,6 +316,12 @@ p.description {
 .google.auth.button {
   background: url(~@fortawesome/fontawesome-free/svgs/brands/google.svg) no-repeat .5em center / 1em auto;
   padding-left: 2em;
+}
+
+@media only screen and (min-width: 1024px) {
+  main {
+    margin-top: 5rem;
+  }
 }
 
 @media only screen and (max-width: 1024px) {
