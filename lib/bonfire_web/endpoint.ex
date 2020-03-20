@@ -20,7 +20,8 @@ defmodule BonfireWeb.Endpoint do
     at: "/",
     from: :bonfire,
     gzip: Mix.env() != :dev,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico robots.txt),
+    headers: %{"Access-Control-Allow-Origin" => "*"}
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
