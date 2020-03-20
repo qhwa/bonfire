@@ -6,7 +6,6 @@ rio \
   run \
   --no-mesh \
   --build-branch master \
-  --dnssearch bonfire.ooo \
   --image-pull-policy always \
   --name bonfire \
   --ports 80:4000 \
