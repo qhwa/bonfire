@@ -17,7 +17,8 @@ module.exports = (env, options) => ({
   },
   output: {
     filename: 'app.js',
-    path: path.resolve(__dirname, '../priv/static/js')
+    path: path.resolve(__dirname, '../priv/static/js'),
+    publicPath: "/js/"
   },
   module: {
     rules: [
@@ -33,8 +34,13 @@ module.exports = (env, options) => ({
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
-        test: /\.(svg|eot|woff2?|ttf)$/,
-        use: 'url-loader'
+        test: /\.(svg|eot|woff2?|ttf|jpg|png)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 4096
+          }
+        }
       },
       {
       test: /\.(sass|scss)$/,

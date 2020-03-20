@@ -1,0 +1,6 @@
+#home-hero-1 {
+  background-image: url("../static/images/hero-1.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
