@@ -2,6 +2,7 @@ defmodule Bonfire.Books.GoogleBookAPI do
   @moduledoc false
 
   use HTTPoison.Base
+  require Logger
 
   @endpoint "https://www.googleapis.com/books/v1/volumes"
 
@@ -12,7 +13,8 @@ defmodule Bonfire.Books.GoogleBookAPI do
       books when is_list(books) ->
         books
 
-      _ ->
+      other ->
+        Logger.error(["Search failed,\n  keyword: ", keyword, "\n  result: ", inspect(other)])
         []
     end
   end
