@@ -33,6 +33,15 @@ static_url =
       |> Map.to_list()
   end
 
+appsignal_config =
+  case Syste.get_env("BONFIRE_APPSIGNAL_API_KEY") do
+    nil ->
+      [active: false]
+
+    key ->
+      [active: true, name: "bonfire", push_api_key: key, env: Mix.env()]
+  end
+
 config :bonfire, BonfireWeb.Endpoint,
   http: [
     port: String.to_integer(System.get_env("PORT") || "4000"),
@@ -49,3 +58,5 @@ config :bonfire, Bonfire.EventStore,
   serializer: Commanded.Serialization.JsonSerializer,
   url: es_database_url,
   pool_size: String.to_integer(System.get_env("ES_REPO_POOL_SIZE") || "10")
+
+config :appsignal, :config, appsignal_config
