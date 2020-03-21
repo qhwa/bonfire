@@ -8,6 +8,13 @@ defmodule Bonfire.Application do
   def start(_type, _args) do
     Application.put_env(:bonfire, :pow_assent, pow_assent_config())
 
+    :telemetry.attach(
+      "appsignal-ecto",
+      [:bonfire, :repo, :query],
+      &Appsignal.Ecto.handle_event/4,
+      nil
+    )
+
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository

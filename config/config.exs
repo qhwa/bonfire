@@ -17,7 +17,8 @@ config :bonfire, BonfireWeb.Endpoint,
   render_errors: [view: BonfireWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Bonfire.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [signing_salt: "1ct/on/h"],
-  pubsub: [adapter: Phoenix.PubSub.PG2, pool_size: 1, name: Bonfire.PubSub]
+  pubsub: [adapter: Phoenix.PubSub.PG2, pool_size: 1, name: Bonfire.PubSub],
+  instrumenters: [Appsignal.Phoenix.Instrumenter]
 
 # Configures Elixir's Logger
 config :logger, :console,
