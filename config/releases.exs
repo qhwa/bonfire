@@ -39,7 +39,7 @@ appsignal_config =
       [active: false]
 
     key ->
-      [active: true, name: "bonfire", push_api_key: key, env: Mix.env()]
+      [active: true, push_api_key: key]
   end
 
 config :bonfire, BonfireWeb.Endpoint,
