@@ -6,7 +6,7 @@ defmodule Bonfire.Application do
   use Application
 
   def start(_type, _args) do
-    Application.put_env(:bonfire, :pow_assent, providers: pow_assent_providers())
+    Application.put_env(:bonfire, :pow_assent, pow_assent_config())
 
     # List all child processes to be supervised
     children = [
@@ -25,6 +25,11 @@ defmodule Bonfire.Application do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Bonfire.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  defp pow_assent_config do
+    Application.get_env(:bonfire, :pow_assent, [])
+    |> Keyword.put(:providers, pow_assent_providers())
   end
 
   defp pow_assent_providers do

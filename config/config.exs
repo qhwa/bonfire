@@ -39,6 +39,9 @@ config :bonfire, Bonfire.EventStore, serializer: Commanded.Serialization.JsonSer
 
 config :bonfire, Bonfire.Books.GoogleBookAPI, proxy: System.get_env("GOOGLE_BOOK_API_PROXY")
 config :bonfire, Bonfire.Books.DoubanBookApi, proxy: System.get_env("DOUBAN_BOOK_API_PROXY")
+config :bonfire, Bonfire.Auth.HTTP, proxy: System.get_env("BONFIRE_AUTH_PROXY")
+
+config :bonfire, :pow_assent, http_adapter: Bonfire.Auth.HTTP
 
 import_config "appsignal.exs"
 
