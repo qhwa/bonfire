@@ -1,6 +1,6 @@
 <div class="hero is-medium is-bold">
   <div class="hero-body">
-    <ul class="container has-text-centered">
+    <ul class="auth-buttons container has-text-centered">
       <%= for provider <- PowAssent.Plug.available_providers(@conn) do %>
 
         <li>

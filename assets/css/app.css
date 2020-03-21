@@ -309,6 +309,10 @@ p.description {
   margin-top: 2em;
 }
 
+.auth-buttons li {
+  margin-bottom: .5em;
+}
+
 .github.auth.button {
   background: url(~@fortawesome/fontawesome-free/svgs/brands/github.svg) no-repeat .5em center / 1em auto;
   padding-left: 2em;
