@@ -34,7 +34,7 @@ static_url =
   end
 
 appsignal_config =
-  case Syste.get_env("BONFIRE_APPSIGNAL_API_KEY") do
+  case System.get_env("BONFIRE_APPSIGNAL_API_KEY") do
     nil ->
       [active: false]
 
