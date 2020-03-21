@@ -40,6 +40,8 @@ config :bonfire, Bonfire.EventStore, serializer: Commanded.Serialization.JsonSer
 config :bonfire, Bonfire.Books.GoogleBookAPI, proxy: System.get_env("GOOGLE_BOOK_API_PROXY")
 config :bonfire, Bonfire.Books.DoubanBookApi, proxy: System.get_env("DOUBAN_BOOK_API_PROXY")
 
+import_config "appsignal.exs"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
