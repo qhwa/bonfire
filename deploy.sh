@@ -20,4 +20,5 @@ rio \
   --env BONFIRE_GOOGLE_CLIENT_SECRET=secret://bonfire/google-client-secret \
   --env GOOGLE_API_KEY=secret://bonfire/google-api-key \
   --env BONFIRE_CDN="https://static.bonfirereading.com" \
+  --env BONFIRE_APPSIGNAL_API_KEY=secret://bonfire/appsignal-api-key \
   https://github.com/qhwa/bonfire
