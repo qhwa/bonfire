@@ -1,0 +1,25 @@
+<div class="container">
+  <h2 class="title">Register</h2>
+
+  <%= form_for @changeset, @action, [as: :user, class: "form"], fn f -> %>
+    <%= if @changeset.action do %>
+      <div class="notification is-warning">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= label f, Pow.Ecto.Schema.user_id_field(@changeset), class: "label" %>
+
+      <div class="control">
+        <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), class: "input" %>
+      </div>
+
+      <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+    </div>
+
+    <div>
+      <%= submit "Submit", class: "button is-primary" %>
+    </div>
+  <% end %>
+</div>
