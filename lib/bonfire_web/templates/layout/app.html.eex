@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title><%= assigns[:page_title] || "Bonfire · Share books you are reading and loving" %></title>
     <link rel="stylesheet" href="<%= Routes.static_url(@conn, "/css/app.css") %>"/>
+    <link rel="shortcut icon" href="<%= Routes.static_url(@conn, "/images/favicon.svg") %>"/>
     <%= csrf_meta_tag() %>
   </head>
   <body>
