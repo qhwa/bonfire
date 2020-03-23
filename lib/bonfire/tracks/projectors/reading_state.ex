@@ -92,7 +92,6 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
           user_id: user_id,
           book_id: rs.user_book.book.id,
           reading_state_id: id,
-          date: to_date(created_at),
           insight: insight
         }
 
@@ -104,9 +103,4 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
       end
     end
   )
-
-  defp to_date(time) do
-    # TODO: consider user's timezone
-    DateTime.to_date(time)
-  end
 end
