@@ -55,7 +55,8 @@ defmodule Bonfire.MixProject do
       {:tzdata, "~> 1.0.3"},
       {:credo, "~> 1.2", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0-rc.7", only: :dev, runtime: false},
-      {:appsignal, "~> 1.0"}
+      {:appsignal, "~> 1.0"},
+      {:earmark, "~> 1.4.3"}
     ]
   end
 

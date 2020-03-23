@@ -35,4 +35,17 @@ defmodule BonfireWeb.CheckinView do
     end)
     |> Enum.join()
   end
+
+  @doc """
+  Render insight text of a checkin, with markdown transformed to HTML.
+  """
+  def insight(text) do
+    case Earmark.as_html(text) do
+      {:ok, html, _} ->
+        {:safe, html}
+
+      {:error, html, _} ->
+        {:safe, html}
+    end
+  end
 end

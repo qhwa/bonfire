@@ -84,6 +84,13 @@ ul.latest-checkins li .content .book-title a {
   font-size: 100%;
 }
 
+ul.latest-checkins li .content blockquote {
+  padding-left: 1em;
+  margin-bottom: 1em;
+  font-style: italic;
+  border-left: 4px solid #ccc;
+}
+
 #new-checkin section.selected {
   display: flex;
   align-items: center;
