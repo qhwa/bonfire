@@ -16,6 +16,10 @@ details summary {
   margin-bottom: .5em;
 }
 
+footer.footer {
+  font-size: 80%;
+}
+
 .flash.container {
   margin-bottom: 1em;
 }
