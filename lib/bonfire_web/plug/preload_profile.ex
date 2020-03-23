@@ -1,5 +1,5 @@
 defmodule BonfireWeb.Plug.PreloadProfile do
-  @doc """
+  @moduledoc """
   This module is used to preload profiles of users
   """
 
@@ -7,16 +7,12 @@ defmodule BonfireWeb.Plug.PreloadProfile do
 
   import Plug.Conn
 
-  def init(opts) do
-    opts
-  end
+  def init(opts), do: opts
 
   def call(%{assigns: %{current_user: %User{} = user}} = conn, _opts) do
     conn
     |> assign(:current_user, Bonfire.Repo.preload(user, :profile))
   end
 
-  def call(conn, _) do
-    conn |> IO.inspect()
-  end
+  def call(conn, _), do: conn
 end

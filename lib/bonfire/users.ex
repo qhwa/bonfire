@@ -1,8 +1,27 @@
 defmodule Bonfire.Users do
+  @moduledoc """
+  User context.
+  """
   import Ecto.Query, only: [from: 2]
 
   alias Bonfire.Sharing.Profile
   alias Bonfire.Repo
+  alias Bonfire.Users.User
+
+  use PowAssent.Ecto.UserIdentities.Context, repo: Bonfire.Repo, user: User
+
+  @impl true
+  def create_user(user_identity_params, user_params, user_id_params) do
+    super(user_identity_params, user_params, user_id_params)
+    |> case do
+      {:ok, user} ->
+        Bonfire.Games.start_game(user)
+        {:ok, user}
+
+      other ->
+        other
+    end
+  end
 
   @default_timezone "Etc/UTC"
 

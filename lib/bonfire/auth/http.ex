@@ -16,7 +16,7 @@ defmodule Bonfire.Auth.HTTP do
        %Assent.HTTPAdapter.HTTPResponse{
          status: res.status_code,
          headers: res.headers,
-         body: Jason.decode!(res.body |> IO.inspect())
+         body: Jason.decode!(res.body)
        }}
     end
   end

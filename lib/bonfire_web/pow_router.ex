@@ -1,4 +1,6 @@
 defmodule BonfireWeb.PowRouter do
+  @moduledoc false
+
   use Pow.Phoenix.Routes
 
   alias BonfireWeb.Router.Helpers, as: Routes

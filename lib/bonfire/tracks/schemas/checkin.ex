@@ -1,4 +1,7 @@
 defmodule Bonfire.Tracks.Schemas.Checkin do
+  @moduledoc """
+  An Ecto schema representing checkin events.
+  """
   use Ecto.Schema
 
   schema "checkins" do

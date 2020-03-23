@@ -42,7 +42,9 @@ config :bonfire, Bonfire.Books.GoogleBookAPI, proxy: System.get_env("GOOGLE_BOOK
 config :bonfire, Bonfire.Books.DoubanBookApi, proxy: System.get_env("DOUBAN_BOOK_API_PROXY")
 config :bonfire, Bonfire.Auth.HTTP, proxy: System.get_env("BONFIRE_AUTH_PROXY")
 
-config :bonfire, :pow_assent, http_adapter: Bonfire.Auth.HTTP
+config :bonfire, :pow_assent,
+  http_adapter: Bonfire.Auth.HTTP,
+  user_identities_context: Bonfire.Users
 
 import_config "appsignal.exs"
 
