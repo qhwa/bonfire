@@ -1,6 +1,6 @@
 defmodule Bonfire.Sharing.Aggregate do
   @moduledoc """
-  An aggregate for sharing context.
+  An aggregate for sharing commands.
   """
 
   defstruct [:user_id, :key]

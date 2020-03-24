@@ -25,7 +25,8 @@ defmodule Bonfire.Application do
       # {Bonfire.Worker, arg},
       Bonfire.EventApp,
       Bonfire.Tracks.Supervisor,
-      Bonfire.Sharing.Supervisor
+      Bonfire.Sharing.Supervisor,
+      Bonfire.Games.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

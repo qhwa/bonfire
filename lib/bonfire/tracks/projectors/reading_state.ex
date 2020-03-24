@@ -85,7 +85,7 @@ defmodule Bonfire.Tracks.Projectors.ReadingState do
 
   project(
     %CheckedIn{track_id: %{user_id: user_id, isbn: isbn}, insight: insight},
-    %{created_at: created_at},
+    _meta,
     fn multi ->
       with %ReadingState{id: id} = rs <- Bonfire.Tracks.get_reading_state_by_isbn(isbn, user_id) do
         checkin = %Checkin{
