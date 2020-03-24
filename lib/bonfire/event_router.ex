@@ -4,4 +4,5 @@ defmodule Bonfire.EventRouter do
 
   router(Bonfire.Tracks.Router)
   router(Bonfire.Sharing.Router)
+  router(Bonfire.Games.Router)
 end
