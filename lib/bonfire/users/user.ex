@@ -11,7 +11,10 @@ defmodule Bonfire.Users.User do
 
     has_many :reading_states, Bonfire.Tracks.Schemas.ReadingState
     has_many :books, Bonfire.Books.UserBook
+    has_many :pushes, Bonfire.Pushes.Schemas.Push
+
     has_one :profile, Bonfire.Sharing.Profile
+    has_one :game, Bonfire.Games.Schemas.Game
 
     timestamps()
   end
