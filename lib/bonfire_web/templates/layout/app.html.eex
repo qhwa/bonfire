@@ -73,6 +73,7 @@
       </div>
 
       <%= render @view_module, @view_template, assigns %>
+      <%= if @current_user, do: live_render @conn, BonfireWeb.Live.Push, session: %{"user" => @current_user} %>
     </main>
 
     <script async type="text/javascript" src="<%= Routes.static_url(@conn, "/js/app.js") %>"></script>

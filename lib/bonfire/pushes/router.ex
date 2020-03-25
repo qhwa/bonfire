@@ -3,9 +3,10 @@ defmodule Bonfire.Pushes.Router do
 
   alias Bonfire.Pushes.{
     Commands.Push,
+    Commands.Read,
     Aggregate
   }
 
   identify(Aggregate, by: :user_id, prefix: "push-")
-  dispatch([Push], to: Aggregate)
+  dispatch([Push, Read], to: Aggregate)
 end
