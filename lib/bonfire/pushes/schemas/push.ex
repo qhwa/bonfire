@@ -4,6 +4,7 @@ defmodule Bonfire.Pushes.Schemas.Push do
   """
 
   use Ecto.Schema
+  import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
@@ -14,5 +15,11 @@ defmodule Bonfire.Pushes.Schemas.Push do
     belongs_to :user, Bonfire.Users.User
 
     timestamps()
+  end
+
+  def read_changeset(push) do
+    push
+    |> cast(%{}, [])
+    |> put_change(:state, "read")
   end
 end
