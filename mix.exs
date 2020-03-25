@@ -33,10 +33,10 @@ defmodule Bonfire.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.14"},
+      {:phoenix, "~> 1.4.16"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
-      {:phoenix_live_view, "~> 0.8.0"},
+      {:phoenix_live_view, "~> 0.10.0"},
       {:ecto_sql, "~> 3.1"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.11"},
@@ -56,7 +56,8 @@ defmodule Bonfire.MixProject do
       {:credo, "~> 1.2", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0-rc.7", only: :dev, runtime: false},
       {:appsignal, "~> 1.0"},
-      {:earmark, "~> 1.4.3"}
+      {:earmark, "~> 1.4.3"},
+      {:elixir_uuid, "~> 1.2.1"}
     ]
   end
 

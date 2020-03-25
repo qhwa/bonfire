@@ -1,4 +1,4 @@
-defmodule Bonfire.Games.Supervisor do
+defmodule Bonfire.Pushes.Supervisor do
   @moduledoc false
 
   use Supervisor
@@ -9,8 +9,7 @@ defmodule Bonfire.Games.Supervisor do
 
   def init(_init_arg) do
     children = [
-      Bonfire.Games.Projector,
-      Bonfire.Games.ProcessManager
+      Bonfire.Pushes.Projector
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

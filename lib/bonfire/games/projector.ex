@@ -1,4 +1,4 @@
-defmodule Bonfire.Games.Projectors.Game do
+defmodule Bonfire.Games.Projector do
   @moduledoc false
 
   alias Bonfire.Games.Events.GameStarted
