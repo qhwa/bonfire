@@ -67,7 +67,7 @@
             </span>
           </div>
           <div class="content">
-            <%= BonfireWeb.CheckinView.datetime_tag @profile.timezone, checkin.inserted_at %>
+            <%= BonfireWeb.CheckinView.datetime_tag @profile && @profile.timezone, checkin.inserted_at %>
             <%= if checkin.insight && checkin.insight != "" do %>
             <div class="insight notification"><%= BonfireWeb.CheckinView.insight(checkin.insight) %></div>
           </div>

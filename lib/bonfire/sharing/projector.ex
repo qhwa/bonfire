@@ -1,4 +1,4 @@
-defmodule Bonfire.Sharing.Projectors.Track do
+defmodule Bonfire.Sharing.Projector do
   @moduledoc """
   A projector with hooks on sharing changes.
   """

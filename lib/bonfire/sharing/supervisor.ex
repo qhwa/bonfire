@@ -9,7 +9,7 @@ defmodule Bonfire.Sharing.Supervisor do
 
   def init(_init_arg) do
     children = [
-      Bonfire.Sharing.Projectors.Track
+      Bonfire.Sharing.Projector
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
