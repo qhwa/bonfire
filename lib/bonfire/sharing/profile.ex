@@ -23,6 +23,7 @@ defmodule Bonfire.Sharing.Profile do
     |> cast(attrs, [:share_key, :user_id, :timezone])
     |> validate_share_key()
     |> unique_constraint(:share_key)
+    |> unique_constraint(:user_id)
   end
 
   @doc false

@@ -16,6 +16,7 @@ defmodule Bonfire.Users do
     |> case do
       {:ok, user} ->
         Bonfire.Games.start_game(user)
+        create_profile(user.id)
         {:ok, user}
 
       other ->
@@ -43,9 +44,17 @@ defmodule Bonfire.Users do
         {:ok, profile}
 
       nil ->
-        Profile.creating_changeset(%Profile{user_id: user_id}, %{})
-        |> Repo.insert()
+        create_profile(user_id)
     end
+  end
+
+  @doc """
+  Create a profile for a user.
+  """
+  def create_profile(user_id, attrs \\ %{}) do
+    %Profile{user_id: user_id}
+    |> Profile.creating_changeset(attrs)
+    |> Repo.insert()
   end
 
   @doc """
