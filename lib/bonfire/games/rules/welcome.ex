@@ -17,7 +17,7 @@ defmodule Bonfire.Games.Rules.Welcome do
         content: ["welcome", []],
         actions: %{
           ok: %{
-            label: "Sure, take me there!",
+            label: "Sure!",
             action: ["redirect", Routes.checkin_path(BonfireWeb.Endpoint, :new)]
           },
           no: "Not now, thanks."
