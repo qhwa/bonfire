@@ -13,7 +13,7 @@ defmodule Bonfire.Pushes do
   Render a push's content into text.
   """
   def render_content([template, payload]),
-    do: BonfireWeb.PushView.render(template, payload)
+    do: BonfireWeb.PushContentView.render(template, payload)
 
   def render_content(text) when is_binary(text),
     do: text

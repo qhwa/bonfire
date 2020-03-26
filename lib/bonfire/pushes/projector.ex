@@ -12,13 +12,8 @@ defmodule Bonfire.Pushes.Projector do
     Events.PushRead
   }
 
-  project(%PushCreated{id: id, user_id: user_id, content: content}, _, fn multi ->
-    push = %Push{
-      id: id,
-      state: "created",
-      user_id: user_id,
-      content: Bonfire.Pushes.render_content(content)
-    }
+  project(%PushCreated{content: content, user_id: user_id} = evt, _, fn multi ->
+    push = Push.from_event(%{evt | content: Bonfire.Pushes.render_content(content)})
 
     ret =
       Ecto.Multi.insert(
