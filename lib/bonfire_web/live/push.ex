@@ -5,26 +5,10 @@ defmodule BonfireWeb.Live.Push do
 
   use Phoenix.HTML
   use Phoenix.LiveView
+  alias BonfireWeb.PushView
 
   def render(assigns) do
-    ~L"""
-    <%= if @push do %>
-      <div class="modal is-active">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-          <div class="card">
-            <div class="card-content">
-              <%= @push.content %>
-            </div>
-            <div class="card-footer">
-              <a href="#" phx-click="read" class="card-footer-item">Got it</a>
-            </div>
-          </div>
-        </div>
-        <button class="modal-close is-large" aria-label="close" phx-click="dismiss"></button>
-      </div>
-    <% end %>
-    """
+    PushView.render("show.html", assigns)
   end
 
   def mount(_params, %{"user" => user}, socket) do
@@ -51,7 +35,26 @@ defmodule BonfireWeb.Live.Push do
     end
   end
 
-  def handle_event("read", _, socket) do
+  def handle_event("ok", %{"redirect" => path}, socket) do
+    push = socket.assigns.push
+    Bonfire.Pushes.read(push)
+
+    socket =
+      socket
+      |> assign(:push, nil)
+      |> redirect(to: path)
+
+    {:noreply, socket}
+  end
+
+  def handle_event("ok", _, socket) do
+    push = socket.assigns.push
+    Bonfire.Pushes.read(push)
+
+    {:noreply, assign(socket, :push, nil)}
+  end
+
+  def handle_event("no", _, socket) do
     push = socket.assigns.push
     Bonfire.Pushes.read(push)
 

@@ -11,10 +11,17 @@ defmodule Bonfire.Pushes.Schemas.Push do
   schema "pushes" do
     field :content, :string
     field :state, :string
+    field :actions, Util.Term
+    field :allow_dismiss, :boolean
 
     belongs_to :user, Bonfire.Users.User
 
     timestamps()
+  end
+
+  def from_event(evt) do
+    struct(__MODULE__, Map.from_struct(evt))
+    |> Map.put(:state, "created")
   end
 
   def read_changeset(push) do

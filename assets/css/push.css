@@ -1,0 +1,17 @@
+.push.modal {
+}
+
+.push.modal figure {
+  margin-top: -1.5rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.push.modal p {
+  padding-bottom: 1em;
+}
+
+.push.modal .card-footer-item:not(.ok) {
+  color: inherit;
+}

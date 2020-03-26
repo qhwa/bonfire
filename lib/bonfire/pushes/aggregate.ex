@@ -10,8 +10,9 @@ defmodule Bonfire.Pushes.Aggregate do
     Commands.Read
   }
 
-  def execute(_, %Push{user_id: user_id, content: content}) do
-    %PushCreated{id: UUID.uuid4(), user_id: user_id, content: content}
+  def execute(_, %Push{} = cmd) do
+    %{cmd | __struct__: PushCreated}
+    |> Map.put(:id, UUID.uuid4())
   end
 
   def execute(_, %Read{user_id: user_id, id: id}) do

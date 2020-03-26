@@ -1,0 +1,7 @@
+<figure class="head">
+  <img src="<%= Routes.static_url(BonfireWeb.Endpoint, "/images/welcome-bg.png") %>" />
+</figure>
+
+<h1 class="title">Welcome!</h1>
+<p>Welcome to Bonfire Town, explorer!</p> 
+<p>Let's enjoy reading together! You can record your reading by check in. Do you want to check in now?</p>
