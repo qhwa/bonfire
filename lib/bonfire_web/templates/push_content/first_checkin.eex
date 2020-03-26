@@ -1,0 +1,6 @@
+<figure class="head">
+  <img src="<%= Routes.static_url(BonfireWeb.Endpoint, "/images/star_collection.png") %>" />
+</figure>
+
+<h1 class="title">Congraturations! You just collected a star!</h1>
+<p>The more you read, the more stars you will get.</p>

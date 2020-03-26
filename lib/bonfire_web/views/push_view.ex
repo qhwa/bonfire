@@ -1,7 +1,7 @@
 defmodule BonfireWeb.PushView do
   use BonfireWeb, :view
 
-  @default_actions %{"Got it" => "ok"}
+  @default_actions %{ok: "Got it!"}
 
   def render_actions(actions) do
     for action <- actions || @default_actions do

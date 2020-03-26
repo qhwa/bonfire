@@ -10,18 +10,17 @@ defmodule BonfireWeb.CheckinView do
   def week_title(2), do: "last week"
   def week_title(ago), do: "#{ago - 1} weeks ago"
 
-  def datetime_tag(%Plug.Conn{} = conn, datetime) do
-    tz = conn.assigns.current_user.profile.timezone
+  def datetime_tag(%Plug.Conn{assigns: %{current_user: %{profile: %{timezone: tz}}}}, datetime) do
     datetime_tag(tz, datetime)
-  end
-
-  def datetime_tag(nil, datetime) do
-    content_tag(:span, to_str(datetime))
   end
 
   def datetime_tag(tz, datetime) when is_binary(tz) do
     dt = Bonfire.Tracks.db_time_to_user_time(datetime, tz)
     content_tag(:span, to_str(dt))
+  end
+
+  def datetime_tag(_, datetime) do
+    content_tag(:span, to_str(datetime))
   end
 
   defp to_str(dt) do
