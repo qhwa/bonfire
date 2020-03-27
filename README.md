@@ -38,7 +38,7 @@ This project is not ready for a serious production yet. It's still under active 
   * [ ] following
   * [ ] email notification
 * 3.0: gaming
-  * [ ] a game which will encourage users to do more reading
+  * [x] a game which will encourage users to do more reading
   * [ ] a game helping to form a reading habit
 
 [Phoenix]: http://www.phoenixframework.org/
