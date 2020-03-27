@@ -7,16 +7,17 @@ defmodule Bonfire.Games.Schemas.Game do
   import Ecto.Changeset
 
   schema "games" do
+    field :star_count_in_current_season, :integer
+    field :star_count_in_total, :integer
+
     belongs_to :user, Bonfire.Users.User
 
     timestamps()
   end
 
   @doc false
-  def changeset(game, attrs) do
+  def updating_changeset(game, attrs) do
     game
-    |> cast(attrs, [])
-    |> validate_required([])
-    |> unique_constraint(:user_id)
+    |> cast(attrs, [:star_count_in_current_season, :star_count_in_total])
   end
 end

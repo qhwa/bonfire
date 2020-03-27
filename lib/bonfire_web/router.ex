@@ -50,6 +50,7 @@ defmodule BonfireWeb.Router do
     pow_assent_routes()
 
     get "/", BonfireWeb.PageController, :index
+    get "/leaders", BonfireWeb.GameController, :index
     get "/:user_name", BonfireWeb.ProfileController, :show
   end
 

@@ -1,0 +1,16 @@
+#leaderboard ol {
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+#leaderboard ol li.index-1 {
+  background: #fff9df;
+}
+
+#leaderboard ol li.index-2 {
+  background: #ebffdf;
+}
+
+#leaderboard ol li.index-3 {
+  background: #dff9ff;
+}
