@@ -1,4 +1,4 @@
-<div class="container has-text-centered" id="leaderboard">
+<div class="has-text-centered" id="leaderboard">
   <h1 class="title">Top Readers</h1>
   <ol>
   <%= for {game, index} <- Enum.with_index(@games, 1) do %>
