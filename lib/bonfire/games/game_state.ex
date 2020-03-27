@@ -4,5 +4,5 @@ defmodule Bonfire.Games.GameState do
   """
   @enforce_keys [:user_id]
 
-  defstruct user_id: nil, score: 0
+  defstruct user_id: nil, star_count_in_current_season: 0, star_count_in_total: 0
 end

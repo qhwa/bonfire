@@ -3,6 +3,7 @@ defmodule Bonfire.Tracks do
   Tracks context. This module holds tracking related high level API.
   """
 
+  alias Bonfire.Users
   alias Bonfire.Books.{Book, UserBook}
   alias Bonfire.Repo
   alias Bonfire.EventApp
@@ -175,7 +176,7 @@ defmodule Bonfire.Tracks do
   Checkin stats summary of a user.
   """
   def checkin_stats(user_id) do
-    tz = Bonfire.Users.get_timezone(user_id)
+    tz = Users.get_timezone(user_id)
 
     checkins =
       from(c in "checkins", select: [:inserted_at], where: c.user_id == ^user_id)
@@ -202,7 +203,7 @@ defmodule Bonfire.Tracks do
     }
   end
 
-  def get_checkins(reading_state) do
+  def get_checkins(%ReadingState{} = reading_state) do
     from(c in CheckinSchema,
       where: c.reading_state_id == ^reading_state.id,
       order_by: [desc: :inserted_at]
@@ -228,4 +229,41 @@ defmodule Bonfire.Tracks do
 
   defp to_user_local_time(time, tz),
     do: time |> DateTime.shift_zone!(tz, Tzdata.TimeZoneDatabase)
+
+  @doc """
+  Given a user's id, return if he/she has already checked in today.
+  """
+  def checked_in_today?(user_id) do
+    tz = Users.get_timezone(user_id)
+    last_checkin_time(user_id) |> today?(tz)
+  end
+
+  defp last_checkin_time(user_id) do
+    from(
+      c in CheckinSchema,
+      where: c.user_id == ^user_id,
+      order_by: [desc: :id],
+      limit: 1,
+      select: [:inserted_at]
+    )
+    |> Repo.one()
+    |> case do
+      %{inserted_at: time} -> time
+      _ -> nil
+    end
+  end
+
+  defp today?(nil, _), do: false
+
+  defp today?(db_time, tz) do
+    today =
+      DateTime.utc_now()
+      |> to_user_local_time(tz)
+      |> DateTime.to_date()
+
+    db_time
+    |> db_time_to_user_time(tz)
+    |> DateTime.to_date()
+    |> Kernel.==(today)
+  end
 end
