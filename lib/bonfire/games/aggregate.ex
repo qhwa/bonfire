@@ -21,6 +21,10 @@ defmodule Bonfire.Games.Aggregate do
     {:error, :game_already_started}
   end
 
+  def execute(nil, %NewStar{} = cmd) do
+    %{cmd | __struct__: StarCollected}
+  end
+
   def execute(%{game: %{star_count_in_total: count}}, %NewStar{} = cmd) do
     %{cmd | __struct__: StarCollected, prev_star_count: count}
   end
