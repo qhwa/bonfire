@@ -58,9 +58,12 @@ p.description {
   font-size: 120%;
 }
 
+.navbar .navbar-item {
+  margin-right: 1em;
+}
+
 .navbar .navbar-brand .navbar-item {
   padding-right: 1em;
-  margin-right: 1em;
   border-right: 1px solid #efefef;
 }
 
