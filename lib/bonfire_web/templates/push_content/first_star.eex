@@ -4,4 +4,5 @@
 
 <% stars = if @amount == 1, do: "a star", else: "#{@amount} stars" %>
 <h1 class="title">New Star!</h1>
-<p>You just collected <b><%= stars %>⭐</b>! The more you read, the more stars you will get.</p>
+<p>You just collected <b><%= stars %>⭐</b>!</p>
+<p>The more you read, the more stars you will get.</p>
