@@ -2,5 +2,6 @@
   <img src="<%= Routes.static_url(BonfireWeb.Endpoint, "/images/star_collection.png") %>" />
 </figure>
 
-<h1 class="title">Congraturations! You just collected a star!</h1>
-<p>The more you read, the more stars you will get.</p>
+<% stars = if @amount == 1, do: "a star", else: "#{@amount} stars" %>
+<h1 class="title">New Star!</h1>
+<p>You just collected <b><%= stars %>⭐</b>! The more you read, the more stars you will get.</p>

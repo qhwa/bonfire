@@ -8,11 +8,11 @@ defmodule Bonfire.Games.Rules.OnStarCollected do
 
   @behaviour Bonfire.Games.Rule
 
-  def apply(_, %StarCollected{user_id: user_id, prev_star_count: 0}) do
+  def apply(_, %StarCollected{user_id: user_id, prev_star_count: prev, amount: amount}) do
     [
       %Push{
         user_id: user_id,
-        content: ["first_star", []],
+        content: ["first_star", %{prev: prev, amount: amount}],
         allow_dismiss: false
       }
     ]
