@@ -2,6 +2,7 @@
 @import "./checkin.css";
 @import "./home.css";
 @import "./push.css";
+@import "./leaderboard.css";
 
 body {
   font-family: 'Alegreya Sans', sans-serif;
@@ -19,6 +20,10 @@ details summary {
 
 footer.footer {
   font-size: 80%;
+}
+
+ol li {
+  list-style-type: none;
 }
 
 .flash.container {

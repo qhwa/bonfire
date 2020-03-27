@@ -1,0 +1,17 @@
+<div class="container has-text-centered" id="leaderboard">
+  <h1 class="title">Top Readers</h1>
+  <ol>
+  <%= for {game, index} <- Enum.with_index(@games, 1) do %>
+    <li class="game level index-<%= index %> is-mobile">
+      <div class="level-item"><%= render_index(index) %></div>
+      <div class="level-item"><label class="label"><%= render_user(game) %></label></div>
+      <div class="level-item">
+        <div>
+          <p class="heading">⭐</p>
+          <p class="title"><%= game.star_count_in_current_season %></p>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  </ol>
+</div>
