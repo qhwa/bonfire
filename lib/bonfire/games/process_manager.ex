@@ -7,21 +7,23 @@ defmodule Bonfire.Games.ProcessManager do
     application: Bonfire.EventApp,
     name: __MODULE__
 
-  alias Bonfire.Games.Events.GameStarted
+  alias Bonfire.Games.Events.{GameStarted, StarCollected}
   alias Bonfire.Tracks.Events.CheckedIn
 
   @derive Jason.Encoder
 
   @enforce_keys [:user_id]
-  defstruct [:user_id, :rule]
+  defstruct [:user_id]
 
   @rules [
     Bonfire.Games.Rules.Welcome,
-    Bonfire.Games.Rules.FirstCheckin
+    Bonfire.Games.Rules.OnCheckin,
+    Bonfire.Games.Rules.OnStarCollected
   ]
 
   def interested?(%GameStarted{user_id: user_id}), do: {:start, user_id}
   def interested?(%CheckedIn{track_id: %{user_id: user_id}}), do: {:continue, user_id}
+  def interested?(%StarCollected{user_id: user_id}), do: {:continue, user_id}
   def interested?(_event), do: false
 
   def handle(_manager, evt) do

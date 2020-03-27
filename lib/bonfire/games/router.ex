@@ -3,9 +3,10 @@ defmodule Bonfire.Games.Router do
 
   alias Bonfire.Games.{
     Commands.StartGame,
+    Commands.NewStar,
     Aggregate
   }
 
   identify(Aggregate, by: :user_id, prefix: "game-")
-  dispatch([StartGame], to: Aggregate)
+  dispatch([StartGame, NewStar], to: Aggregate)
 end
