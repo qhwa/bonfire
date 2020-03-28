@@ -10,7 +10,7 @@
     <%= csrf_meta_tag() %>
   </head>
   <body>
-    <nav class="navbar is-fixed-top is-spaced" role="navigation" arial-label="main navigation">
+    <nav class="navbar is-fixed-top is-white is-spaced" role="navigation" arial-label="main navigation">
       <input type="checkbox" class="burger-trigger" />
 
       <div class="navbar-brand">

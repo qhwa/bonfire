@@ -1,13 +1,17 @@
-<div class="hero is-medium is-bold">
-  <div class="hero-body">
-    <ul class="auth-buttons container has-text-centered">
-      <%= for provider <- PowAssent.Plug.available_providers(@conn) do %>
+<section class="login container has-text-centered">
+  <figure class="image">
+    <%= img_tag Routes.static_url(@conn, "/images/bonfire.png") %>
+  </figure>
 
-        <li>
-        <%= PowAssent.Phoenix.ViewHelpers.authorization_link(@conn, provider, class: "auth button #{to_string(provider)} is-large"
-) %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
+  <h1 class="title">Sign in</h1>
+
+  <ul class="auth-buttons container has-text-centered">
+    <%= for provider <- PowAssent.Plug.available_providers(@conn) do %>
+
+      <li>
+      <%= PowAssent.Phoenix.ViewHelpers.authorization_link(@conn, provider, class: "auth button #{to_string(provider)} is-large"
+  ) %>
+      </li>
+    <% end %>
+  </ul>
+</section>
