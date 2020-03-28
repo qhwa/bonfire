@@ -35,7 +35,7 @@ defmodule Bonfire.Games.Aggregate do
 
   def apply(%{game: game} = state, %StarCollected{amount: amount}) do
     game =
-      game
+      (game || %GameState{})
       |> Map.update!(:star_count_in_current_season, &(&1 + amount))
       |> Map.update!(:star_count_in_total, &(&1 + amount))
 
