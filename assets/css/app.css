@@ -19,7 +19,14 @@ details summary {
 }
 
 footer.footer {
+  background-color: transparent;
   font-size: 80%;
+  color: #ccc;
+}
+
+footer.footer a {
+  color: #333;
+  text-decoration: underline;
 }
 
 ol li {
