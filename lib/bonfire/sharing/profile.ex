@@ -12,6 +12,7 @@ defmodule Bonfire.Sharing.Profile do
   schema "profiles" do
     field :share_key, :string
     field :timezone, :string
+
     belongs_to :user, Bonfire.Users.User
 
     timestamps()

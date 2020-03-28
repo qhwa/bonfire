@@ -1,20 +1,4 @@
-<nav class="stats level is-mobile">
-  <div class="level-item">
-    <div>
-      <p class="heading">finished</p>
-      <p class="title"><%= @stats.finished %></p>
-    </div>
-  </div>
-
-  <div class="level-item">
-    <div>
-      <p class="heading">reading</p>
-      <p class="title"><%= @stats.reading %></p>
-    </div>
-  </div>
-</nav>
-
-<hr class="hr" />
+<h1 class="title">Books</h1>
 
 <ul class="reading_states is-flex-tablet">
 <%= for rs <- @reading_states do %>
@@ -47,3 +31,10 @@
   </li>
 <% end %>
 </ul>
+
+<h1 class="title">Recent Activities</h1>
+<%= if @checkins == [] do %>
+  There's no reading activities in recent 7 days.
+<% else %>
+  <%= render BonfireWeb.CheckinView, "list.html", Map.put(assigns, :with_link, false) %>
+<% end %>

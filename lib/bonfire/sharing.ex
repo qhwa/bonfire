@@ -7,15 +7,15 @@ defmodule Bonfire.Sharing do
   alias Bonfire.Sharing.Profile
 
   @doc """
-  Get reading states from a share_key
+  Get user by share key.
   """
-  def get_reading_states_by_profile(share_key) do
+  def get_user(share_key) do
     case Repo.get_by(Profile, share_key: share_key) do
       %{user_id: user_id} ->
-        {:ok, user_id, Bonfire.Tracks.list_reading_states(user_id)}
+        %Bonfire.Users.User{id: user_id}
 
-      nil ->
-        {:error, :not_found}
+      _ ->
+        nil
     end
   end
 

@@ -5,16 +5,27 @@ defmodule Bonfire.Users.User do
   use Ecto.Schema
   use Pow.Ecto.Schema
   use PowAssent.Ecto.Schema
+  import Ecto.Query, only: [from: 2]
+
+  alias Bonfire.{
+    Tracks.Schemas.ReadingState,
+    Tracks.Schemas.Checkin,
+    Books.UserBook,
+    Pushes.Schemas.Push,
+    Sharing.Profile,
+    Games.Game
+  }
 
   schema "users" do
     pow_user_fields()
 
-    has_many :reading_states, Bonfire.Tracks.Schemas.ReadingState
-    has_many :books, Bonfire.Books.UserBook
-    has_many :pushes, Bonfire.Pushes.Schemas.Push
+    has_many :reading_states, ReadingState
+    has_many :books, UserBook
+    has_many :pushes, Push
+    has_many :checkins, Checkin
 
-    has_one :profile, Bonfire.Sharing.Profile
-    has_one :game, Bonfire.Games.Schemas.Game
+    has_one :profile, Profile
+    has_one :game, Game
 
     timestamps()
   end
