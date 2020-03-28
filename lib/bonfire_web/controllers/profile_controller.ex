@@ -4,7 +4,6 @@ defmodule BonfireWeb.ProfileController do
   alias Bonfire.Users.User
   alias Bonfire.Sharing
   alias Bonfire.Sharing.Profile
-  alias Bonfire.Tracks
   alias Bonfire.Tracks.Schemas.Checkin
   alias Bonfire.Users
 

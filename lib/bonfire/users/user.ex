@@ -5,7 +5,6 @@ defmodule Bonfire.Users.User do
   use Ecto.Schema
   use Pow.Ecto.Schema
   use PowAssent.Ecto.Schema
-  import Ecto.Query, only: [from: 2]
 
   alias Bonfire.{
     Tracks.Schemas.ReadingState,
