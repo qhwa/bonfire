@@ -8,7 +8,7 @@
   </nav>
 
   <h1 class="title">What are you reading?</h1>
-  <h2 class="subtitle">having been read for at least one minute</h2>
+  <h2 class="subtitle">(for more than one minute)</h2>
 
   <div>
     <%= live_render(@conn, BonfireWeb.Live.NewCheckin, session: %{"user_id" => @current_user.id}) %>

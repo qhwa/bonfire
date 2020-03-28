@@ -1,9 +1,11 @@
 defmodule BonfireWeb.ProfileController do
   use BonfireWeb, :controller
 
+  alias Bonfire.Users.User
   alias Bonfire.Sharing
   alias Bonfire.Sharing.Profile
   alias Bonfire.Tracks
+  alias Bonfire.Tracks.Schemas.Checkin
   alias Bonfire.Users
 
   plug Pow.Plug.RequireAuthenticated,
@@ -14,11 +16,19 @@ defmodule BonfireWeb.ProfileController do
   action_fallback BonfireWeb.FallbackController
 
   def show(conn, %{"user_name" => user_name}) do
-    with {:ok, user_id, reading_states} <- Sharing.get_reading_states_by_profile(user_name),
-         stats <- Tracks.stats(user_id) do
+    with %User{} = user <- Sharing.get_user(user_name),
+         %User{} = user <-
+           Bonfire.Repo.preload(user, [
+             [reading_states: [user_book: :book]],
+             [checkins: {Checkin.recent(), :book}]
+           ]) do
       conn
       |> put_layout("sharing.html")
-      |> render("show.html", reading_states: reading_states, stats: stats)
+      |> render("show.html",
+        user: user,
+        reading_states: user.reading_states,
+        checkins: user.checkins
+      )
     end
   end
 

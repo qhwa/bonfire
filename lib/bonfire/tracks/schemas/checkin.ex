@@ -4,6 +4,8 @@ defmodule Bonfire.Tracks.Schemas.Checkin do
   """
   use Ecto.Schema
 
+  import Ecto.Query, only: [from: 2]
+
   schema "checkins" do
     field :date, :date
     field :insight, :string
@@ -13,5 +15,12 @@ defmodule Bonfire.Tracks.Schemas.Checkin do
     belongs_to :reading_state, Bonfire.Tracks.Schemas.ReadingState
 
     timestamps()
+  end
+
+  def recent do
+    from(c in __MODULE__,
+      order_by: [desc: :inserted_at],
+      where: c.inserted_at > from_now(-7, "day")
+    )
   end
 end
