@@ -12,7 +12,7 @@ defmodule Bonfire.Users.User do
     Books.UserBook,
     Pushes.Schemas.Push,
     Sharing.Profile,
-    Games.Game
+    Games.Schemas.Game
   }
 
   schema "users" do

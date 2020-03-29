@@ -23,8 +23,11 @@
 <nav class="stats level is-mobile">
   <div class="level-item">
     <div>
-      <p class="heading">Stars ⭐</p>
-      <p class="title"><%= link @stats.checkin_count, to: Routes.checkin_path(@socket, :index) %></p>
+      <p class="heading">Checkins</p>
+      <p class="title">
+        <% checkin_count = @stats.checkin_count %>
+        <%= if checkin_count > 0, do: link(checkin_count, to: Routes.checkin_path(@socket, :index)), else: 0 %>
+      </p>
     </div>
   </div>
 
