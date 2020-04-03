@@ -17,7 +17,9 @@ defmodule Bonfire.Sharing.Projector do
     Ecto.Multi.insert(
       multi,
       :creat_track_sharing,
-      Profile.creating_changeset(%Profile{}, %{user_id: user_id, share_key: key})
+      Profile.creating_changeset(%Profile{}, %{user_id: user_id, share_key: key}),
+      on_conflict: [set: [share_key: key]],
+      conflict_target: [:user_id]
     )
   end)
 end
