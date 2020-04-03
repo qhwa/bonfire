@@ -45,12 +45,12 @@ Also, this project contains an `Dockerfile` so you can build your own image and 
   docker run \
     --rm \
     -it \
-    -e DATABASE_URL=ecto://YOUR_DB_USERNAME:YOUR_DB_PASSOWRD@YOUR_DB_HOST:YOUR_DB_PORT/YOUR_DATABASE \
-    -e SECRET_KEY_BASE=$(mix phx.gen.secret) \
-    -e ES_DATABASE_URL=ecto://... \
-    -e GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID} \
-    -e GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET} \
-    -e GOOGLE_API_KEY=${GOOGLE_API_KEY} \
+    -e BONFIRE_DATABASE_URL=ecto://YOUR_DB_USERNAME:YOUR_DB_PASSOWRD@YOUR_DB_HOST:YOUR_DB_PORT/YOUR_DATABASE \
+    -e BONFIRE_SECRET_KEY_BASE=$(mix phx.gen.secret) \
+    -e BONFIRE_ES_DATABASE_URL=ecto://... \
+    -e BONFIRE_GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID} \
+    -e BONFIRE_GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET} \
+    -e BONFIRE_GOOGLE_API_KEY=${GOOGLE_API_KEY} \
     -p 4000:4000 \
     bonfire \
     start_iex
