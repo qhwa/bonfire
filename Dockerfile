@@ -3,10 +3,12 @@ FROM qhwa/elixir-builder:latest AS builder
 
 ARG mix_env=prod
 ARG hex_mirror_url=https://repo.hex.pm
+ARG appsignal_http_proxy
 
 ENV NODE_ENV=${mix_env} \
     MIX_ENV=${mix_env} \
-    HEX_MIRROR_URL=${hex_mirror_url}
+    HEX_MIRROR_URL=${hex_mirror_url} \
+    APPSIGNAL_HTTP_PROXY=${appsignal_http_proxy}
 
 WORKDIR /src
 
@@ -16,8 +18,11 @@ RUN mix deps.get --only $MIX_ENV
 
 ADD . .
 
+ARG sass_binary_site
+ENV SASS_BINARY_SITE=${sass_binary_site}
 # uncomment following lines to enable digesting in Phoenix project
 RUN npm install --prefix assets
+RUN npm rebuild --prefix assets
 RUN npm run deploy --prefix assets
 RUN mix phx.digest
 

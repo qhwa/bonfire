@@ -46,7 +46,7 @@ defmodule Bonfire.Application do
     |> Enum.reduce([], fn {name, default_on}, providers ->
       uname = name |> to_string() |> String.upcase()
 
-      case System.get_env("AUTH_WITH_#{uname}", to_string(default_on)) do
+      case System.get_env("BONFIRE_AUTH_WITH_#{uname}", to_string(default_on)) do
         "false" ->
           providers
 
