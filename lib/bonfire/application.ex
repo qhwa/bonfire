@@ -17,6 +17,7 @@ defmodule Bonfire.Application do
 
     # List all child processes to be supervised
     children = [
+      {Phoenix.PubSub, name: Bonfire.PubSub},
       # Start the Ecto repository
       Bonfire.Repo,
       # Start the endpoint when the application starts
