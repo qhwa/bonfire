@@ -77,7 +77,7 @@
         <%= if error do %><div class="notification is-warning is-light" role="alert"><%= error %></div><% end %>
       </div>
 
-      <%= render @view_module, @view_template, assigns %>
+      <%= @inner_content %>
       <%= if @current_user, do: live_render @conn, BonfireWeb.Live.Push, session: %{"user" => @current_user} %>
     </main>
 
