@@ -13,8 +13,7 @@ config :bonfire, BonfireWeb.Endpoint,
   server: true,
   http: [port: 4000, compress: true],
   url: [host: "bonfire.ooo", port: 443, scheme: "https"],
-  cache_static_manifest: "priv/static/cache_manifest.json",
-  force_ssl: [hsts: true]
+  cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
