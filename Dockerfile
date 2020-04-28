@@ -1,14 +1,13 @@
-# - stage 1: generate release files
-FROM qhwa/elixir-builder:latest AS builder
+# syntax = docker/dockerfile:1.0-experimental
 
-ARG mix_env=prod
-ARG hex_mirror_url=https://repo.hex.pm
-ARG appsignal_http_proxy
+# -----------------------------------
+# - stage: install
+# - job: dependencies
+# -----------------------------------
+FROM qhwa/elixir-builder:latest AS deps
 
-ENV NODE_ENV=${mix_env} \
-    MIX_ENV=${mix_env} \
-    HEX_MIRROR_URL=${hex_mirror_url} \
-    APPSIGNAL_HTTP_PROXY=${appsignal_http_proxy}
+ARG MIX_ENV=prod
+ARG HEX_MIRROR_URL=https://repo.hex.pm
 
 WORKDIR /src
 
@@ -16,29 +15,83 @@ COPY mix.exs mix.lock /src/
 
 RUN mix deps.get --only $MIX_ENV
 
+
+# -----------------------------------
+# - stage: build
+# - job: compile
+# -----------------------------------
+FROM qhwa/elixir-builder:latest AS compile
+
+ARG MIX_ENV=prod
+ARG APPSIGNAL_HTTP_PROXY
+
+WORKDIR /src
+
+COPY --from=deps /src/deps /src/deps
 ADD . .
 
-ARG sass_binary_site
-ENV SASS_BINARY_SITE=${sass_binary_site}
-# uncomment following lines to enable digesting in Phoenix project
-RUN npm install --prefix assets
-RUN npm rebuild --prefix assets
-RUN npm run deploy --prefix assets
-RUN mix phx.digest
+RUN mix compile
 
+# -----------------------------------
+# - stage: build
+# - job: assets
+# -----------------------------------
+FROM qhwa/elixir-builder:latest AS assets
+
+WORKDIR /src/assets
+
+COPY --from=deps /src/deps /src/deps/
+COPY assets/package.json assets/package-lock.json ./
+
+ARG NPM_REGISTRY=https://registry.npmjs.com/
+
+# Use the npm cache directory as a cache mount
+RUN npm \
+  --registry ${NPM_REGISTRY} \
+  --prefer-offline \
+  --no-audit \
+  --ignore-scripts \
+  ci
+
+ARG SASS_BINARY_SITE
+RUN npm rebuild node-sass
+
+COPY assets/ ./
+
+RUN npm run deploy
+
+# -----------------------------------
+# - stage: release
+# - job: mix_release
+# -----------------------------------
+FROM qhwa/elixir-builder:latest AS mix_release
+
+WORKDIR /src
+
+ARG MIX_ENV=prod
+
+ADD . .
+
+COPY --from=compile /src/deps ./deps
+COPY --from=compile /src/_build ./_build
+COPY --from=assets /src/assets/ ./assets
+
+RUN mix phx.digest
 RUN mix release --path /app --quiet
 
-# - stage 2: build final image for running
+# -----------------------------------
+# - stage: release
+# - job: release_image
+# -----------------------------------
+FROM qhwa/elixir-runner:latest AS release_image
 
-FROM qhwa/elixir-runner:latest
+ARG APP_REVISION=latest
+ARG MIX_ENV=prod
 
-ARG app_revision=latest
-ARG mix_env=prod
+User nobody
 
-ENV MIX_ENV=${mix_env} \
-    APP_REVISION=${app_revision}
+COPY --from=mix_release --chown=nobody: /app /app
 
-COPY --from=builder /app /app
 WORKDIR /app
 
 ENTRYPOINT ["/app/bin/bonfire"]
