@@ -32,6 +32,7 @@ ADD . .
 
 RUN mix compile
 
+
 # -----------------------------------
 # - stage: build
 # - job: assets
@@ -60,6 +61,7 @@ COPY assets/ ./
 
 RUN npm run deploy
 
+
 # -----------------------------------
 # - stage: release
 # - job: mix_release
@@ -74,15 +76,19 @@ ADD . .
 
 COPY --from=compile /src/deps ./deps
 COPY --from=compile /src/_build ./_build
-COPY --from=assets /src/assets/ ./assets
 
+
+COPY --from=assets /src/assets/ ./assets
 RUN mix phx.digest
+
+
 RUN mix release --path /app --quiet
 
 # -----------------------------------
 # - stage: release
 # - job: release_image
 # -----------------------------------
+
 FROM qhwa/elixir-runner:latest AS release_image
 
 ARG APP_REVISION=latest
