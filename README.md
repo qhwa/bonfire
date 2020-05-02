@@ -16,6 +16,7 @@ Some of the frameworks/libraries used:
 * [Pow] for authentification
 * [Rio] for deployment
 * [dockerize] for docker image building
+* [AppSignal] for APM (Application Performance Monitoring) and exception watching. Grateful thanks to [AppSignal] for the sponsorship. 
 
 Libraries are picked for practicing reason, you can find more background information in the [design document](https://github.com/qhwa/bonfire/blob/master/design/design.md). 
 
@@ -50,3 +51,4 @@ This project is not ready for a serious production yet. It's still under active 
 [credo]: https://github.com/rrrene/credo/
 [dialyxir]: https://github.com/jeremyjh/dialyxir
 [dockerize]: https://github.com/qhwa/dockerize
+[AppSignal]: https://appsignal.com/

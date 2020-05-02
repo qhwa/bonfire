@@ -1,11 +1,9 @@
 version: "3.6"
 
 services:
-  eventstore:
-    image: eventstore/eventstore
+  db:
+    image: sameersbn/postgresql
     environment:
-      - START_STANDARD_PROJECTIONS=true
-      - RUN_PROJECTIONS=all
+      - PG_PASSWORD=postgres
     ports:
-      - "1113:1113"
-      - "2113:2113"
+      - "5432:5432"

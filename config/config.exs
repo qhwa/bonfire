@@ -36,8 +36,12 @@ config :bonfire, :pow,
 
 config :bonfire, Bonfire.EventStore, serializer: Commanded.Serialization.JsonSerializer
 
-config :bonfire, Bonfire.Books.GoogleBookAPI, proxy: System.get_env("GOOGLE_BOOK_API_PROXY")
-config :bonfire, Bonfire.Books.DoubanBookApi, proxy: System.get_env("DOUBAN_BOOK_API_PROXY")
+config :bonfire, Bonfire.Books.GoogleBookAPI,
+  proxy: System.get_env("BONFIRE_GOOGLE_BOOK_API_PROXY")
+
+config :bonfire, Bonfire.Books.DoubanBookApi,
+  proxy: System.get_env("BONFIRE_DOUBAN_BOOK_API_PROXY")
+
 config :bonfire, Bonfire.Auth.HTTP, proxy: System.get_env("BONFIRE_AUTH_PROXY")
 
 config :bonfire, :pow_assent,
