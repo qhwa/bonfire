@@ -11,43 +11,48 @@ ARG HEX_MIRROR_URL=https://repo.hex.pm
 
 WORKDIR /src
 
+COPY config/ ./config
 COPY mix.exs mix.lock /src/
 
-RUN mix deps.get --only $MIX_ENV
-
+RUN --mount=type=cache,target=~/.hex/packages/hexpm,sharing=locked \
+    --mount=type=cache,target=~/.cache/rebar3,sharing=locked \
+    mix deps.get \
+    --only $MIX_ENV
 
 # -----------------------------------
 # - stage: build
 # - job: compile
 # -----------------------------------
-FROM qhwa/elixir-builder:latest AS compile
+FROM deps AS compile
+WORKDIR /src
 
 ARG MIX_ENV=prod
 ARG APPSIGNAL_HTTP_PROXY
 
-WORKDIR /src
+RUN mix deps.compile
 
-COPY --from=deps /src/deps /src/deps
-ADD . .
+COPY lib/ ./lib
+COPY priv/ ./priv
 
 RUN mix compile
-
+RUN pwd && ls -al
 
 # -----------------------------------
 # - stage: build
 # - job: assets
 # -----------------------------------
-FROM qhwa/elixir-builder:latest AS assets
+FROM deps AS assets
 
 WORKDIR /src/assets
 
-COPY --from=deps /src/deps /src/deps/
 COPY assets/package.json assets/package-lock.json ./
 
 ARG NPM_REGISTRY=https://registry.npmjs.com/
+ARG APPSIGNAL_HTTP_PROXY
 
 # Use the npm cache directory as a cache mount
-RUN npm \
+RUN --mount=type=cache,target=~/.npm,sharing=locked \
+  npm \
   --registry ${NPM_REGISTRY} \
   --prefer-offline \
   --no-audit \
@@ -55,32 +60,40 @@ RUN npm \
   ci
 
 ARG SASS_BINARY_SITE
+
 RUN npm rebuild node-sass
 
 COPY assets/ ./
 
 RUN npm run deploy
 
+# -----------------------------------
+# - stage: build
+# - job: digest
+# -----------------------------------
+FROM compile AS digest
+WORKDIR /src
+
+ARG MIX_ENV=prod
+
+COPY --from=assets /src/assets ./assets/
+
+RUN ls -al ./
+RUN ls -al ./_build/
+
+RUN mix phx.digest
 
 # -----------------------------------
 # - stage: release
 # - job: mix_release
 # -----------------------------------
-FROM qhwa/elixir-builder:latest AS mix_release
+FROM compile AS mix_release
 
 WORKDIR /src
 
 ARG MIX_ENV=prod
 
-ADD . .
-
-COPY --from=compile /src/deps ./deps
-COPY --from=compile /src/_build ./_build
-
-
-COPY --from=assets /src/assets/ ./assets
-RUN mix phx.digest
-
+COPY --from=digest /src/priv/static ./priv/static
 
 RUN mix release --path /app --quiet
 
