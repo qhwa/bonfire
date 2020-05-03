@@ -21,9 +21,9 @@ RUN --mount=type=cache,target=~/.hex/packages/hexpm,sharing=locked \
 
 # -----------------------------------
 # - stage: build
-# - job: compile
+# - job: compile_deps
 # -----------------------------------
-FROM deps AS compile
+FROM deps AS compile_deps
 WORKDIR /src
 
 ARG MIX_ENV=prod
@@ -31,11 +31,20 @@ ARG APPSIGNAL_HTTP_PROXY
 
 RUN mix deps.compile
 
+
+# -----------------------------------
+# - stage: build
+# - job: compile_app
+# -----------------------------------
+FROM compile_deps AS compile_app
+WORKDIR /src
+
+ARG MIX_ENV=prod
+
 COPY lib/ ./lib
 COPY priv/ ./priv
 
 RUN mix compile
-RUN pwd && ls -al
 
 # -----------------------------------
 # - stage: build
@@ -71,23 +80,21 @@ RUN npm run deploy
 # - stage: build
 # - job: digest
 # -----------------------------------
-FROM compile AS digest
+FROM compile_deps AS digest
 WORKDIR /src
 
 ARG MIX_ENV=prod
 
-COPY --from=assets /src/assets ./assets/
+COPY --from=assets /src/priv ./priv
 
-RUN ls -al ./
-RUN ls -al ./_build/
-
+RUN ls -al ./priv/static
 RUN mix phx.digest
 
 # -----------------------------------
 # - stage: release
 # - job: mix_release
 # -----------------------------------
-FROM compile AS mix_release
+FROM compile_app AS mix_release
 
 WORKDIR /src
 
