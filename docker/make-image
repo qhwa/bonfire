@@ -8,10 +8,11 @@
 
 DOCKER_BUILDKIT=1 \
   docker build \
-  --build-arg HEX_MIRROR_URL=https://hexpm.upyun.com \
-  --build-arg NPM_REGISTRY=https://registry.npm.taobao.org/ \
+  --build-arg HEX_MIRROR_URL \
+  --build-arg NPM_REGISTRY \
   --build-arg APPSIGNAL_HTTP_PROXY \
   --build-arg SASS_BINARY_SITE \
+  --build-arg MIX_ENV=prod \
   -t bonfire \
   --target release_image \
   $@ \
