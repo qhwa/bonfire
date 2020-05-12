@@ -52,3 +52,7 @@ This project is not ready for a serious production yet. It's still under active 
 [dialyxir]: https://github.com/jeremyjh/dialyxir
 [dockerize]: https://github.com/qhwa/dockerize
 [AppSignal]: https://appsignal.com/
+
+## License
+
+[MIT](https://ocw.mit.edu/index.htm)
