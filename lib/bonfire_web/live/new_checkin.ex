@@ -16,7 +16,23 @@ defmodule BonfireWeb.Live.NewCheckin do
     <div class="notification is-success is-light" phx-click="lv:clear-flash" phx-value-key="info"><%= flash %></div>
     <% end %>
 
-    <%= if @state == :new, do: live_component(@socket, BonfireWeb.Live.BookSuggestion, id: :new_book_suggestion) %>
+    <%= if @state == :new do %>
+      <%= live_component(@socket, BonfireWeb.Live.BookSuggestion, id: :new_book_suggestion) %>
+      <%= if @recent_books != [] do %>
+      <section class="recent-books">
+        <h6 class="title is-6">recent books</h6>
+        <div class="books">
+          <ul>
+            <%= for book <- @recent_books do %>
+              <li phx-click="select" phx-value-isbn="<%= book.isbn %>" phx-value-title="<%= book.title %>" phx-value-thumbnail="<%= book.cover %>">
+                <%= BonfireWeb.BookView.cover_tag(book.cover) %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </section>
+      <% end %>
+    <% end %>
 
     <%= if @state == :selected do %>
       <section class="selected">
@@ -46,6 +62,7 @@ defmodule BonfireWeb.Live.NewCheckin do
       socket
       |> assign(:user_id, user_id)
       |> assign(:state, :new)
+      |> assign(:recent_books, Tracks.recent_checked_books(user_id))
 
     {:ok, socket}
   end
