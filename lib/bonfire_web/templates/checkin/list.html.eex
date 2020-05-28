@@ -15,8 +15,8 @@
 
         <%= if checkin.insight && checkin.insight != "" do %>
         <div class="insight notification"><%= BonfireWeb.CheckinView.insight(checkin.insight) %></div>
+        <% end %>
       </div>
-    <% end %>
     </li>
   <% end %>
 </ul>

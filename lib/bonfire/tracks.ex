@@ -157,7 +157,7 @@ defmodule Bonfire.Tracks do
     |> Integer.floor_div(7)
   end
 
-  @max_recent_checkins 10
+  @default_recent_quantity 10
 
   @doc """
   Get recent checkins of a user
@@ -165,11 +165,30 @@ defmodule Bonfire.Tracks do
   def recent_checkins(user_id) do
     from(c in CheckinSchema,
       where: c.user_id == ^user_id,
-      limit: @max_recent_checkins,
+      limit: @default_recent_quantity,
       order_by: [desc: :inserted_at]
     )
     |> Repo.all()
     |> Repo.preload([:book])
+  end
+
+  @doc """
+  Get recent checked books
+  """
+  def recent_checked_books(user_id, limit \\ @default_recent_quantity) do
+    recent_checkins =
+      from(c in CheckinSchema,
+        distinct: c.book_id,
+        order_by: [desc: c.inserted_at]
+      )
+
+    from(b in Book,
+      join: c in subquery(recent_checkins),
+      on: c.book_id == b.id,
+      limit: ^limit,
+      order_by: [desc: c.inserted_at]
+    )
+    |> Repo.all()
   end
 
   @doc """

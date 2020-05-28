@@ -102,3 +102,22 @@ ul.latest-checkins li .content blockquote {
 #new-checkin section.selected .title {
   flex: 1;
 }
+
+#new-checkin section.recent-books .books {
+  width: 100%;
+  overflow-x: scroll;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+#new-checkin section.recent-books { 
+  margin-top: 1em;
+}
+
+#new-checkin section.recent-books .books::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+#new-checkin section.recent-books .books > ul {
+  display: flex;
+}
