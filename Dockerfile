@@ -11,13 +11,9 @@ ARG HEX_MIRROR_URL=https://repo.hex.pm
 
 WORKDIR /src
 
-COPY config/ ./config
-COPY mix.exs mix.lock /src/
+COPY config mix.exs mix.lock /src/
 
-RUN --mount=type=cache,target=~/.hex/packages/hexpm,sharing=locked \
-    --mount=type=cache,target=~/.cache/rebar3,sharing=locked \
-    mix deps.get \
-    --only $MIX_ENV
+RUN mix deps.get --only $MIX_ENV
 
 # -----------------------------------
 # - stage: build
@@ -42,9 +38,14 @@ WORKDIR /src
 ARG MIX_ENV=prod
 
 COPY lib/ ./lib
+
+
 COPY priv/ ./priv
 
+
 RUN mix compile
+
+
 
 # -----------------------------------
 # - stage: build
@@ -59,9 +60,7 @@ COPY assets/package.json assets/package-lock.json ./
 ARG NPM_REGISTRY=https://registry.npmjs.com/
 ARG APPSIGNAL_HTTP_PROXY
 
-# Use the npm cache directory as a cache mount
-RUN --mount=type=cache,target=~/.npm,sharing=locked \
-  npm \
+RUN npm \
   --registry ${NPM_REGISTRY} \
   --prefer-offline \
   --no-audit \
@@ -90,6 +89,7 @@ COPY --from=assets /src/priv ./priv
 RUN ls -al ./priv/static
 RUN mix phx.digest
 
+
 # -----------------------------------
 # - stage: release
 # - job: mix_release
@@ -100,7 +100,9 @@ WORKDIR /src
 
 ARG MIX_ENV=prod
 
+
 COPY --from=digest /src/priv/static ./priv/static
+
 
 RUN mix release --path /app --quiet
 
@@ -116,7 +118,7 @@ ARG MIX_ENV=prod
 
 User nobody
 
-COPY --from=mix_release --chown=nobody: /app /app
+COPY --from=mix_release --chown=nobody:nobody /app /app
 
 WORKDIR /app
 
