@@ -11,7 +11,8 @@ ARG HEX_MIRROR_URL=https://repo.hex.pm
 
 WORKDIR /src
 
-COPY config mix.exs mix.lock /src/
+COPY config /src/config
+COPY mix.exs mix.lock /src/
 
 RUN mix deps.get --only $MIX_ENV
 
