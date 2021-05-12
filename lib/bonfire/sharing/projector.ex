@@ -13,6 +13,8 @@ defmodule Bonfire.Sharing.Projector do
     Profile
   }
 
+  require Logger
+
   project(%SharingStarted{user_id: user_id, key: key}, _metadata, fn multi ->
     Ecto.Multi.insert(
       multi,
@@ -22,4 +24,9 @@ defmodule Bonfire.Sharing.Projector do
       conflict_target: [:user_id]
     )
   end)
+
+  def error({:error, %Ecto.Changeset{valid?: false} = error}, _event, _failure_context) do
+    Logger.error(["Failed processing SharingStarted event due to error: ", inspect(error)])
+    :skip
+  end
 end
