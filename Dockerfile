@@ -87,7 +87,6 @@ ARG MIX_ENV=prod
 
 COPY --from=assets /src/priv ./priv
 
-RUN ls -al ./priv/static
 RUN mix phx.digest
 
 
